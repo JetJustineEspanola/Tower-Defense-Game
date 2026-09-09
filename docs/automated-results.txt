@@ -1,0 +1,12 @@
+TEST SUMMARY client: 11 checks / 0 failures
+TEST SUMMARY fault-client: 5 checks / 0 failures
+TEST SUMMARY fault-exit-client: 3 checks / 0 failures
+TEST SUMMARY fault-exit-host: 1 checks / 0 failures
+TEST SUMMARY fault-full: 2 checks / 0 failures
+TEST SUMMARY fault-host: 12 checks / 0 failures
+TEST SUMMARY fault-mismatch: 2 checks / 0 failures
+TEST SUMMARY fault-timeout: 2 checks / 0 failures
+TEST SUMMARY host: 9 checks / 0 failures
+PASS: Quit button invoked
+TEST SUMMARY rules: 44 checks / 0 failures
+TEST SUMMARY ui: 43 checks / 0 failures
