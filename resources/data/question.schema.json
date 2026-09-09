@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"CodeBorn prototype question pack v1",
+  "type":"array","minItems":1,"maxItems":500,
+  "items":{
+    "type":"object",
+    "required":["id","type","difficulty","language","language_version","prompt","answers","reward","explanation"],
+    "properties":{
+      "id":{"type":"string","minLength":1,"maxLength":2000},
+      "type":{"enum":["multiple_choice","identification","coding_fix"]},
+      "difficulty":{"enum":["easy","medium","hard"]},
+      "language":{"const":"GDScript"},"language_version":{"const":"4.6"},
+      "prompt":{"type":"string","minLength":1,"maxLength":2000},
+      "explanation":{"type":"string","minLength":1,"maxLength":2000},
+      "reward":{"type":"integer","minimum":1,"maximum":60},
+      "answers":{"type":"array","minItems":1,"items":{"type":"string","minLength":1,"maxLength":500}},
+      "options":{"type":"array","minItems":4,"maxItems":4,"uniqueItems":true,"items":{"type":"string","minLength":1,"maxLength":500}}
+    },
+    "allOf":[
+      {"if":{"properties":{"type":{"const":"multiple_choice"}}},"then":{"required":["options"],"properties":{"answers":{"maxItems":1}}}},
+      {"if":{"properties":{"type":{"const":"coding_fix"}}},"then":{"properties":{"prompt":{"pattern":"___"}}}}
+    ]
+  }
+}

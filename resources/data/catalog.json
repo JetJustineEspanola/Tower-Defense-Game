@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "rules": {"duration":720,"preparation":15,"base_hp":1000,"starting_gold":300,"starting_mana":40,"gold_cap":9999,"mana_cap":100,"attacker_income":6,"defender_income":4,"population_cap":60,"queue_cap":8,"training_lanes":2,"question_cost":30},
+  "towers": {"pulse_spire":{"name":"Pulse Spire","cost":120,"hp":240,"damage":18,"interval":1.0,"range":9.0,"abilities":["overclock","long_lens","forked_circuit","arc_burst","frost_script"],"scene":"res://scenes/towers/pulse_spire.tscn"}},
+  "troops": {"core_runner":{"name":"Core Runner","cost":70,"count":3,"training":6.0,"hp":80,"speed":2.2,"base_damage":35,"abilities":["sprint_runes","thick_carapace","brood_link","core_charge","phase_step"],"scene":"res://scenes/troops/core_runner.tscn"}},
+  "ability_costs":{"tower":[60,100],"troop":[120,180]},
+  "abilities": {
+    "overclock":{"name":"Overclock","description":"Attack rate 1.25/s"},"long_lens":{"name":"Long Lens","description":"Range +2"},"forked_circuit":{"name":"Forked Circuit","description":"One nearby secondary target takes 50% damage"},"arc_burst":{"name":"Arc Burst","description":"Up to 3 nearby secondary targets take 40% damage"},"frost_script":{"name":"Frost Script","description":"Primary target slowed 20% for 2 seconds"},
+    "sprint_runes":{"name":"Sprint Runes","description":"Future orders: speed +20%"},"thick_carapace":{"name":"Thick Carapace","description":"Future orders: health +40%"},"brood_link":{"name":"Brood Link","description":"Future orders: 4 units"},"core_charge":{"name":"Core Charge","description":"Future orders: 45 base contact damage"},"phase_step":{"name":"Phase Step","description":"Reserved for guard blocking; unavailable in this slice","enabled":false}
+  }
+}

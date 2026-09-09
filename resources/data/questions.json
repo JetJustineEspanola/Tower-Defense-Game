@@ -1,0 +1,5 @@
+[
+ {"id":"variables-01","type":"multiple_choice","difficulty":"easy","language":"GDScript","language_version":"4.6","prompt":"Which keyword declares a variable?","options":["var","let","def","int()"],"answers":["var"],"reward":25,"explanation":"GDScript declares variables with var."},
+ {"id":"loops-01","type":"identification","difficulty":"easy","language":"GDScript","language_version":"4.6","prompt":"Name the keyword that exits the current loop.","answers":["break"],"reward":25,"explanation":"break exits the innermost loop."},
+ {"id":"conditions-01","type":"coding_fix","difficulty":"medium","language":"GDScript","language_version":"4.6","prompt":"Fill the blank to compare the two values:\nif gold ___ 120:\n    print(\"Exact price\")","answers":["=="],"reward":40,"explanation":"== compares values; = assigns a value."}
+]
