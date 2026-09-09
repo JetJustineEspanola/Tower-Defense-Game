@@ -11,8 +11,20 @@ config_version=5
 [application]
 
 config/name="CodeBorn"
+run/main_scene="uid://bl8qpmlnmsfa"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "blue",
+"res://docs/": "yellow",
+"res://maps/": "orange",
+"res://scenes/": "red",
+"res://scripts/": "green",
+"res://tests/": "teal"
+}
 
 [physics]
 
