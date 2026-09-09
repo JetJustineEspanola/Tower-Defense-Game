@@ -8,14 +8,14 @@ Build 0.1.0, protocol 1, Godot `4.6.stable.official.89cea1439`. Local environmen
 | --- | --- |
 | Godot 4.6 editor import and script/scene loading | Clean headless editor import; all eight application scenes load; no parse errors |
 | Rules and local settings | 44 assertions passed: transaction replay, wrong roles, invalid/occupied nodes, insufficient funds, training timing, resource privacy, frozen upgrade snapshots, two-slot cap, host answer validation, final-tick tie, terminal immutability, reset, duration clamp, settings save/reload |
-| Rendered UI/navigation | 43 assertions passed; all starting buttons exercised (Quit in separate process); settings/developer/browser/lobby/game/results/menu loop; both role HUDs; both zoom limits; feedback stays within viewport |
+| Rendered UI/navigation | 44 assertions passed; all starting buttons exercised (Quit in separate process); settings/developer/browser/lobby/game/results/menu loop; both role HUDs; both zoom limits; feedback stays within viewport |
 | Two actual localhost processes | Host 9 / client 11 assertions passed; discover/join, repeated ready, matching roles, build/train, natural base-destruction outcome, rematch role swap, natural survival outcome, menu cleanup |
 | Result comparison | Public final state and both players' wallet/stat totals match exactly between peers for both matches; private pending orders/questions excluded intentionally |
 | Connection failures | 27 assertions passed across seven suites: content mismatch, full lobby, pre-ready start, ready reset after setting change, disconnect/rejoin before match, disconnect during match, host exit, unreachable host timeout |
 | Windows export | Matching official 4.6.stable Windows x86_64 debug/release templates installed; debug export produced EXE/PCK; exported application launched with real rendering and exited with code 0, no script/runtime errors |
 | Diff hygiene | `git diff --check` passed; generated caches, test artifacts and builds ignored |
 
-Total: 134 test assertions, plus the separate Quit action and cross-peer final-state comparison. The final UI-only run followed the complete suite to verify the final label/role-preview changes. The Windows export was rebuilt afterward. There are no known parse errors or failing automated checks at handoff.
+Total: 135 test assertions, plus the separate Quit action and cross-peer final-state comparison. The final UI-only run followed the complete suite to verify the final label/role-preview changes. The Windows export was rebuilt afterward. There are no known parse errors or failing automated checks at handoff.
 
 The integration harness accelerates wall-clock testing by feeding the same 1/30-second simulation ticks at about 30× speed. It does not assign winners or alter HP, prices, or results. The first match builds one tower and continuously orders troops; it ends at core destruction. The rematch makes no troop purchases and naturally reaches the configured 720-second survival limit. This proves authority/lifecycle behavior, not human balance or a real-time network endurance run.
 

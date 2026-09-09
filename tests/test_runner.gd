@@ -187,9 +187,11 @@ func _ui() -> void:
 	await get_tree().create_timer(0.2).timeout
 	NetworkManager.attacker = 2
 	NetworkManager.defender = 1
+	NetworkManager.phase = "reveal"
+	NetworkManager.reveal_left = 5.0
 	SceneRouter.go("reveal")
 	await get_tree().create_timer(0.3).timeout
-	NetworkManager.phase = "loading"
+	check(get_tree().current_scene.get_script().resource_path == "res://scripts/core/role_reveal.gd","Role reveal fixture displays the reveal screen")
 	for width: int in [1366,1920]:
 		DisplayServer.window_set_size(Vector2i(width,768 if width == 1366 else 1080))
 		await get_tree().create_timer(0.2).timeout

@@ -9,4 +9,4 @@ TEST SUMMARY fault-timeout: 2 checks / 0 failures
 TEST SUMMARY host: 9 checks / 0 failures
 PASS: Quit button invoked
 TEST SUMMARY rules: 44 checks / 0 failures
-TEST SUMMARY ui: 43 checks / 0 failures
+TEST SUMMARY ui: 44 checks / 0 failures
