@@ -3,8 +3,6 @@ name: godot-primal-towers
 description: Implement, debug, and review Primal Towers Godot 4 features involving GDScript, scenes, 3D imports, grid combat, economy, and LAN replication. Use for this project's development and verification, not unrelated games or standalone artwork.
 ---
 
-<!-- Tip: Use /create-skill in chat to generate content with agent assistance -->
-
 # Godot Primal Towers
 
 Deliver small, verifiable changes to a semester-scale 1v1 tower-defense game. Treat these as engineering defaults, not a certification or universal industry standard. Apply only sections relevant to the current task.

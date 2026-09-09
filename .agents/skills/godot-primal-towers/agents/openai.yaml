@@ -1,0 +1,6 @@
+interface:
+  display_name: "Godot Primal Towers"
+  short_description: "Build and verify Primal Towers Godot features"
+  default_prompt: "Use $godot-primal-towers to implement and verify the requested Primal Towers feature."
+policy:
+  allow_implicit_invocation: true
