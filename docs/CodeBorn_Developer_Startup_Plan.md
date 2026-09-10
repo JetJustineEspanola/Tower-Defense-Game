@@ -1,4 +1,4 @@
-# CodeBorn Developer Startup Plan
+# CodeBorn Beginner Developer Startup Plan
 
 Project board: https://github.com/users/JetJustineEspanola/projects/1/views/2
 
@@ -6,222 +6,260 @@ Repository: https://github.com/JetJustineEspanola/Tower-Defense-Game
 
 Miro reference: https://miro.com/app/board/uXjVHq86R4M=/
 
-## Decision
+## Beginner first decision
 
-CodeBorn should begin with one two-hour team kickoff followed by a controlled start order. The Core, LAN, and UI developer creates the shared Godot structure first. Jet starts the graybox and asset contract in parallel. The Economy and Arcane developer and Tower and Combat developer begin as soon as the shared identifiers and service interfaces are committed on the first day. The Bugs, Training, and Pathfinding developer begins after the route, spawn, base-contact, and troop data contracts are fixed, no later than the second day.
+The team should not begin with LAN multiplayer, the complete Arcane Question system, five abilities, or advanced enemy navigation. Those features require several smaller Godot skills first.
 
-Tower upgrades belong with the Tower and Combat developer. Pathfinding belongs with the Bugs and Training developer. This keeps each feature next to the runtime system that must apply and test it.
+The first goal is a small offline prototype that teaches the team how Godot scenes, nodes, scripts, signals, resources, and GitHub branches work. It contains only a starting screen, a graybox map, gold and mana labels, one stationary tower, one bug moving along one path, and a simple base target.
 
-The first shared target is one complete match slice: two players connect, one defender places one attack tower, one attacker trains one objective bug, the bug follows one path, the tower attacks it, the surviving bug damages the base, and the host declares the result.
+Each developer builds a tiny test scene before connecting work to the main scene. A task is complete when another team member can open and run it without special instructions.
 
-## Start order
+## Who starts first
 
-| Order | Start time | Owner | First output | Start condition |
-|---|---|---|---|---|
-| 0 | Day 1 first two hours | Whole team | Approved contracts and first-slice rules | Kickoff begins |
-| 1 | Day 1 immediately after kickoff | Core LAN UI Integration | Godot project shell and shared service interfaces | Rules and names agreed |
-| 1 | Day 1 in parallel | Jet 3D Art | Asset contract and graybox map kit | Scale and pivot agreed |
-| 2 | Day 1 after shared skeleton exists | Economy and Arcane | Wallet, mana, and question data skeleton | Player state and transaction API exist |
-| 2 | Day 1 after shared skeleton exists | Tower Combat and Upgrades | Tower data, deployment, targeting, and damage skeleton | Entity IDs and combat API exist |
-| 3 | Day 2 at the latest | Bugs Training and Pathfinding | Training queue, path agent, and objective bug skeleton | Route and troop contract exist |
-| 4 | End of Day 3 | Whole team | First integrated offline graybox | All minimum systems can run in one scene |
-| 5 | End of Week 1 | Whole team | First two-instance LAN demonstration | Offline slice works and network commands are defined |
-
-All developers should be active by Day 2. The order controls dependencies; it does not reserve several days for one person to work alone.
-
-## Team responsibilities
-
-| Owner | Primary responsibility | Owns | Does not own |
+| Order | Owner | First beginner task | Start time |
 |---|---|---|---|
-| Jet 3D Art | 3D and technical art | Models, rigs, animation clips, materials, graybox environment, GLB delivery and visual checks | Match rules and final gameplay scene wiring |
-| Core LAN UI Integration | Application shell and multiplayer flow | Project structure, scene routing, menus, lobby, networking, match state replication, HUD containers, builds and integration | Economy calculations or tower and troop behavior |
-| Economy and Arcane | Resources and questions | Gold, mana, validated transactions, passive income, question definitions, rewards, skip and refresh, question panel data | Direct tower placement, targeting or troop movement |
-| Tower Combat and Upgrades | Defender structures and combat rules | Deployment nodes, tower lifecycle, targeting, damage, armor, attack types, tower abilities and two-slot upgrade rule | Troop path movement and training queues |
-| Bugs Training and Pathfinding | Attacker units and movement | Training queue, spawn timing, Path3D movement, objective contact, siege targeting, troop lifecycle and troop upgrades | Tower placement and tower ability implementation |
+| 0 | Whole team | Install Godot 4.6, clone the repository, and run the project | Day 1 together |
+| 1 | Core and UI | Create the starting screen and empty scene destinations | Day 1 |
+| 1 | Jet 3D Art | Create the graybox map and correctly scaled placeholders | Day 1 in parallel |
+| 2 | Economy and Arcane | Create local gold and mana counters in a test scene | Day 2 |
+| 2 | Tower Combat | Make one tower detect and damage one stationary dummy | Day 2 |
+| 2 | Bugs and Pathfinding | Make one bug move along one visible path | Day 2 |
+| 3 | Whole team | Combine the five basic pieces into one offline scene | End of Week 1 |
 
-The Core LAN UI developer is the integration owner. Every specialist owns defects inside their subsystem and must provide a small test or repeatable verification scene.
+The Core and UI developer and Jet start first because everyone needs a runnable project, a screen to launch from, and a graybox space. The other three developers can start on Day 2 using small isolated scenes.
 
-## Day 1 kickoff decisions
+## What the team should learn first
 
-The whole team must decide and record the following before feature branches diverge:
+Every programmer should complete a short practice scene covering:
 
-- Godot 4.6 patch and Windows export target.
-- Folder, scene, script, resource, signal, and branch naming.
-- World scale, model forward direction, ground pivot, tower footprint, and path width.
-- Stable player, entity, tower, troop, ability, deployment-node, command, and transaction identifiers.
-- Match phase order and the host-authoritative rule.
-- Starting gold and mana placeholders used for the first slice.
-- Damage, armor, attack interval, training time, and movement-unit conventions.
-- Network request and acknowledgment shapes for purchases, placement, training, damage, and results.
-- Which Miro screens are required for the first demonstration.
-- Pull-request reviewer and merge order for each work package.
+- Opening and running a Godot project.
+- Creating and saving a scene.
+- Adding and renaming nodes.
+- Attaching a typed GDScript.
+- Using exported variables in the Inspector.
+- Connecting a signal through code or the editor.
+- Instantiating one reusable scene.
+- Reading an error in the Debugger.
+- Creating a branch and committing a small change.
 
-The first values are test values and may change during balancing. Their names, units, and ownership must remain stable.
+Do not copy a large system without understanding which scene owns it and how it is started.
 
-## Shared technical contracts
+## Simple project folders
 
-Create these typed Godot resources or equivalent documented data objects before building the full roster:
+Use a small structure during the beginner phase:
 
-- `TowerDefinition`: stable ID, class, price, footprint, health, armor, attack configuration, income configuration, spawn configuration, and five ability IDs.
-- `TroopDefinition`: stable ID, class, price, count, training time, health, armor, movement speed, attacks, base damage, income configuration, and five ability IDs.
-- `AbilityDefinition`: stable ID, valid owner type, price, modifiers, effect tags, prerequisites, and UI text.
-- `StatBlock`: base values plus ordered modifiers and final computed values.
-- `PlayerState`: peer ID, role, ready state, gold, mana, and selected loadout.
-- `MatchState`: phase, timer, defender base health, winner, role assignment, and protocol version.
-- `EconomyTransaction`: request ID, player ID, reason, amount, related entity ID, server result, and resulting balance.
-- `TrainingOrder`: request ID, troop ID, selected abilities, quantity, accepted timestamp, and spawn timestamp.
-- `DamageEvent`: source, target, raw damage, damage type, armor result, final damage, and server tick.
-- `QuestionDefinition`: ID, format, difficulty, prompt, choices when applicable, accepted answer, explanation, reward, and content version.
+- `scenes/ui` for the starting screen and temporary destination screens.
+- `scenes/gameplay` for the offline integration scene.
+- `scenes/towers` for the tower test scene.
+- `scenes/troops` for the bug path test scene.
+- `scenes/maps` for the graybox map and Path3D.
+- `scripts` for shared beginner scripts.
+- `assets/placeholders` for primitive models and temporary art.
+- `docs` for team instructions.
 
-UI scripts must request changes from the owning system. They must not directly change gold, mana, health, training queues, tower state, or match results.
+Add more folders only when a real feature needs them.
 
-## Initial work package for Core LAN UI Integration
+## Beginner task for Core and UI
 
-**Start:** First, immediately after the kickoff contract.
+**Goal:** Create only the starting screen shown in the Miro reference.
 
-**Tasks:**
+**Learn first:** Control nodes, containers, anchors, button signals, and scene changing.
 
-- Create the Godot 4.6 project structure and typed GDScript conventions.
-- Add `SceneRouter`, `NetworkManager`, `MatchState`, `SettingsManager`, and an event interface.
-- Create the Starting Screen, LAN Browser, Host Lobby, Role Reveal, Main Game shell, and Results shell.
-- Implement ENet host and join for two local instances.
-- Replicate lobby roster, ready state, random first role assignment, and five-second reveal.
-- Provide an authoritative command entry point for economy, placement, training, and combat requests.
-- Create a fixed isometric camera with limited zoom.
-- Maintain the integration scene and Windows test build.
+**Steps:**
 
-**Done when:** Two instances connect through localhost, both appear in the lobby, both become ready, the host starts, both see the same roles, and both enter the same graybox match scene without parse errors.
+1. Create `starting_screen.tscn` with a full-screen Control root.
+2. Add the CodeBorn title.
+3. Add Play, Settings, Developer, and Quit buttons in a centered vertical container.
+4. Make Play open a temporary scene containing the text `Play Screen Placeholder` and a Back button.
+5. Make Settings open a temporary scene containing one volume slider and a Back button.
+6. Make Developer open a temporary scene containing the text `Question Editor Placeholder` and a Back button.
+7. Make Quit close the running game.
+8. Set the starting screen as the main project scene.
+9. Test the screen at 1366 by 768 and 1920 by 1080.
 
-## Initial work package for Jet 3D Art
+**Done when:** Every button works, every placeholder screen can return to the starting screen, and no text or button is clipped at either test resolution.
 
-**Start:** Day 1 in parallel with the project shell.
+**Do later:** LAN browser, lobby, role reveal, final HUD, settings persistence, animations, and polished visual effects.
 
-**Tasks:**
+## Beginner task for Jet 3D Art
 
-- Publish the futuristic fantasy chibi scale, pivot, forward-axis, naming, material, texture, and animation contract.
-- Block out one route, attacker portal, defender base, and three to twelve deployment markers.
-- Deliver one attack-tower placeholder and one objective-bug placeholder.
-- Provide idle, move, attack, hit, and death clips where relevant, or document static substitutes.
-- Verify silhouettes using the fixed isometric camera and HUD safe areas from Miro.
-- Store large binary art sources and exports using the repository's Git LFS rules.
+**Goal:** Provide simple, replaceable objects that let the programmers build gameplay.
 
-**Done when:** The programmers import the map, tower, and bug without correcting scale, origin, forward direction, or filenames, and the route remains readable beneath the HUD.
+**Learn first:** Godot scale, imported GLB orientation, pivots, materials, and the fixed isometric camera view.
 
-## Initial work package for Economy and Arcane
+**Steps:**
 
-**Start:** Day 1 after `PlayerState` and the transaction interface exist.
+1. Agree that one Godot unit represents one meter.
+2. Create a flat graybox ground plane.
+3. Add one clearly visible route from attacker spawn to defender base.
+4. Mark one attacker spawn point and one defender base point.
+5. Add three simple tower deployment markers.
+6. Create one tower placeholder using simple shapes.
+7. Create one bug placeholder using simple shapes.
+8. Export the tower and bug as separate GLB files.
+9. Record the forward direction, pivot location, size, and filename for each asset.
+10. Check that the route and deployment markers are visible from the isometric camera.
 
-**Tasks:**
+**Done when:** Another team member imports the map, tower, and bug at the correct size without rotating, moving, or renaming them.
 
-- Implement host-owned gold and mana balances.
-- Implement `can_afford`, validated spending, rewards, passive income, and mana regeneration.
-- Use unique request IDs to prevent duplicate spending and duplicate rewards.
-- Define Coding Fix, Multiple Choice, and Identification question records.
-- Create one valid sample question of each type.
-- Implement correct-answer reward, difficulty reward, mana skip, and mana refresh.
-- Expose read-only resource events for the HUD.
-- Create validation for missing answers, duplicate IDs, invalid rewards, and malformed choices.
+**Do later:** Final character models, detailed textures, complete rigs, ability effects, destruction animation, and environment decoration.
 
-**Done when:** The host accepts valid transactions once, rejects insufficient funds and duplicates, mana regenerates, and a correct sample answer awards gold exactly once.
+## Beginner task for Economy and Arcane
 
-## Initial work package for Tower Combat and Upgrades
+**Goal:** Make a local test scene that changes gold and mana correctly.
 
-**Start:** Day 1 after entity identifiers and the combat interface exist.
+**Learn first:** Variables, labels, buttons, Timer nodes, signals, and simple validation.
 
-**Tasks:**
+**Steps:**
 
-- Implement deployment-node occupancy and server-side placement validation.
-- Create a data-driven base tower scene.
-- Implement range detection, deterministic target selection, attack interval, armor, damage, death, and cleanup.
-- Build one functional single-target attack tower.
-- Define single-target, multi-target, and splash attack interfaces.
-- Implement the five-ability definition list and enforce a maximum of two selected tower abilities.
-- Create two test abilities, such as increased range and splash damage.
-- Emit combat events that the network and HUD can display.
+1. Create `resource_test.tscn`.
+2. Start with 100 gold and 50 mana.
+3. Display both values using Label nodes.
+4. Add an `Earn 10 Gold` test button.
+5. Add a `Spend 25 Gold` test button.
+6. Prevent spending when gold is below 25.
+7. Add a Timer that restores one mana at a slow test interval.
+8. Add one Multiple Choice question with three answer buttons.
+9. Award gold once for the correct answer.
+10. Disable the answers after the question is completed.
 
-**Done when:** A purchased tower occupies one valid node, rejects invalid placement, acquires a living bug, attacks at the configured interval, applies armor correctly, releases invalid targets, and cannot equip a third ability.
+**Done when:** Gold never becomes negative, mana increases through the Timer, and the question reward can be received only once.
 
-## Initial work package for Bugs Training and Pathfinding
+**Do later:** Passive economy towers and troops, difficulty rewards, question refresh, question skip, JSON question packs, the developer editor, and network authority.
 
-**Start:** After the route and troop definition contract are committed, no later than Day 2.
+## Beginner task for Tower Combat
 
-**Tasks:**
+**Goal:** Make one tower detect and damage one stationary dummy.
 
-- Implement the host-owned troop training queue and spawn timer.
-- Create a data-driven base troop scene.
-- Implement movement along the agreed Path3D route with stable route progress.
-- Build one objective bug that ignores towers and damages only the defender base.
-- Implement health, armor, death, cleanup, and safe removal from target lists.
-- Create extension points for siege and economy bug behavior.
-- Implement the five-ability definition list and maximum two selected troop abilities.
-- Create two test abilities, such as increased movement speed and reduced training time.
+**Learn first:** Reusable scenes, Area3D, collision layers, Timer nodes, signals, and exported statistics.
 
-**Done when:** A valid purchase enters training, spawns once at the correct time, follows the entire route without getting stuck, can die to tower damage, or damages the base once if it survives.
+**Steps:**
 
-## Week 1 integration schedule
+1. Create `basic_tower.tscn` with a Node3D root.
+2. Add the placeholder tower model.
+3. Add an Area3D with a visible debug range.
+4. Create a stationary dummy with 50 health.
+5. Detect when the dummy enters the tower range.
+6. Use a Timer to deal 10 damage once per second.
+7. Display the dummy health using a Label.
+8. Stop attacking when the dummy reaches zero health.
+9. Print or display `Dummy defeated` once.
+10. Expose range, damage, and attack interval in the Inspector.
 
-| Day | Required integration result |
+**Done when:** Moving the dummy into range starts attacks, moving it out stops attacks, and defeat happens exactly once.
+
+**Do later:** Tower purchasing, deployment validation, armor, projectiles, splash attacks, multiple targets, defend towers, economy towers, and tower upgrades.
+
+## Beginner task for Bugs and Pathfinding
+
+**Goal:** Make one bug follow one path from spawn to base.
+
+**Learn first:** Path3D, PathFollow3D, process movement, exported speed, reusable scenes, and arrival signals.
+
+**Steps:**
+
+1. Create `bug_path_test.tscn`.
+2. Add a visible Path3D with a short curved route.
+3. Create `basic_bug.tscn` using the placeholder bug model.
+4. Place the bug under a PathFollow3D node.
+5. Move it forward at a constant exported speed.
+6. Add a Start button that resets and launches the bug.
+7. Add a Stop or Reset button for testing.
+8. Detect when the bug reaches the end.
+9. Display `Base reached` exactly once.
+10. Test with slow and fast movement values.
+
+**Done when:** The bug starts at the correct position, follows the full route without leaving it, and announces arrival only once.
+
+**Do later:** Training queues, groups of bugs, collision avoidance, siege targeting, tower blocking, health, armor, death, and troop upgrades.
+
+## Beginner offline integration task
+
+**Goal:** Combine the separate practice scenes into one small offline demonstration.
+
+**Steps:**
+
+1. Play opens the offline gameplay scene.
+2. The graybox map and fixed isometric camera appear.
+3. Gold and mana labels appear without their test buttons.
+4. One tower is already placed beside the route.
+5. One button spawns or starts one bug.
+6. The bug follows the route.
+7. The tower damages the bug when it enters range.
+8. If the bug dies, display `Bug defeated`.
+9. If the bug survives, reduce the base health once.
+10. A Back button safely returns to the starting screen.
+
+**Done when:** A new team member can clone the repository, open Godot, press Play, navigate into the demonstration, run both possible outcomes, and return to the starting screen.
+
+## Week 1 beginner schedule
+
+| Day | Team result |
 |---|---|
-| Day 1 | Project shell, contracts, branches, map scale, identifiers, and placeholder data are committed. |
-| Day 2 | One map, deployment node, tower shell, troop shell, wallet, HUD labels, and two-instance lobby load together. |
-| Day 3 | Offline vertical slice runs from tower purchase and troop training through combat and base contact. |
-| Day 4 | Offline commands are routed through host-authoritative request handlers and replicated to a second instance. |
-| Day 5 | Team demonstrates one short LAN match, records defects, and updates the board using evidence. |
+| Day 1 | Everyone runs the project. Starting-screen and graybox branches begin. |
+| Day 2 | Resource, tower, and bug-path test scenes begin using placeholders. |
+| Day 3 | Each developer demonstrates their small scene to one teammate. |
+| Day 4 | Fix scene errors and connect the simplest versions in the offline gameplay scene. |
+| Day 5 | Demonstrate the complete offline beginner prototype and record what was learned. |
 
-Every developer integrates at least once by Day 3. No subsystem remains on an isolated branch for the whole week.
+There is no requirement to finish LAN networking during Week 1.
 
-## Week 2 target
+## Week 2 beginner schedule
 
-Week 2 stabilizes the first slice and adds one example of each supporting feature:
+Week 2 makes the offline prototype safer and easier to extend:
 
-- LAN discovery or a documented manual-IP fallback.
-- Disconnect handling before and during a match.
-- One Arcane Question from each format.
-- Passive mana regeneration and one gold reward path.
-- Two tower test abilities and two troop test abilities.
-- Result screen and safe return to the starting screen.
-- Rematch with attacker and defender roles swapped.
-- One Windows export tested on two physical devices using the same Wi-Fi or hotspot.
+- Replace print statements with small on-screen feedback labels.
+- Move repeated statistics into simple Godot Resource files.
+- Add a basic base-health label.
+- Add a basic spawn delay using one Timer.
+- Add a basic deployment-node click test.
+- Add one settings volume slider that remains while changing local scenes.
+- Add short README instructions for running each test scene.
+- Fix warnings and errors before starting multiplayer.
 
-Do not begin the complete roster or all thirty abilities until this gate passes.
+At the end of Week 2, decide whether the team is ready for LAN host and join work.
 
-## First playable gate
+## Features deliberately postponed
 
-The startup milestone is complete only when all of the following are true:
+Do not add these to the beginner startup cards:
 
-- Two players connect and enter one lobby.
-- Both players become ready and see one synchronized role assignment.
-- The defender buys and places one attack tower on a legal deployment node.
-- The attacker buys one objective bug and waits for its training timer.
-- The bug follows the route while the tower attacks it.
-- A dead bug is removed safely, or a surviving bug damages the base once.
-- Gold, mana, match time, and base health display authoritative values.
-- The host decides victory or defeat and both clients show the same result.
-- Returning to the menu does not leave peers, units, timers, or transactions active.
-- The exact build runs on two Windows devices over the supported LAN configuration.
+- UDP lobby discovery.
+- Host-authoritative replication.
+- Random networked role assignment.
+- Rematch synchronization.
+- Complete attacker and defender shops.
+- Economy towers and economy bugs.
+- Siege targeting and blocking troops.
+- Five finished abilities per unit.
+- Two-slot upgrade selection UI.
+- Full Arcane Question editor and content packs.
+- Final victory and defeat statistics.
+- Advanced pathfinding or dynamic avoidance.
 
-## GitHub planning board connection
+These remain part of the full CodeBorn plan and begin after the offline prototype is stable.
 
-Create six startup cards in the CodeBorn planning board and link them to the existing M0 and M1 issues:
+## GitHub board cards
 
-1. `[START-01] Core LAN UI foundation and shared contracts` - references issues #2, #3, #4, #7, #8, and #9.
-2. `[START-02] Economy and Arcane vertical slice` - references issues #2, #4, #5, #7, and #9.
-3. `[START-03] Tower combat placement and upgrade framework` - references issues #2, #7, #12, and #17.
-4. `[START-04] Bug training pathfinding and objective contact` - references issues #2, #7, #12, and #17.
-5. `[START-05] Graybox map and replaceable 3D asset contract` - references issues #1 and #6.
-6. `[START-06] Two-player first playable integration gate` - depends on START-01 through START-05 and references issues #7, #8, #9, and #10.
+Use these six beginner cards:
 
-START-01 and START-05 move to In Progress first. START-02 and START-03 become ready after the shared skeleton lands. START-04 becomes ready after the route contract lands. START-06 stays blocked until all five implementation cards provide their minimum outputs.
+1. `[BEGINNER-01] Project setup and starting screen`
+2. `[BEGINNER-02] Basic gold mana and one question test`
+3. `[BEGINNER-03] Basic tower range and damage test`
+4. `[BEGINNER-04] Basic bug path movement test`
+5. `[BEGINNER-05] Graybox map and placeholder art`
+6. `[BEGINNER-06] Offline beginner prototype integration`
 
-Attach or link this startup plan from every START card. Keep later milestone cards in Backlog. A card moves to Done only when its stated result is demonstrated in the integrated build.
+BEGINNER-01 and BEGINNER-05 start first and remain In Progress. BEGINNER-02, BEGINNER-03, and BEGINNER-04 remain Todo until their developers can run the project and their required placeholder scene exists. BEGINNER-06 remains Todo until the five small pieces work separately.
 
-## Working rules
+## Beginner working rules
 
-- Keep at most one primary startup card in progress per person.
-- Merge small interfaces and placeholders early instead of waiting for complete features.
-- Use data resources for balance values; do not store prices or combat values in UI scripts.
-- Use placeholders until final art is ready.
-- Record build version, commit, test setup, expected result, actual result, and evidence for failures.
-- Review any change that affects identifiers, network messages, save formats, or asset contracts with every affected owner.
-- Reestimate after the first two-device demonstration.
+- Keep each first pull request small enough to review in about fifteen minutes.
+- Put only one feature in each test scene.
+- Use descriptive node and file names.
+- Ask another developer to run the scene before marking the card Done.
+- Commit working checkpoints instead of one very large final commit.
+- Never mark a task Done because the code was written; run the scene and show the result.
+- Use placeholders without waiting for final models or polished UI.
+- Read the first debugger error before changing several files.
+- When stuck for more than one hour, write the exact error and ask a teammate for help.
 
