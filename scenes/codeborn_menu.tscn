@@ -1,0 +1,255 @@
+[gd_scene format=3 uid="uid://3c8mheov6x1d"]
+
+[ext_resource type="Script" uid="uid://dtdsk4mvsrp6w" path="res://scripts/codeborn_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://d0qtd2xnyw5pg" path="res://assets/Images_Ubac/Gemini_Generated_Image_g9d0xog9d0xog9d0.jpg" id="2_nb7fy"]
+[ext_resource type="Texture2D" uid="uid://33wscoorfvv7" path="res://assets/Buttons_Ubac/1.png" id="3_ml0vf"]
+[ext_resource type="Texture2D" uid="uid://6ur0gtfaovhm" path="res://assets/Buttons_Ubac/2.png" id="4_nrmlo"]
+[ext_resource type="Texture2D" uid="uid://ytdcm7fyrhlt" path="res://assets/Buttons_Ubac/3.png" id="5_4ujci"]
+[ext_resource type="Texture2D" uid="uid://bgfjggotqkvhi" path="res://assets/Buttons_Ubac/4.png" id="6_hu1up"]
+[ext_resource type="Texture2D" uid="uid://b327ia53hagpx" path="res://assets/Buttons_Ubac/5.png" id="7_wf2tn"]
+[ext_resource type="Texture2D" uid="uid://cesuy0xi8jrrs" path="res://assets/Buttons_Ubac/6.png" id="8_wmt6p"]
+[ext_resource type="Texture2D" uid="uid://dh1wu0nu3wllx" path="res://assets/Buttons_Ubac/7.png" id="9_leexa"]
+[ext_resource type="Texture2D" uid="uid://duymh76pmgmyy" path="res://assets/Buttons_Ubac/8.png" id="10_4rb5s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_img66"]
+texture = ExtResource("2_nb7fy")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxPanel"]
+content_margin_left = 48.0
+content_margin_top = 40.0
+content_margin_right = 48.0
+content_margin_bottom = 40.0
+bg_color = Color(0.075, 0.105, 0.15, 0.96)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.003921569)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="CodeBornMenu" type="Control" unique_id=336241842]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="BackgroundImage" type="Panel" parent="." unique_id=1408160347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_img66")
+
+[node name="MainMenu" type="Control" parent="." unique_id=476134126]
+layout_mode = 1
+anchor_left = 0.52049786
+anchor_top = 0.5651041
+anchor_right = 0.52049786
+anchor_bottom = 0.5651041
+scale = Vector2(1.2521197, 1.2590717)
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu" unique_id=1987301262 node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -214.052
+offset_top = -159.5
+offset_right = 145.948
+offset_bottom = 173.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+shortcut_context = NodePath("../../PlayScreen")
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/CenterContainer" unique_id=785627375]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxPanel")
+
+[node name="Content" type="VBoxContainer" parent="MainMenu/CenterContainer/PanelContainer" unique_id=959196566]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Buttons" type="VBoxContainer" parent="MainMenu/CenterContainer/PanelContainer/Content" unique_id=550242140]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = -1
+
+[node name="PlayButton" type="TextureButton" parent="MainMenu/CenterContainer/PanelContainer/Content/Buttons" unique_id=160554610]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_ml0vf")
+texture_pressed = ExtResource("3_ml0vf")
+texture_hover = ExtResource("4_nrmlo")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SettingsButton" type="TextureButton" parent="MainMenu/CenterContainer/PanelContainer/Content/Buttons" unique_id=1582817070]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_4ujci")
+texture_pressed = ExtResource("5_4ujci")
+texture_hover = ExtResource("6_hu1up")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DeveloperButton" type="TextureButton" parent="MainMenu/CenterContainer/PanelContainer/Content/Buttons" unique_id=1491256789]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_wf2tn")
+texture_pressed = ExtResource("7_wf2tn")
+texture_hover = ExtResource("8_wmt6p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="QuitButton" type="TextureButton" parent="MainMenu/CenterContainer/PanelContainer/Content/Buttons" unique_id=1677124057]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("9_leexa")
+texture_pressed = ExtResource("9_leexa")
+texture_hover = ExtResource("10_4rb5s")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PlayScreen" type="Control" parent="." unique_id=1294109234]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayScreen" unique_id=188101666]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayScreen/CenterContainer" unique_id=343393007]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxPanel")
+
+[node name="Content" type="VBoxContainer" parent="PlayScreen/CenterContainer/PanelContainer" unique_id=1739335708]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="PlayScreen/CenterContainer/PanelContainer/Content" unique_id=1287922552]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 30
+text = "Play Screen Placeholder"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="PlayScreen/CenterContainer/PanelContainer/Content" unique_id=964594246]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.76, 0.82, 1)
+text = "The game screen will be built here."
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="PlayScreen/CenterContainer/PanelContainer/Content" unique_id=1922352302]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Back"
+
+[node name="SettingsScreen" type="Control" parent="." unique_id=1636905337]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SettingsScreen" unique_id=1976370781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 503.0
+offset_top = 274.5
+offset_right = -503.0
+offset_bottom = -274.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="SettingsScreen/CenterContainer" unique_id=1837480501]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxPanel")
+
+[node name="Content" type="VBoxContainer" parent="SettingsScreen/CenterContainer/PanelContainer" unique_id=564834350]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="VolumeLabel" type="Label" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=787860707]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=1365276293]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+value = 75.0
+
+[node name="BackButton" type="Button" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=963801174]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Back"
+
+[node name="DeveloperScreen" type="Control" parent="." unique_id=1533904123]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="DeveloperScreen" unique_id=1412545248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="DeveloperScreen/CenterContainer" unique_id=158137792]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxPanel")
+
+[node name="Content" type="VBoxContainer" parent="DeveloperScreen/CenterContainer/PanelContainer" unique_id=1383644576]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=522546477]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 30
+text = "Question Editor Placeholder"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=267394575]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.76, 0.82, 1)
+text = "Question authoring tools will be built here."
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=49520902]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Back"
