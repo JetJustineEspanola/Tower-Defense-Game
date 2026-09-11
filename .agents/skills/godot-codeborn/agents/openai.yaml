@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot CodeBorn"
+  short_description: "Beginner team development for CodeBorn in Godot 4.6"
+  default_prompt: "Use $godot-codeborn to help me complete my current CodeBorn task in small, beginner-friendly steps."
