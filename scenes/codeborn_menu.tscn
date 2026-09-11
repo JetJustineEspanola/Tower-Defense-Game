@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3c8mheov6x1d"]
 
 [ext_resource type="Script" uid="uid://dtdsk4mvsrp6w" path="res://scripts/codeborn_menu.gd" id="1_menu"]
-[ext_resource type="Texture2D" uid="uid://d0qtd2xnyw5pg" path="res://assets/Images_Ubac/Gemini_Generated_Image_g9d0xog9d0xog9d0.jpg" id="2_nb7fy"]
+[ext_resource type="VideoStream" uid="uid://y4j00rle8qdg" path="res://assets/BackgroundVideo/background_from_mp4_maxquality.ogv" id="2_wmt6p"]
 [ext_resource type="Texture2D" uid="uid://33wscoorfvv7" path="res://assets/Buttons_Ubac/1.png" id="3_ml0vf"]
 [ext_resource type="Texture2D" uid="uid://6ur0gtfaovhm" path="res://assets/Buttons_Ubac/2.png" id="4_nrmlo"]
 [ext_resource type="Texture2D" uid="uid://ytdcm7fyrhlt" path="res://assets/Buttons_Ubac/3.png" id="5_4ujci"]
@@ -10,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cesuy0xi8jrrs" path="res://assets/Buttons_Ubac/6.png" id="8_wmt6p"]
 [ext_resource type="Texture2D" uid="uid://dh1wu0nu3wllx" path="res://assets/Buttons_Ubac/7.png" id="9_leexa"]
 [ext_resource type="Texture2D" uid="uid://duymh76pmgmyy" path="res://assets/Buttons_Ubac/8.png" id="10_4rb5s"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_img66"]
-texture = ExtResource("2_nb7fy")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxPanel"]
 content_margin_left = 48.0
@@ -40,14 +37,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="BackgroundImage" type="Panel" parent="." unique_id=1408160347]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1707079460]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_img66")
+stream = ExtResource("2_wmt6p")
+autoplay = true
+expand = true
+loop = true
 
 [node name="MainMenu" type="Control" parent="." unique_id=476134126]
 layout_mode = 1
