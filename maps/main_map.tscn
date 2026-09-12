@@ -1582,55 +1582,6 @@ height = 0.7528253
 radial_segments = 5
 rings = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7yv4"]
-resource_name = "water"
-render_priority = 0
-shader = SubResource("Shader_vbbjw")
-shader_parameter/base_color = Color(0.25882354, 0.5529412, 0.7882353, 1)
-shader_parameter/energy = 0.0
-metadata/use_outline_hull = false
-
-[sub_resource type="BoxMesh" id="BoxMesh_yhr6e"]
-size = Vector3(1.5, 0.09, 2.2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_emlnw"]
-resource_name = "foam"
-render_priority = 0
-shader = SubResource("Shader_vbbjw")
-shader_parameter/base_color = Color(0.60784316, 0.85882354, 0.8901961, 1)
-shader_parameter/energy = 0.1
-metadata/use_outline_hull = false
-
-[sub_resource type="BoxMesh" id="BoxMesh_i8wix"]
-size = Vector3(0.045, 0.83, 0.56)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cek0i"]
-size = Vector3(0.05, 0.82, 0.25)
-
-[sub_resource type="TorusMesh" id="TorusMesh_xrjh6"]
-inner_radius = 0.188
-outer_radius = 0.2
-rings = 32
-ring_segments = 6
-
-[sub_resource type="TorusMesh" id="TorusMesh_050to"]
-inner_radius = 0.273
-outer_radius = 0.285
-rings = 32
-ring_segments = 6
-
-[sub_resource type="TorusMesh" id="TorusMesh_qob48"]
-inner_radius = 0.358
-outer_radius = 0.37
-rings = 32
-ring_segments = 6
-
-[sub_resource type="TorusMesh" id="TorusMesh_5asx7"]
-inner_radius = 0.443
-outer_radius = 0.455
-rings = 32
-ring_segments = 6
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a5nn"]
 resource_name = "mat_rock_anime_GLB"
 cull_mode = 2
@@ -4907,41 +4858,6 @@ cast_shadow = 0
 mesh = SubResource("CylinderMesh_bm3sa")
 
 [node name="Water" type="Node3D" parent="Environment" unique_id=2120465750]
-
-[node name="WaterLedge" type="MeshInstance3D" parent="Environment/Water" unique_id=338583996]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, -0.88, 5.5)
-material_override = SubResource("ShaderMaterial_f7yv4")
-mesh = SubResource("BoxMesh_yhr6e")
-
-[node name="WaterfallRibbon" type="MeshInstance3D" parent="Environment/Water" unique_id=471664805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.73, -0.36, 5.5)
-material_override = SubResource("ShaderMaterial_emlnw")
-mesh = SubResource("BoxMesh_i8wix")
-
-[node name="BlueFlowBand" type="MeshInstance3D" parent="Environment/Water" unique_id=131101658]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -0.36, 5.42)
-material_override = SubResource("ShaderMaterial_f7yv4")
-mesh = SubResource("BoxMesh_cek0i")
-
-[node name="FoamRipple" type="MeshInstance3D" parent="Environment/Water" unique_id=640405942]
-transform = Transform3D(0.62, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.81, 5.5)
-material_override = SubResource("ShaderMaterial_emlnw")
-mesh = SubResource("TorusMesh_xrjh6")
-
-[node name="@MeshInstance3D@59" type="MeshInstance3D" parent="Environment/Water" unique_id=900355149]
-transform = Transform3D(0.62, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.81, 5.5)
-material_override = SubResource("ShaderMaterial_emlnw")
-mesh = SubResource("TorusMesh_050to")
-
-[node name="@MeshInstance3D@60" type="MeshInstance3D" parent="Environment/Water" unique_id=711086599]
-transform = Transform3D(0.62, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.81, 5.5)
-material_override = SubResource("ShaderMaterial_emlnw")
-mesh = SubResource("TorusMesh_qob48")
-
-[node name="@MeshInstance3D@61" type="MeshInstance3D" parent="Environment/Water" unique_id=756685094]
-transform = Transform3D(0.62, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.81, 5.5)
-material_override = SubResource("ShaderMaterial_emlnw")
-mesh = SubResource("TorusMesh_5asx7")
 
 [node name="Rocks" type="Node3D" parent="Environment" unique_id=162590285]
 
