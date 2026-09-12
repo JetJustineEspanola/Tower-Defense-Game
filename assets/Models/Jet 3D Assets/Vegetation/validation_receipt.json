@@ -1,0 +1,327 @@
+[
+  {
+    "file": "broadleaf_tree_round_01.glb",
+    "sha256": "29771fa8ecccc0114d173edf7adc65b60c709fa537b2bb0f34488e119c7df07b",
+    "bytes": 33752,
+    "triangles": 336,
+    "dimensions_m": [
+      2.1774075031280518,
+      1.835924506187439,
+      2.799999952316284
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "broadleaf_tree_tall_01.glb",
+    "sha256": "6d83563fdc66fb1458ee9918e30c364b87b70f0869141f0bfafffef5e4d5f7fe",
+    "bytes": 53048,
+    "triangles": 544,
+    "dimensions_m": [
+      2.585631847381592,
+      2.076580286026001,
+      3.799999952316284
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "bush_flower_mix_01.glb",
+    "sha256": "083d236c1f96aeb69a40a7c0a010fd9041f2794012139bf0064cd426db77c33d",
+    "bytes": 183532,
+    "triangles": 1760,
+    "dimensions_m": [
+      0.7854396104812622,
+      0.5939954519271851,
+      0.5367199778556824
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "flower_mixed_cluster_01.glb",
+    "sha256": "ced7d10fbd595fde7b9b7ac8ad6c0891605b01b05b1707c1c1d2a9f9fa8832ee",
+    "bytes": 150916,
+    "triangles": 1440,
+    "dimensions_m": [
+      0.39810287952423096,
+      0.3385511040687561,
+      0.36107999086380005
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "flower_pink_cluster_01.glb",
+    "sha256": "615c35b2776e82d8a7747c66d60dc9d873af6d70722cf96d3bfad2b3c71851e8",
+    "bytes": 148920,
+    "triangles": 1440,
+    "dimensions_m": [
+      0.3859860301017761,
+      0.32696497440338135,
+      0.34101998805999756
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "flower_pink_small_01.glb",
+    "sha256": "022b6c05f01b8e6eee87771510174dbeb5b2d3269db7bd3b800c20f927296bca",
+    "bytes": 52512,
+    "triangles": 480,
+    "dimensions_m": [
+      0.15670008957386017,
+      0.1615917682647705,
+      0.2407200038433075
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "flower_white_cluster_01.glb",
+    "sha256": "fa305ea2efe2564fe16ce4635530c768d9353ba1f64913c62acb27f2c2326dd2",
+    "bytes": 148920,
+    "triangles": 1440,
+    "dimensions_m": [
+      0.36175239086151123,
+      0.3037925958633423,
+      0.30090001225471497
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "flower_white_small_01.glb",
+    "sha256": "57f71c44f75642de4b388942ba3ff3d4d76849f9715046260bd1698a1eced0d7",
+    "bytes": 52516,
+    "triangles": 480,
+    "dimensions_m": [
+      0.14364174008369446,
+      0.1481257975101471,
+      0.220660001039505
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "flower_yellow_small_01.glb",
+    "sha256": "de7b35a6bf878bb0f571ef18505d8ac3f606ca9213713995df86f1e822e145e0",
+    "bytes": 52516,
+    "triangles": 480,
+    "dimensions_m": [
+      0.15670008957386017,
+      0.1615917682647705,
+      0.2407200038433075
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "grass_clump_large_01.glb",
+    "sha256": "7971f7a7fc1676a52cbf54824e1d63f776796f81e2b85c1c4917fe6d8aa0142f",
+    "bytes": 6904,
+    "triangles": 45,
+    "dimensions_m": [
+      0.6054757833480835,
+      0.6407672762870789,
+      0.6200000047683716
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "grass_clump_medium_01.glb",
+    "sha256": "1020cd1b27f0a13decf18f468c382782cabe1afe1d4f0fb589666d1c4d51a762",
+    "bytes": 5884,
+    "triangles": 35,
+    "dimensions_m": [
+      0.4267232418060303,
+      0.40573522448539734,
+      0.4300000071525574
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "grass_clump_small_01.glb",
+    "sha256": "dcdf7d5697400bb6b00444a3eb9e5b23f0cbccb6a150d70e25781af4120076f9",
+    "bytes": 4860,
+    "triangles": 25,
+    "dimensions_m": [
+      0.22846709191799164,
+      0.2211136817932129,
+      0.2600000202655792
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "grass_clump_small_02.glb",
+    "sha256": "20f429bb98135047e24df7397f151c401da27241ad53f9d260f596e24f116c5d",
+    "bytes": 4352,
+    "triangles": 20,
+    "dimensions_m": [
+      0.323177307844162,
+      0.2891131043434143,
+      0.30000001192092896
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "grass_flower_mix_01.glb",
+    "sha256": "5071542cfe52e1a8aa60b6d47ab5c4bdd07e10d9cb4bc6d09ae29dec44271f68",
+    "bytes": 104244,
+    "triangles": 985,
+    "dimensions_m": [
+      0.3273772597312927,
+      0.26608023047447205,
+      0.2908700108528137
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "pine_tree_large_01.glb",
+    "sha256": "968ed0d1a6b3315684ca121767526c31644d73df791665303b00b573c1b569cb",
+    "bytes": 38336,
+    "triangles": 494,
+    "dimensions_m": [
+      1.977381944656372,
+      1.7124629020690918,
+      3.799999952316284
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "pine_tree_medium_01.glb",
+    "sha256": "e0574ef36dfdc9c0b7f5c52d0371832333ea6e46878cf638cd95d6737851fee8",
+    "bytes": 31632,
+    "triangles": 400,
+    "dimensions_m": [
+      1.4882400035858154,
+      1.288853645324707,
+      2.5999999046325684
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "pine_tree_small_01.glb",
+    "sha256": "9267eaaede1280c868113836b55adb349bb0e6f7fbfb95f501bc397922b11f37",
+    "bytes": 24908,
+    "triangles": 306,
+    "dimensions_m": [
+      0.9332608580589294,
+      0.8082276582717896,
+      1.5
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "sapling_small_01.glb",
+    "sha256": "833bca16797cf253a85d8e8a9e4e3da5de9bafa5920bb2ef0edf51a56f014717",
+    "bytes": 9928,
+    "triangles": 84,
+    "dimensions_m": [
+      0.47956380248069763,
+      0.2196609526872635,
+      0.8000000715255737
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "shrub_clump_medium_01.glb",
+    "sha256": "22032696452c51aff5acba2a875359c7f865fe97db0e51d3f28bf0eadb889f1d",
+    "bytes": 34992,
+    "triangles": 320,
+    "dimensions_m": [
+      0.9009454250335693,
+      0.6813477277755737,
+      0.5940000414848328
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "shrub_clump_round_01.glb",
+    "sha256": "995b7ad022072c2b436e4ddcec467a472d544598ae20e31fe816c9357e8c19a6",
+    "bytes": 34992,
+    "triangles": 320,
+    "dimensions_m": [
+      0.7623384594917297,
+      0.5765249729156494,
+      0.6237000226974487
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "shrub_clump_small_01.glb",
+    "sha256": "c201f290f93ec47294f2a6959e07a7ab10212c830cdde509ceebfb1ff39de557",
+    "bytes": 34996,
+    "triangles": 320,
+    "dimensions_m": [
+      0.554427981376648,
+      0.4192909300327301,
+      0.3959999978542328
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "shrub_clump_wide_01.glb",
+    "sha256": "99bcec2646f3fc2b1a6f71734882253781e350d56e750f1b04e187b4955cd36c",
+    "bytes": 34988,
+    "triangles": 320,
+    "dimensions_m": [
+      1.2128112316131592,
+      0.6420391798019409,
+      0.47519999742507935
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "stylized_tree_large_01.glb",
+    "sha256": "1f6fe11a771b724fd9048752fa91589dd62b910ee7d9ee9748613d7e6f24c6d8",
+    "bytes": 53056,
+    "triangles": 544,
+    "dimensions_m": [
+      3.7033333778381348,
+      3.015998363494873,
+      4.600000381469727
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "stylized_tree_medium_01.glb",
+    "sha256": "252876c0277f899410c129433ba6f8ddf1361d88a5f3494907f8773263cdacb3",
+    "bytes": 53056,
+    "triangles": 544,
+    "dimensions_m": [
+      2.495724678039551,
+      2.0325207710266113,
+      3.1000001430511475
+    ],
+    "uv": true,
+    "ground_origin": true
+  },
+  {
+    "file": "stylized_tree_small_01.glb",
+    "sha256": "a70512f523781dcc98fd57537f3e93a17a340453c35299881fa030dba461686e",
+    "bytes": 53060,
+    "triangles": 544,
+    "dimensions_m": [
+      1.5296378135681152,
+      1.2457385063171387,
+      1.899999976158142
+    ],
+    "uv": true,
+    "ground_origin": true
+  }
+]
