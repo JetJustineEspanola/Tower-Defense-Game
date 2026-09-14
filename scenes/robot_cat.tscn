@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ce5cb2cuo6b5h"]
+
+[ext_resource type="PackedScene" uid="uid://7au461ek7yhq" path="res://scenes/Cat/CODE_BORN_Robot_Cat_Rigged.glb" id="1_6ywi3"]
+
+[node name="Robot Cat Preview" unique_id=1026361533 instance=ExtResource("1_6ywi3")]

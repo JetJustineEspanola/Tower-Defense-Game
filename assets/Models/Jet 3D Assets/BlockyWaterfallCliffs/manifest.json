@@ -1,0 +1,83 @@
+{
+  "provenance": "Locally authored derivative of CODE BORN long blocky cliff for user project; no third-party content",
+  "walls": [
+    {
+      "name": "cliff_blocky_WestLower",
+      "length": 14.08,
+      "height": 2.389,
+      "triangles": 672,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "cliff_blocky_NorthLower",
+      "length": 14.1,
+      "height": 2.52,
+      "triangles": 732,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "cliff_blocky_NorthUpperWest",
+      "length": 3.05,
+      "height": 2.52,
+      "triangles": 132,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "cliff_blocky_NorthUpperEast",
+      "length": 4.98,
+      "height": 2.52,
+      "triangles": 192,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "cliff_blocky_WestUpperSouth",
+      "length": 3.05,
+      "height": 2.52,
+      "triangles": 132,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "cliff_blocky_WestUpperNorth",
+      "length": 5.12,
+      "height": 2.52,
+      "triangles": 252,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "cliff_blocky_NorthEndReturn",
+      "length": 1.16,
+      "height": 2.52,
+      "triangles": 72,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "sha256": "16809f0019c6f7c174210c81f556b4fd9c4f4ab90cf966b94a79cdaa27e23c94"
+}
