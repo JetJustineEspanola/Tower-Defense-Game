@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://p3f35jxa837j"]
+
+[node name="robot_cat_root" type="Node3D" unique_id=1987152292]
+
+[node name="Model" parent="." unique_id=797877449]

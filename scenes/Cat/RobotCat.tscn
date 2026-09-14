@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://32epmt0eb173"]
+
+[ext_resource type="Script" uid="uid://elup83a2aeh1" path="res://scenes/Cat/robot_cat_animation.gd" id="1_lirel"]
+[ext_resource type="PackedScene" uid="uid://7au461ek7yhq" path="res://scenes/Cat/CODE_BORN_Robot_Cat_Rigged.glb" id="1_pa23a"]
+
+[node name="Node3D" type="Node3D" unique_id=796387878]
+script = ExtResource("1_lirel")
+
+[node name="Robot Cat Preview" parent="." unique_id=1026361533 instance=ExtResource("1_pa23a")]
