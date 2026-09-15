@@ -1,7 +1,7 @@
 extends Control
 
 var gold = 100
-var mana = 20
+var mana = 50
 var answered = false
 
 func _ready():
