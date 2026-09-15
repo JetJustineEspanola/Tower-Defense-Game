@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bx7yhp68fdv3t"]
+
+[ext_resource type="Script" uid="uid://buj2f6hsc40ud" path="res://scripts/arcane_question_test.gd" id="1_586t4"]
+
+[node name="ArcaneQuestionTest" type="Control" unique_id=1101563791]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_586t4")
+
+[node name="GoldLabel" type="Label" parent="." unique_id=1332811081]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 102.0
+offset_bottom = 48.0
+text = "Gold: 100"
+
+[node name="ManaLabel" type="Label" parent="." unique_id=72965343]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 25.0
+offset_right = 221.0
+offset_bottom = 48.00001
+text = "Mana: 50"
+
+[node name="QuestionPanel" type="Panel" parent="." unique_id=477482350]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 20.0
+offset_right = 1330.0
+offset_bottom = 470.0
+
+[node name="QuestionLabel" type="Label" parent="QuestionPanel" unique_id=348475363]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 310.0
+offset_bottom = 110.0
+text = "What does this code output?
+print(2 + 3 * 4)"
+
+[node name="AnswerButtonA" type="Button" parent="QuestionPanel" unique_id=84775232]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 150.0
+offset_right = 310.0
+offset_bottom = 190.0
+text = "14"
+
+[node name="AnswerButtonB" type="Button" parent="QuestionPanel" unique_id=861271139]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 200.0
+offset_right = 310.0
+offset_bottom = 240.0
+text = "20"
+
+[node name="AnswerButtonC" type="Button" parent="QuestionPanel" unique_id=373826947]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 250.0
+offset_right = 310.0
+offset_bottom = 290.0
+text = "10"
+
+[node name="ResultLabel" type="Label" parent="QuestionPanel" unique_id=430739201]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 320.0
+offset_right = 310.0
+offset_bottom = 350.0
+text = "Answer"
+horizontal_alignment = 1
+
+[node name="NewQuestionButton" type="Button" parent="." unique_id=137325360]
+layout_mode = 0
+offset_left = 1020.0
+offset_top = 401.0
+offset_right = 1310.0
+offset_bottom = 451.0
+text = "New Question"
+
+[node name="ManaTimer" type="Timer" parent="." unique_id=1839634255]
+wait_time = 5.0
+autostart = true
+
+[connection signal="pressed" from="QuestionPanel/AnswerButtonA" to="." method="_on_answer_button_a_pressed"]
+[connection signal="pressed" from="QuestionPanel/AnswerButtonB" to="." method="_on_answer_button_b_pressed"]
+[connection signal="pressed" from="QuestionPanel/AnswerButtonC" to="." method="_on_answer_button_c_pressed"]
+[connection signal="pressed" from="NewQuestionButton" to="." method="_on_new_question_button_pressed"]
+[connection signal="timeout" from="ManaTimer" to="." method="_on_mana_timer_timeout"]
