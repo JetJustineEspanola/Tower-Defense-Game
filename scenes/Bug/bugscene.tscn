@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bvfnfvieguxiv"]
+
+[ext_resource type="PackedScene" uid="uid://0hnmqe0v5r1" path="res://scenes/Bug/bug.glb" id="1_k8ax2"]
+[ext_resource type="Script" uid="uid://bu8teuwmv44a3" path="res://scenes/Bug/PathFinder_Bug.gd" id="2_eixpn"]
+
+[node name="Node3D" type="Node3D" unique_id=949287718]
+
+[node name="bug" parent="." unique_id=996549791 instance=ExtResource("1_k8ax2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02190566, -0.88632727, 1.3838094)
+script = ExtResource("2_eixpn")
