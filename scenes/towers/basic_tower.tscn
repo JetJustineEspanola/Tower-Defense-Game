@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://d4lw3xb456wm"]
+
+[ext_resource type="PackedScene" uid="uid://kjv50eoj1pnv" path="res://assets/Models/tower.glb" id="1_eidq4"]
+[ext_resource type="Script" uid="uid://ce3km0l5ud2uq" path="res://scripts/towers/basic_tower.gd" id="1_g4jmr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4jmr"]
+radius = 1.0241807
+
+[node name="BasicTower" type="Node3D" unique_id=910561427]
+script = ExtResource("1_g4jmr")
+
+[node name="TowerVisual" parent="." unique_id=318258957 instance=ExtResource("1_eidq4")]
+transform = Transform3D(-0.99490356, 0, 0.100830674, 0, 1, 0, -0.100830674, 0, -0.99490356, 2.3165083, 1.776577, -1.0737039)
+
+[node name="AttackRange" type="Area3D" parent="." unique_id=144806888]
+collision_mask = 2
+
+[node name="RangeShape" type="CollisionShape3D" parent="AttackRange" unique_id=107660302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15413857, 0.087516785, 0)
+shape = SubResource("SphereShape3D_g4jmr")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=233174684]
+autostart = true

@@ -3896,6 +3896,7 @@ mesh = SubResource("ArrayMesh_ocp2s")
 transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, 2, 0.2, 0.02)
 
 [node name="pine_tree_small_01" type="MeshInstance3D" parent="Environment/Vegetation/FramingTree02" unique_id=93247329]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 8.34465e-07, 0)
 mesh = SubResource("ArrayMesh_ocp2s")
 surface_material_override/0 = SubResource("ShaderMaterial_hb58x")
 surface_material_override/1 = SubResource("ShaderMaterial_fxjfn")

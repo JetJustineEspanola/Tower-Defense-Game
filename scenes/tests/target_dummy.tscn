@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://0ecnv27shjif"]
+
+[ext_resource type="Script" uid="uid://cbcx23ksnqeje" path="res://scripts/tests/.gd" id="1_c5mcy"]
+[ext_resource type="PackedScene" uid="uid://bmqs04oox5qa6" path="res://assets/Models/bug.glb" id="2_85e2w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hq050"]
+radius = 0.5800781
+height = 1.8999023
+
+[node name="TargetDummy" type="CharacterBody3D" unique_id=2001610765]
+collision_layer = 2
+script = ExtResource("1_c5mcy")
+
+[node name="DummyVisual" parent="." unique_id=85625528 instance=ExtResource("2_85e2w")]
+transform = Transform3D(0.9932907, 0.051691614, 0.10344775, -0.04670423, 0.997653, -0.050069124, -0.10579296, 0.044901684, 0.99337405, -0.023651063, -1.37002, 1.4373344)
+
+[node name="BodyShape" type="CollisionShape3D" parent="." unique_id=814605196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.081058025, 0.2537397, 0.18691754)
+shape = SubResource("CapsuleShape3D_hq050")
+
+[node name="HealthLabel" type="Label3D" parent="." unique_id=398466587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044454962, 0.86977714, 0.14324379)
+text = "50
+"
+font_size = 38
