@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TowerUpgradePath" format=3]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade_path.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade.gd" id="upgrade"]
+[ext_resource type="Texture2D" path="res://assets/ui/portraits/ronel.png" id="portrait"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel/swift_steps.tres" id="u0"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel/resilient_runner.tres" id="u1"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel/base_breaker.tres" id="u2"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel/quick_training.tres" id="u3"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel/warded_cloak.tres" id="u4"]
+[resource]
+script = ExtResource("script")
+character_name = "Ronel"
+role = "Objective"
+portrait = ExtResource("portrait")
+choices = Array[ExtResource("upgrade")]([ExtResource("u0"), ExtResource("u1"), ExtResource("u2"), ExtResource("u3"), ExtResource("u4")])

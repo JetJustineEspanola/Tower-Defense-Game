@@ -1,0 +1,66 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://maps/main_map.tscn" id="map"]
+[ext_resource type="Script" path="res://scripts/attacker/attacker_match.gd" id="match"]
+[ext_resource type="Script" path="res://scripts/attacker/troop_roster.gd" id="roster"]
+[ext_resource type="Script" path="res://scripts/resources/player_resources.gd" id="wallet"]
+[ext_resource type="PackedScene" path="res://scenes/attacker/troop_card.tscn" id="card"]
+[ext_resource type="PackedScene" path="res://scenes/towers/tower_upgrade_sidebar.tscn" id="sidebar"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel.tres" id="ronel"]
+[ext_resource type="Resource" path="res://resources/attacker/matthew.tres" id="matthew"]
+[ext_resource type="Resource" path="res://resources/attacker/canguit.tres" id="canguit"]
+[node name="AttackerMatch" instance=ExtResource("map")]
+script = ExtResource("match")
+[node name="CombatReview" parent="Gameplay" index="0"]
+script = null
+[node name="TowerShop" parent="Gameplay" index="1"]
+visible = false
+process_mode = 4
+script = null
+[node name="TargetHealth" type="Label3D" parent="Gameplay/AlliedBase"]
+position = Vector3(0, 1.6, 0)
+billboard = 1
+no_depth_test = true
+font_size = 36
+pixel_size = 0.004
+text = "ENEMY BASE"
+[node name="DefenderResources" type="Node" parent="."]
+script = ExtResource("wallet")
+starting_gold = 0
+[node name="Roster" type="Node3D" parent="."]
+[node name="Ronel" type="Node3D" parent="Roster"]
+script = ExtResource("roster")
+definition = ExtResource("ronel")
+[node name="Matthew" type="Node3D" parent="Roster"]
+script = ExtResource("roster")
+definition = ExtResource("matthew")
+[node name="Canguit" type="Node3D" parent="Roster"]
+script = ExtResource("roster")
+definition = ExtResource("canguit")
+[node name="AttackerUI" type="CanvasLayer" parent="."]
+layer = 2
+[node name="TrainingBar" type="PanelContainer" parent="AttackerUI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -196.0
+offset_right = -412.0
+offset_bottom = -16.0
+theme = ExtResource("theme")
+[node name="Row" type="HBoxContainer" parent="AttackerUI/TrainingBar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+[node name="Ronel" parent="AttackerUI/TrainingBar/Row" instance=ExtResource("card")]
+layout_mode = 2
+[node name="Matthew" parent="AttackerUI/TrainingBar/Row" instance=ExtResource("card")]
+layout_mode = 2
+[node name="Canguit" parent="AttackerUI/TrainingBar/Row" instance=ExtResource("card")]
+layout_mode = 2
+[node name="UpgradeSidebar" parent="AttackerUI" instance=ExtResource("sidebar")]
+[editable path="Gameplay/ResourceHUD/ArcaneQuestionTest"]
+[node name="BattleMusic" parent="."]
+role = "attacker"
+[editable path="Gameplay/TowerShop"]
+

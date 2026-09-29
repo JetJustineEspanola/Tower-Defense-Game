@@ -1,0 +1,16 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/audio/battle_music.gd" id="script"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/CODE_BORN_Crystalbrook_Vigil_Loop.wav" id="calm"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/Banners_on_the_Wall.mp3" id="combat"]
+[node name="BattleMusic" type="Node"]
+process_mode = 3
+script = ExtResource("script")
+[node name="Calm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("calm")
+volume_db = -60.0
+[node name="Combat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("combat")
+volume_db = -60.0
+[node name="Check" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true

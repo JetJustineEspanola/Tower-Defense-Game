@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TowerUpgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/upgrades/burning_edge.svg" id="icon"]
+[resource]
+script = ExtResource("script")
+icon = ExtResource("icon")
+short_description = "Burn: 4 damage/s for 3s."
+id = &"burning_edge"
+title = "Burning Edge"
+description = "Hits burn enemies for 4 damage per second for 3 seconds. Repeated hits refresh the burn."
+cost = 100
+burn_damage = 4
+burn_seconds = 3

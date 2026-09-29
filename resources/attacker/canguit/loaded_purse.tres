@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TowerUpgrade" format=3]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/upgrades/bigger_payout.svg" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"loaded_purse"
+title = "Loaded Purse"
+short_description = "+5 gold per payout."
+description = "+5 gold per payout. Applies to new training orders only."
+icon = ExtResource("icon")
+cost = 120
+income_bonus = 5

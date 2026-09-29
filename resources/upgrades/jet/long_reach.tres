@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TowerUpgrade" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/upgrades/long_reach.svg" id="icon"]
+[resource]
+script = ExtResource("script")
+icon = ExtResource("icon")
+short_description = "+0.7 attack range."
+id = &"long_reach"
+title = "Long Reach"
+description = "Attack range increases by 0.7."
+cost = 70
+range_bonus = 0.7

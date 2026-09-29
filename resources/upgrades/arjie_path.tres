@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TowerUpgradePath" format=3]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade_path.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade.gd" id="upgrade_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/portraits/arjie.png" id="portrait"]
+[ext_resource type="Resource" path="res://resources/upgrades/arjie/reinforced_guard.tres" id="u0"]
+[ext_resource type="Resource" path="res://resources/upgrades/arjie/twin_summon.tres" id="u1"]
+[ext_resource type="Resource" path="res://resources/upgrades/arjie/rapid_summon.tres" id="u2"]
+[ext_resource type="Resource" path="res://resources/upgrades/arjie/stronger_blade.tres" id="u3"]
+[ext_resource type="Resource" path="res://resources/upgrades/arjie/hold_the_line.tres" id="u4"]
+[resource]
+script = ExtResource("script")
+character_name = "Arjie"
+role = "Defense Tower"
+portrait = ExtResource("portrait")
+choices = Array[ExtResource("upgrade_script")]([ExtResource("u0"), ExtResource("u1"), ExtResource("u2"), ExtResource("u3"), ExtResource("u4")])

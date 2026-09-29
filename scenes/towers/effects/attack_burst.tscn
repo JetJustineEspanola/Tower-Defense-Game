@@ -1,0 +1,32 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/towers/effects/burning_embers.tscn" id="embers"]
+[ext_resource type="Script" path="res://scripts/towers/tower_burst.gd" id="logic"]
+[ext_resource type="Shader" path="res://assets/ui/qi_slash.gdshader" id="shader"]
+[sub_resource type="ShaderMaterial" id="slash_mat"]
+shader = ExtResource("shader")
+[sub_resource type="PlaneMesh" id="slash"]
+material = SubResource("slash_mat")
+size = Vector2(1.8, 1.8)
+[sub_resource type="Gradient" id="fade"]
+offsets = PackedFloat32Array(0, 0.15, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[node name="QiSlash" type="Node3D"]
+script = ExtResource("logic")
+[node name="RedSlash" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 2
+lifetime = 0.32
+one_shot = true
+explosiveness = 0.85
+local_coords = false
+mesh = SubResource("slash")
+direction = Vector3(0, 0, -1)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.8
+initial_velocity_max = 3.5
+scale_amount_min = 0.7
+scale_amount_max = 1.0
+color_ramp = SubResource("fade")
+[node name="Embers" parent="." instance=ExtResource("embers")]

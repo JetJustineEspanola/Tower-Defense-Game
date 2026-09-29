@@ -30,6 +30,7 @@ func _stop_editor_music() -> void:
 
 func _start_background_music() -> void:
 	if Engine.is_editor_hint():return
+	if get_parent().has_node("BattleMusic"):return
 	var player=get_parent().get_node_or_null("BackgroundMusic") as AudioStreamPlayer
 	if not player:
 		player=AudioStreamPlayer.new()

@@ -1,0 +1,48 @@
+[gd_scene format=3]
+[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="heading_font"]
+[node name="UpgradeCard" type="Button"]
+custom_minimum_size = Vector2(0, 96)
+size_flags_horizontal = 3
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+[node name="Icon" type="TextureRect" parent="Content"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="Text" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Content/Text"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 17
+text = "Upgrade name"
+[node name="Description" type="Label" parent="Content/Text"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.7, 0.83, 0.9, 1)
+autowrap_mode = 2
+text = "Short effect"
+[node name="Cost" type="Label" parent="Content/Text"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.8, 0.3, 1)
+text = "80 Gold"

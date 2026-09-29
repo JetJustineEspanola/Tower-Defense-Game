@@ -1,0 +1,93 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/towers/upgrade_card.tscn" id="card"]
+[ext_resource type="Script" path="res://scripts/towers/tower_upgrade_sidebar.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="heading_font"]
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.025, 0.045, 0.07, 0.98)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 2
+border_width_bottom = 1
+border_color = Color(0.14, 0.35, 0.43, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.35)
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+corner_radius_top_left = 14
+corner_radius_bottom_left = 14
+[node name="UpgradeSidebar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Panel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -396.0
+offset_top = 84.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("panel")
+[node name="Content" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Header" type="HBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+[node name="Name" type="Label" parent="Panel/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 20
+text = "Tower Upgrades"
+[node name="Close" type="Button" parent="Panel/Content/Header"]
+layout_mode = 2
+text = "×"
+custom_minimum_size = Vector2(36, 36)
+tooltip_text = "Close upgrades"
+[node name="Portrait" type="TextureRect" parent="Panel/Content"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="Stats" type="Label" parent="Panel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+text = "Tower stats"
+[node name="Slots" type="Label" parent="Panel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(1, 0.8, 0.3, 1)
+text = "0 / 2 abilities chosen"
+[node name="Scroll" type="ScrollContainer" parent="Panel/Content"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Choices" type="VBoxContainer" parent="Panel/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+[node name="Upgrade1" parent="Panel/Content/Scroll/Choices" instance=ExtResource("card")]
+layout_mode = 2
+[node name="Upgrade2" parent="Panel/Content/Scroll/Choices" instance=ExtResource("card")]
+layout_mode = 2
+[node name="Upgrade3" parent="Panel/Content/Scroll/Choices" instance=ExtResource("card")]
+layout_mode = 2
+[node name="Upgrade4" parent="Panel/Content/Scroll/Choices" instance=ExtResource("card")]
+layout_mode = 2
+[node name="Upgrade5" parent="Panel/Content/Scroll/Choices" instance=ExtResource("card")]
+layout_mode = 2
+[connection signal="pressed" from="Panel/Content/Header/Close" to="." method="close"]

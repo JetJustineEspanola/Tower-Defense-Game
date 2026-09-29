@@ -1,0 +1,157 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/ui/match_result.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="heading"]
+[ext_resource type="Texture2D" path="res://assets/ui/results/victory.png" id="victory"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/time.svg" id="time_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/gold.svg" id="gold_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/health.svg" id="health_icon"]
+[sub_resource type="SystemFont" id="title_font"]
+font_names = PackedStringArray("Arial Black", "Bahnschrift")
+font_weight = 900
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.015, 0.04, 0.085, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.65, 1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 18
+content_margin_left = 24.0
+content_margin_right = 24.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+shadow_color = Color(0, 0.5, 1, 0.2)
+shadow_size = 12
+[node name="MatchResult" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+visible = false
+script = ExtResource("script")
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+[node name="Background" type="TextureRect" parent="Screen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("victory")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+[node name="Brand" type="Label" parent="Screen"]
+offset_left = 40.0
+offset_top = 24.0
+text = "CODE\nBORN"
+theme_override_fonts/font = ExtResource("heading")
+theme_override_font_sizes/font_size = 32
+modulate = Color(0.5, 0.88, 1, 1)
+[node name="Motto" type="Label" parent="Screen"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 28.0
+offset_right = -32.0
+text = "SMALL STEPS\nBRIGHTER FUTURES"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 14
+[node name="Content" type="VBoxContainer" parent="Screen"]
+anchor_left = 0.15
+anchor_right = 0.85
+anchor_top = 0.43
+anchor_bottom = 0.97
+theme_override_constants/separation = 12
+[node name="Banner" type="PanelContainer" parent="Screen/Content"]
+theme_override_styles/panel = SubResource("panel")
+[node name="Text" type="VBoxContainer" parent="Screen/Content/Banner"]
+theme_override_constants/separation = 0
+[node name="Title" type="Label" parent="Screen/Content/Banner/Text"]
+text = "VICTORY"
+horizontal_alignment = 1
+theme_override_fonts/font = SubResource("title_font")
+theme_override_font_sizes/font_size = 54
+theme_override_colors/font_shadow_color = Color(0.1, 0.65, 1, 0.7)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 3
+[node name="Subtitle" type="Label" parent="Screen/Content/Banner/Text"]
+text = "BASE SECURED"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+[node name="Stats" type="PanelContainer" parent="Screen/Content"]
+theme_override_styles/panel = SubResource("panel")
+[node name="Row" type="HBoxContainer" parent="Screen/Content/Stats"]
+theme_override_constants/separation = 20
+[node name="Time" type="VBoxContainer" parent="Screen/Content/Stats/Row"]
+size_flags_horizontal = 3
+[node name="Icon" type="TextureRect" parent="Screen/Content/Stats/Row/Time"]
+custom_minimum_size = Vector2(0, 24)
+texture = ExtResource("time_icon")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+[node name="Caption" type="Label" parent="Screen/Content/Stats/Row/Time"]
+text = "MATCH TIME"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+[node name="Value" type="Label" parent="Screen/Content/Stats/Row/Time"]
+text = "00:00"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+[node name="Gold" type="VBoxContainer" parent="Screen/Content/Stats/Row"]
+size_flags_horizontal = 3
+[node name="Icon" type="TextureRect" parent="Screen/Content/Stats/Row/Gold"]
+custom_minimum_size = Vector2(0, 24)
+texture = ExtResource("gold_icon")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+[node name="Caption" type="Label" parent="Screen/Content/Stats/Row/Gold"]
+text = "GOLD EARNED"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+[node name="Value" type="Label" parent="Screen/Content/Stats/Row/Gold"]
+text = "0"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+[node name="Base" type="VBoxContainer" parent="Screen/Content/Stats/Row"]
+size_flags_horizontal = 3
+[node name="Icon" type="TextureRect" parent="Screen/Content/Stats/Row/Base"]
+custom_minimum_size = Vector2(0, 24)
+texture = ExtResource("health_icon")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+[node name="Caption" type="Label" parent="Screen/Content/Stats/Row/Base"]
+text = "BASE HEALTH"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+[node name="Value" type="Label" parent="Screen/Content/Stats/Row/Base"]
+text = "100 / 100"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+[node name="TipPanel" type="PanelContainer" parent="Screen/Content"]
+theme_override_styles/panel = SubResource("panel")
+[node name="Tip" type="Label" parent="Screen/Content/TipPanel"]
+text = "Great defense. On to a brighter tomorrow!"
+horizontal_alignment = 1
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 16
+[node name="Buttons" type="HBoxContainer" parent="Screen/Content"]
+alignment = 1
+theme_override_constants/separation = 20
+[node name="Home" type="Button" parent="Screen/Content/Buttons"]
+custom_minimum_size = Vector2(240, 54)
+text = "⌂  HOME"
+theme_override_font_sizes/font_size = 22
+[node name="Again" type="Button" parent="Screen/Content/Buttons"]
+custom_minimum_size = Vector2(240, 54)
+text = "↻  PLAY AGAIN"
+theme_override_font_sizes/font_size = 22
+
+

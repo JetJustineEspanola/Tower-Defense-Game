@@ -1,0 +1,32 @@
+[gd_scene format=3]
+[sub_resource type="StandardMaterial3D" id="ember_material"]
+shading_mode = 0
+albedo_color = Color(1, 0.32, 0.025, 1)
+emission_enabled = true
+emission = Color(1, 0.12, 0.01, 1)
+emission_energy_multiplier = 1.5
+[sub_resource type="SphereMesh" id="ember"]
+material = SubResource("ember_material")
+radius = 0.025
+height = 0.08
+radial_segments = 4
+rings = 2
+[sub_resource type="Curve" id="shrink"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+[node name="BurningEmbers" type="CPUParticles3D"]
+emitting = false
+amount = 28
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.85
+local_coords = false
+mesh = SubResource("ember")
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+spread = 45.0
+gravity = Vector3(0, 0.3, 0)
+initial_velocity_min = 0.4
+initial_velocity_max = 1.0
+scale_amount_curve = SubResource("shrink")

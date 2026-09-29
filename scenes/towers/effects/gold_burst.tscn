@@ -1,0 +1,54 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/towers/tower_burst.gd" id="logic"]
+[sub_resource type="StandardMaterial3D" id="gold"]
+shading_mode = 0
+albedo_color = Color(1, 0.68, 0.04, 1)
+emission_enabled = true
+emission = Color(1, 0.45, 0.01, 1)
+emission_energy_multiplier = 0.6
+[sub_resource type="CylinderMesh" id="coin"]
+material = SubResource("gold")
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.025
+radial_segments = 12
+[sub_resource type="Gradient" id="fade"]
+offsets = PackedFloat32Array(0, 0.15, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[node name="GoldFountain" type="Node3D"]
+script = ExtResource("logic")
+[node name="Coins" type="CPUParticles3D" parent="."]
+position = Vector3(0, 0.8, 0)
+emitting = false
+amount = 28
+lifetime = 0.85
+one_shot = true
+explosiveness = 0.7
+local_coords = false
+mesh = SubResource("coin")
+emission_shape = 1
+emission_sphere_radius = 0.08
+direction = Vector3(0, 1, 0)
+spread = 12.0
+gravity = Vector3(0, -5, 0)
+initial_velocity_min = 1.8
+initial_velocity_max = 3.0
+angular_velocity_min = -260.0
+angular_velocity_max = 260.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.7
+scale_amount_max = 1.2
+color_ramp = SubResource("fade")
+[node name="GoldPopup" type="Label3D" parent="."]
+position = Vector3(0, 1.65, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+modulate = Color(1, 0.85, 0.25, 1)
+outline_modulate = Color(0.08, 0.04, 0.01, 1)
+font_size = 60
+outline_size = 12
+pixel_size = 0.004
+text = "+10 Gold"
