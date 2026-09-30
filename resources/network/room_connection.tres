@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="" format=3]
+[ext_resource type="Script" path="res://scripts/network/room_connection_config.gd" id="script"]
+[resource]
+script = ExtResource("script")
+relay_url = ""
+connection_timeout_seconds = 75

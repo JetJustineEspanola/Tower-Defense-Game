@@ -1,0 +1,31 @@
+DECK: Web Development - My Questions
+
+[QUESTION]
+TYPE: MULTIPLE_CHOICE
+QUESTION: Which HTML element creates a hyperlink?
+A: <a>
+B: <p>
+C: <section>
+D: <span>
+ANSWER: A
+GOLD: 25
+EXPLANATION: The <a> element creates hyperlinks.
+[END]
+
+[QUESTION]
+TYPE: IDENTIFICATION
+QUESTION: What does CSS stand for?
+ANSWER: Cascading Style Sheets
+ANSWER: Cascading Style Sheet
+GOLD: 25
+EXPLANATION: CSS controls the presentation of a web page.
+[END]
+
+[QUESTION]
+TYPE: CODE_FIX
+QUESTION: Replace only the misspelled CSS property name.
+CODE: p { colour: red; }
+ANSWER: p { color: red; }
+GOLD: 35
+EXPLANATION: CSS uses the property name color.
+[END]

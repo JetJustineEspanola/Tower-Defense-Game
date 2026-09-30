@@ -1,0 +1,227 @@
+[
+  {
+    "source": "jet_brief_defeat_sound.m4a",
+    "wav": "jet_brief_defeat_sound.wav",
+    "seconds": 4.29,
+    "trim_start": 0.33,
+    "gain": 2.49,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_defeated_01.m4a",
+    "wav": "jet_defeated_01.wav",
+    "seconds": 4.91,
+    "trim_start": 0.27,
+    "gain": 3.0,
+    "peak_dbfs": -4.61,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_defeated_02.m4a",
+    "wav": "jet_defeated_02.wav",
+    "seconds": 5.21,
+    "trim_start": 0.41,
+    "gain": 3.0,
+    "peak_dbfs": -4.02,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_defeated_03.m4a",
+    "wav": "jet_defeated_03.wav",
+    "seconds": 4.08,
+    "trim_start": 0.97,
+    "gain": 3.0,
+    "peak_dbfs": -4.66,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_Hah.m4a",
+    "wav": "jet_hah.wav",
+    "seconds": 1.37,
+    "trim_start": 0.28,
+    "gain": 0.93,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_Hah_01.m4a",
+    "wav": "jet_hah_01.wav",
+    "seconds": 1.33,
+    "trim_start": 0.27,
+    "gain": 0.99,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_hurt_heavy.m4a",
+    "wav": "jet_hurt_heavy.wav",
+    "seconds": 1.76,
+    "trim_start": 0.68,
+    "gain": 0.94,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_hurt_light.m4a",
+    "wav": "jet_hurt_light.wav",
+    "seconds": 1.31,
+    "trim_start": 0.39,
+    "gain": 1.42,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_hyah_01.m4a",
+    "wav": "jet_hyah_01.wav",
+    "seconds": 1.11,
+    "trim_start": 0.42,
+    "gain": 1.31,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_hyah_02.m4a",
+    "wav": "jet_hyah_02.wav",
+    "seconds": 1.31,
+    "trim_start": 0.2,
+    "gain": 1.16,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_placed_01.m4a",
+    "wav": "jet_placed_01.wav",
+    "seconds": 2.02,
+    "trim_start": 0.72,
+    "gain": 1.08,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_placed_02.m4a",
+    "wav": "jet_placed_02.wav",
+    "seconds": 2.87,
+    "trim_start": 0.2,
+    "gain": 1.48,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_placed_03.m4a",
+    "wav": "jet_placed_03.wav",
+    "seconds": 3.19,
+    "trim_start": 0.41,
+    "gain": 1.74,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_selected_01.m4a",
+    "wav": "jet_selected_01.wav",
+    "seconds": 1.29,
+    "trim_start": 0.72,
+    "gain": 2.14,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_selected_02.m4a",
+    "wav": "jet_selected_02.wav",
+    "seconds": 1.26,
+    "trim_start": 0.79,
+    "gain": 2.62,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_selected_03.m4a",
+    "wav": "jet_selected_03.wav",
+    "seconds": 2.03,
+    "trim_start": 0.36,
+    "gain": 1.89,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_still_standing_01.m4a",
+    "wav": "jet_still_standing_01.wav",
+    "seconds": 2.17,
+    "trim_start": 0.29,
+    "gain": 3.0,
+    "peak_dbfs": -4.59,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_still_standing_02.m4a",
+    "wav": "jet_still_standing_02.wav",
+    "seconds": 2.63,
+    "trim_start": 0.27,
+    "gain": 3.0,
+    "peak_dbfs": -4.1,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_still_standing_03.m4a",
+    "wav": "jet_still_standing_03.wav",
+    "seconds": 2.79,
+    "trim_start": 0.39,
+    "gain": 3.0,
+    "peak_dbfs": -10.6,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_strong_attack_01.m4a",
+    "wav": "jet_strong_attack_01.wav",
+    "seconds": 1.51,
+    "trim_start": 0.2,
+    "gain": 1.41,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_strong_attack_02.m4a",
+    "wav": "jet_strong_attack_02.wav",
+    "seconds": 1.4,
+    "trim_start": 0.2,
+    "gain": 1.06,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_strong_attack_03.m4a",
+    "wav": "jet_strong_attack_03.wav",
+    "seconds": 1.73,
+    "trim_start": 0.27,
+    "gain": 0.77,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_upgraded_01.m4a",
+    "wav": "jet_upgraded_01.wav",
+    "seconds": 2.19,
+    "trim_start": 0.2,
+    "gain": 1.73,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_upgraded_02.m4a",
+    "wav": "jet_upgraded_02.wav",
+    "seconds": 2.02,
+    "trim_start": 0.2,
+    "gain": 1.65,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  },
+  {
+    "source": "jet_upgraded_03.m4a",
+    "wav": "jet_upgraded_03.wav",
+    "seconds": 1.56,
+    "trim_start": 0.7,
+    "gain": 1.09,
+    "peak_dbfs": -3.0,
+    "processing": "75Hz highpass; gentle -1.5dB low-mid/+1.5dB presence EQ; 1.6:1 compression; peak <= -3dBFS; pitch and timing unchanged"
+  }
+]

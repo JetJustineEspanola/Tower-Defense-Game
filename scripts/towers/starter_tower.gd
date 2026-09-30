@@ -23,6 +23,7 @@ func choose_attack_target() -> Node3D:
 @export var upgrade_path: TowerUpgradePath
 @export var maximum_health: int = 100
 @export var armor: int = 0
+var low_health_voiced: bool = false
 var health: int = 100
 var purchased: Array[StringName] = []
 var buying_upgrade: bool = false
@@ -74,6 +75,7 @@ func _ready() -> void:
 	_refresh_effects()
 	var experience = get_tree().current_scene.get_node_or_null("Experience")
 	if experience: experience.call_deferred("celebrate", $Model)
+	call_deferred("_jet_voice", "placed")
 func _process(delta: float) -> void:
 	beam_time = maxf(0.0, beam_time - delta)
 	$Beam.visible = beam_time > 0.0
@@ -136,6 +138,7 @@ func _act() -> void:
 		if is_instance_valid(target):
 			facing_target = weakref(target)
 			if $CharacterAnimation.play_action(effective_interval() * 0.8):
+				if randf() < 0.25: _jet_voice("strong_attack" if not purchased.is_empty() else "attack")
 				pending_target = weakref(target)
 				$CharacterAnimation.face_towards(target.global_position)
 
@@ -183,6 +186,7 @@ func _on_selected(_camera: Node, event: InputEvent, _position: Vector3, _normal:
 		selected.emit(self)
 
 func set_selected(value: bool) -> void:
+	if value and not $Selection/RangeCircle.visible: _jet_voice("selected")
 	$Selection/RangeCircle.visible = value
 	$Selection/RangeCircle.scale = Vector3(attack_range, 1.0, attack_range)
 
@@ -237,6 +241,7 @@ func buy_upgrade(index: int) -> bool:
 	var experience = get_tree().current_scene.get_node_or_null("Experience")
 	if experience: experience.celebrate($Model)
 	upgraded.emit()
+	_jet_voice("upgraded")
 	return true
 
 func _refresh_effects() -> void:
@@ -248,6 +253,13 @@ func take_damage(amount: int) -> void:
 	var health_before: int = health
 	health = maxi(0, health - maxi(1, amount - armor))
 	$HealthFeedback.hit(health_before, health)
+	if health == 0:
+		_jet_voice("defeated")
+	elif health <= maximum_health * 0.25 and not low_health_voiced:
+		low_health_voiced = true
+		_jet_voice("low_health")
+	elif randf() < 0.35:
+		_jet_voice("hurt_heavy" if health_before - health >= maximum_health * 0.15 else "hurt_light")
 	upgraded.emit()
 	if health == 0:
 		var experience = get_tree().current_scene.get_node_or_null("Experience")
@@ -264,3 +276,10 @@ func get_stats_text() -> String:
 	if kind == "defense":
 		return result + "Guards: %d   Summon: %.1fs\nGuard HP: %d   Damage: %d\nBlocks: %d each | Deployment radius: %.1f" % [guard_count, interval, guard_health, guard_damage, guard_capacity, attack_range]
 	return result + "Income: +%d gold / %.1fs\nBounty: %d   Astral bonus: %d\nBounty radius: %.1f" % [income, interval, bounty_gold, question_bonus, attack_range]
+
+func _jet_voice(event: String) -> void:
+	if kind != "attack" or not is_inside_tree(): return
+	var scene = get_tree().current_scene
+	if scene == null: return
+	var voice = scene.get_node_or_null("JetVoice")
+	if voice != null and voice.is_node_ready(): voice.request(event, self)

@@ -1,0 +1,10 @@
+extends Resource
+@export var placed: Array[AudioStream] = []
+@export var selected: Array[AudioStream] = []
+@export var upgraded: Array[AudioStream] = []
+@export var attack: Array[AudioStream] = []
+@export var strong_attack: Array[AudioStream] = []
+@export var hurt_light: Array[AudioStream] = []
+@export var hurt_heavy: Array[AudioStream] = []
+@export var low_health: Array[AudioStream] = []
+@export var defeated: Array[AudioStream] = []

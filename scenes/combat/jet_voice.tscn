@@ -1,0 +1,9 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/combat/jet_voice.gd" id="script"]
+[ext_resource type="Resource" path="res://voice_lines/Jet/jet_voice_bank.tres" id="bank"]
+[node name="JetVoice" type="Node"]
+script = ExtResource("script")
+voice_bank = ExtResource("bank")
+[node name="Player" type="AudioStreamPlayer" parent="."]
+bus = &"Voice"
+volume_db = -3.0

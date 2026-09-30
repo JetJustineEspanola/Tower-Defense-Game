@@ -25,7 +25,7 @@ func _show_main_menu() -> void:
 	developer_screen.hide()
 
 func _show_play_screen() -> void:
-	get_tree().change_scene_to_file("res://scenes/ui/lan_lobby.tscn")
+	get_tree().change_scene_to_file("res://scenes/UI/online_lobby.tscn")
 
 func _show_settings_screen() -> void:
 	_show_screen(settings_screen)

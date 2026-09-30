@@ -72,6 +72,7 @@
 [ext_resource type="Script" uid="uid://hxljgfohed1d" path="res://maps/style/living_environment.gd" id="living_environment_script"]
 
 [ext_resource type="Script" path="res://scripts/practice/base_income.gd" id="base_income"]
+[ext_resource type="PackedScene" path="res://scenes/combat/jet_voice.tscn" id="jet_voice"]
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_112s5"]
 resource_name = "mat_grass_tile_anime_GLB"
 cull_mode = 2
@@ -6694,3 +6695,5 @@ track_parent_health = false
 
 [node name="BaseIncome" type="Node" parent="."]
 script = ExtResource("base_income")
+
+[node name="JetVoice" parent="." instance=ExtResource("jet_voice")]

@@ -1,0 +1,38 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/combat/jet_voice_bank.gd" id="script"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_placed_01.wav" id="v1"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_placed_02.wav" id="v2"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_placed_03.wav" id="v3"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_selected_01.wav" id="v4"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_selected_02.wav" id="v5"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_selected_03.wav" id="v6"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_upgraded_01.wav" id="v7"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_upgraded_02.wav" id="v8"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_upgraded_03.wav" id="v9"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_hah_01.wav" id="v10"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_hah.wav" id="v11"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_hyah_01.wav" id="v12"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_hyah_02.wav" id="v13"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_strong_attack_01.wav" id="v14"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_strong_attack_02.wav" id="v15"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_strong_attack_03.wav" id="v16"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_hurt_light.wav" id="v17"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_hurt_heavy.wav" id="v18"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_still_standing_01.wav" id="v19"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_still_standing_02.wav" id="v20"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_still_standing_03.wav" id="v21"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_brief_defeat_sound.wav" id="v22"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_defeated_01.wav" id="v23"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_defeated_02.wav" id="v24"]
+[ext_resource type="AudioStream" path="res://voice_lines/Jet/ready/jet_defeated_03.wav" id="v25"]
+[resource]
+script = ExtResource("script")
+placed = Array[AudioStream]([ExtResource("v1"), ExtResource("v2"), ExtResource("v3")])
+selected = Array[AudioStream]([ExtResource("v4"), ExtResource("v5"), ExtResource("v6")])
+upgraded = Array[AudioStream]([ExtResource("v7"), ExtResource("v8"), ExtResource("v9")])
+attack = Array[AudioStream]([ExtResource("v10"), ExtResource("v11"), ExtResource("v12"), ExtResource("v13")])
+strong_attack = Array[AudioStream]([ExtResource("v14"), ExtResource("v15"), ExtResource("v16")])
+hurt_light = Array[AudioStream]([ExtResource("v17")])
+hurt_heavy = Array[AudioStream]([ExtResource("v18")])
+low_health = Array[AudioStream]([ExtResource("v19"), ExtResource("v20"), ExtResource("v21")])
+defeated = Array[AudioStream]([ExtResource("v22"), ExtResource("v23"), ExtResource("v24"), ExtResource("v25")])

@@ -26,6 +26,8 @@ func _ready() -> void:
 	%Check.pressed.connect(_check)
 	%Import.pressed.connect(func(): %ImportDialog.popup_centered(Vector2i(850, 550)))
 	%ImportDialog.file_selected.connect(_import)
+	%ImportQuestions.pressed.connect(func(): %QuestionImport.popup_centered())
+	%QuestionImport.cards_imported.connect(_append_imported)
 	_refresh()
 
 func _refresh() -> void:
@@ -209,3 +211,18 @@ func _check() -> void:
 	var card: Dictionary = deck.cards[selected]
 	var correct: bool = STORE.matches(card, %PreviewAnswer.text, %PreviewChoice.selected)
 	%PreviewResult.text = ("Correct. " if correct else "Not accepted. ") + str(card.explanation)
+
+func _append_imported(imported: Dictionary) -> void:
+	_commit()
+	if deck.cards.size() + imported.cards.size() > 500:
+		%Status.text = "A deck can contain up to 500 questions."
+		return
+	var first: int = deck.cards.size()
+	for source in imported.cards:
+		var card: Dictionary = source.duplicate(true)
+		card.id = "import_%s_%s" % [Time.get_ticks_usec(), deck.cards.size()]
+		deck.cards.append(card)
+		if not card.type in deck.enabled_types: deck.enabled_types.append(card.type)
+	_refresh()
+	_select(first)
+	%Status.text = "%d questions added. Review the answers, then Save or Use this deck." % imported.cards.size()

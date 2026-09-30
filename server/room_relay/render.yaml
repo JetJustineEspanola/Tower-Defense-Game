@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: codeborn-room-relay
+    runtime: node
+    rootDir: server/room_relay
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    numInstances: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 22

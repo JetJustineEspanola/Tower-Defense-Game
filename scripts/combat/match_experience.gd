@@ -76,6 +76,8 @@ func _health() -> int:
 
 func announce(key: String, text: String, priority: int) -> void:
 	if $Voice.playing and priority <= voice_priority: return
+	var character_voice = get_parent().get_node_or_null("JetVoice/Player")
+	if character_voice != null: character_voice.stop()
 	$Voice.stop()
 	voice_priority = priority
 	$Voice.stream = load("res://assets/audio/announcer/" + key + ".wav")
