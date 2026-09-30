@@ -36,6 +36,8 @@ func _ready() -> void:
 	if popup != null:
 		popup_origin = popup.position
 func play(amount: int = 0) -> void:
+	var visibility_gate = get_node_or_null("Visibility")
+	if visibility_gate != null and not visibility_gate.allows_burst(): return
 	var experience = get_tree().current_scene.get_node_or_null("Experience")
 	var reduced: bool = experience != null and experience.reduced_effects
 	var coins: CPUParticles3D = get_node_or_null("Coins")

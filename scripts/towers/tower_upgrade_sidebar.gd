@@ -66,10 +66,12 @@ func refresh() -> void:
 		if choice == null:
 			rows[i].hide()
 			continue
-		var state: String = "%d Gold" % choice.cost
+		var price: int = tower.get_upgrade_cost(i) if tower.has_method("get_upgrade_cost") else choice.cost
+		var state: String = "%d Gold" % price
+		if price < choice.cost: state += " • First upgrade discount"
 		if tower.purchased.has(choice.id): state = "OWNED"
 		elif tower.purchased.size() >= path.choice_limit: state = "LOCKED"
-		elif resources.gold < choice.cost: state = "Need %d more gold" % (choice.cost - resources.gold)
+		elif resources.gold < price: state = "Need %d more gold" % (price - resources.gold)
 		rows[i].get_node("Content/Icon").texture = choice.icon
 		rows[i].get_node("Content/Text/Title").text = choice.title
 		rows[i].get_node("Content/Text/Description").text = choice.short_description if not choice.short_description.is_empty() else choice.description

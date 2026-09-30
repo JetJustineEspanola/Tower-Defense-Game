@@ -71,6 +71,7 @@
 [ext_resource type="Script" uid="uid://d0pmp14bdms3j" path="res://scripts/robot_cat.gd" id="58_4n2fp"]
 [ext_resource type="Script" uid="uid://hxljgfohed1d" path="res://maps/style/living_environment.gd" id="living_environment_script"]
 
+[ext_resource type="Script" path="res://scripts/practice/base_income.gd" id="base_income"]
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_112s5"]
 resource_name = "mat_grass_tile_anime_GLB"
 cull_mode = 2
@@ -6690,3 +6691,6 @@ track_parent_health = false
 
 [node name="Experience" parent="." instance=ExtResource("experience")]
 [node name="GuardOrders" parent="." instance=ExtResource("guard_orders")]
+
+[node name="BaseIncome" type="Node" parent="."]
+script = ExtResource("base_income")

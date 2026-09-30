@@ -6,7 +6,7 @@
 [ext_resource type="Resource" path="res://resources/attacker/ronel/resilient_runner.tres" id="u1"]
 [ext_resource type="Resource" path="res://resources/attacker/ronel/base_breaker.tres" id="u2"]
 [ext_resource type="Resource" path="res://resources/attacker/ronel/quick_training.tres" id="u3"]
-[ext_resource type="Resource" path="res://resources/attacker/ronel/warded_cloak.tres" id="u4"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel/phase_dash.tres" id="u4"]
 [resource]
 script = ExtResource("script")
 character_name = "Ronel"

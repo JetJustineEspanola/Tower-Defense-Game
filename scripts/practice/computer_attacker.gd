@@ -1,10 +1,9 @@
 extends Node
+const BALANCE = preload("res://resources/attacker/combat_balance.tres")
 ## A budgeted, sequential trainer. Uses the same troop definitions and combat as the player.
 @export_range(0, 120, 1) var opening_delay_seconds: float = 20.0
 @export_range(0, 30, 0.5) var order_delay_seconds: float = 2.0
 @export_range(1, 60, 1) var active_troop_limit: int = 24
-@export_range(1, 100, 1) var passive_gold: int = 15
-@export_range(0.5, 60, 0.5) var income_interval_seconds: float = 5.0
 @export var training_pattern: Array[TroopDefinition] = [
 	preload("res://resources/attacker/ronel.tres"),
 	preload("res://resources/attacker/canguit.tres"),
@@ -26,11 +25,7 @@ func _ready() -> void:
 	wait_remaining = opening_delay_seconds
 
 func _process(delta: float) -> void:
-	if controller.ended or not clock.running: return
-	income_elapsed += delta
-	if income_elapsed >= income_interval_seconds:
-		income_elapsed -= income_interval_seconds
-		wallet.add_gold(passive_gold)
+	if get_tree().paused or controller.ended or not clock.running: return
 	if training_definition != null:
 		training_remaining = maxf(0.0, training_remaining - delta)
 		if training_remaining == 0.0:
@@ -44,6 +39,9 @@ func _process(delta: float) -> void:
 	if get_tree().get_nodes_in_group("attacker_troops").size() >= active_troop_limit: return
 	var definition: TroopDefinition = training_pattern[next_order % training_pattern.size()]
 	if definition == null or definition.scene == null: return
+	if definition.role == "economy" and BALANCE.attacker_economy_count(get_tree(), wallet) >= BALANCE.attacker_economy_limit:
+		next_order += 1
+		return
 	if not wallet.spend_gold(definition.cost): return
 	training_definition = definition
 	training_stats = definition.get_stats().duplicate(true)

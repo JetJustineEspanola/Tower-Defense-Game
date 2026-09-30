@@ -1,4 +1,6 @@
 extends Control
+const BALANCE = preload("res://resources/attacker/combat_balance.tres")
+var emergency_remaining: float = 0.0
 ## Scene-authored resource bar, countdown, question sidebar and local pause menu.
 signal answer_submitted(correct: bool)
 signal question_rewarded(amount: int)
@@ -24,8 +26,9 @@ func _ready() -> void:
 func _update_resources(gold: int, mana: int) -> void:
 	%GoldLabel.text = str(gold)
 	%ManaLabel.text = "%d / %d" % [mana, resources.maximum_mana]
-	%NewQuestionButton.disabled = mana < question_cost
-	%NewQuestionButton.text = "Next / skip  •  %d mana" % question_cost
+	%NewQuestionButton.disabled = (mana < question_cost and not emergency_ready()) or not $MatchClock.running
+	%NewQuestionButton.text = "Emergency refresh • FREE" if emergency_ready() else "Next / skip  •  %d mana" % question_cost
+	%NewQuestionButton.tooltip_text = "Base income: +%d gold every %.0fs. Free refresh below %d gold; %.0fs cooldown remaining." % [BALANCE.base_income_gold, BALANCE.base_income_seconds, BALANCE.emergency_gold_threshold, ceilf(emergency_remaining)]
 
 func _select_answer(index: int) -> void:
 	if answered or get_tree().paused:
@@ -55,9 +58,19 @@ func _submit_answer() -> void:
 func _on_new_question_button_pressed() -> void:
 	if get_tree().paused or not $MatchClock.running:
 		return
-	if not resources.spend_mana(question_cost):
+	if emergency_ready():
+		emergency_remaining = BALANCE.emergency_refresh_seconds
+	elif not resources.spend_mana(question_cost):
 		return
 	_show_next_question()
+
+func emergency_ready() -> bool:
+	return resources.gold < BALANCE.emergency_gold_threshold and emergency_remaining <= 0.0
+
+func _process(delta: float) -> void:
+	if get_tree().paused or not $MatchClock.running: return
+	emergency_remaining = maxf(0.0, emergency_remaining - delta)
+	_update_resources(resources.gold, resources.mana)
 
 func _show_next_question() -> void:
 	var card: Dictionary = question_run.next()

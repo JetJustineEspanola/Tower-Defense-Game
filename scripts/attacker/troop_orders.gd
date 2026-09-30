@@ -23,6 +23,10 @@ func _process(_delta: float) -> void:
 	var troop = selected_troop
 	content.get_node("Health").text = "Health: %d / %d" % [troop.health, troop.maximum_health]
 	var siege: bool = troop.role == "siege"
+	if troop.role == "economy" and troop.stats.get("stationary_economy", false):
+		content.get_node("Description").text = "Trading Post: " + ("Stationed" if troop.stationed else ("Moving to first node" if troop.post_reserved else "Post limit reached; staying mobile")) + "\nStill vulnerable to towers and guards."
+	elif troop.role == "objective" and troop.stats.get("guard_phase", false):
+		content.get_node("Description").text = "Target: Enemy base\nEconomy disruption active.\nPhase Dash: " + ("ACTIVE" if troop.phase_remaining > 0 else ("%.0fs cooldown" % ceilf(troop.phase_wait) if troop.phase_wait > 0 else "Ready; triggers when blocked"))
 	content.get_node("Priority").visible = siege
 	content.get_node("Auto").visible = siege
 	content.get_node("Ability").visible = siege

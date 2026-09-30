@@ -5,7 +5,7 @@
 [ext_resource type="Resource" path="res://resources/attacker/canguit/loaded_purse.tres" id="u0"]
 [ext_resource type="Resource" path="res://resources/attacker/canguit/fast_accounts.tres" id="u1"]
 [ext_resource type="Resource" path="res://resources/attacker/canguit/armored_coat.tres" id="u2"]
-[ext_resource type="Resource" path="res://resources/attacker/canguit/merchant_steps.tres" id="u3"]
+[ext_resource type="Resource" path="res://resources/attacker/canguit/trading_post.tres" id="u3"]
 [ext_resource type="Resource" path="res://resources/attacker/canguit/trade_school.tres" id="u4"]
 [resource]
 script = ExtResource("script")

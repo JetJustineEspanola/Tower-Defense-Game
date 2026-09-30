@@ -60,3 +60,10 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("siege_tracer_mesh")
 [editable path="TroopSelection"]
+[node name="AbilityStatus" type="Label3D" parent="."]
+visible = false
+position = Vector3(0, 1.35, 0)
+billboard = 1
+font_size = 24
+pixel_size = 0.004
+modulate = Color(0.3, 0.95, 1, 1)

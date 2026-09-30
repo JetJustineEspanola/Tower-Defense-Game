@@ -1,4 +1,5 @@
 extends Node3D
+const BALANCE = preload("res://resources/attacker/combat_balance.tres")
 signal upgraded
 @export var definition: TroopDefinition
 var upgrade_path: TowerUpgradePath
@@ -18,16 +19,19 @@ func can_buy_upgrade(index: int) -> bool:
 	if buying or clock == null or not clock.running or get_tree().paused: return false
 	if index < 0 or index >= upgrade_path.choices.size() or purchased.size() >= upgrade_path.choice_limit: return false
 	var choice: TowerUpgrade = upgrade_path.choices[index]
-	return not purchased.has(choice.id) and choice.cost >= 0 and resources.gold >= choice.cost
+	return not purchased.has(choice.id) and choice.cost >= 0 and resources.gold >= get_upgrade_cost(index)
 func buy_upgrade(index: int) -> bool:
 	if not can_buy_upgrade(index): return false
 	var choice: TowerUpgrade = upgrade_path.choices[index]
+	var price: int = get_upgrade_cost(index)
 	buying = true
 	purchased.append(choice.id)
-	if not resources.spend_gold(choice.cost):
+	if not resources.spend_gold(price):
 		purchased.erase(choice.id)
 		buying = false
 		return false
+	stats.stationary_economy = bool(stats.get("stationary_economy", false)) or choice.stationary_economy
+	stats.guard_phase = bool(stats.get("guard_phase", false)) or choice.guard_phase
 	stats.health += choice.troop_health_bonus
 	stats.speed *= choice.speed_multiplier
 	stats.armor += choice.armor_bonus
@@ -42,6 +46,8 @@ func buy_upgrade(index: int) -> bool:
 		stats.interval = maxf(0.2, stats.interval * choice.interval_multiplier)
 	buying = false
 	upgraded.emit()
+	var experience = get_tree().current_scene.get_node_or_null("Experience")
+	if experience: experience.notice("%s | Future troops upgraded" % definition.character_name)
 	return true
 func get_stats_text() -> String:
 	var info: String = "HP: %d  Armor: %d  Speed: %.2f\nTraining: %.1fs  Base damage: %d" % [stats.health, stats.armor, stats.speed, stats.training, stats.base_damage]
@@ -50,3 +56,7 @@ func get_stats_text() -> String:
 	if definition.role == "economy":
 		info += "\nIncome: +%d gold / %.1fs" % [stats.income, stats.income_interval]
 	return info + "\nApplies to new training orders."
+
+func get_upgrade_cost(index: int) -> int:
+	var listed: int = upgrade_path.choices[index].cost
+	return mini(listed, BALANCE.first_attacker_upgrade_cost) if purchased.is_empty() else listed

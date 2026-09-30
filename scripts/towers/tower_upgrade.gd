@@ -27,3 +27,6 @@ extends Resource
 @export var training_multiplier: float = 1.0
 @export var base_damage_bonus: int = 0
 @export var troop_health_bonus: int = 0
+
+@export var stationary_economy: bool = false
+@export var guard_phase: bool = false

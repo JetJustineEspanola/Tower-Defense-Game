@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		var target: Node3D = null
 		var nearest: float = INF
 		for bug in get_tree().get_nodes_in_group("combat_bugs"):
-			if not bug.alive or is_instance_valid(bug.blocker): continue
+			if not bug.alive or not bug.can_be_blocked() or is_instance_valid(bug.blocker): continue
 			if get_parent().global_position.distance_to(bug.global_position) > get_parent().attack_range: continue
 			# Intercept threats in the tower's patrol radius, including ranged siege.
 			var distance: float = global_position.distance_to(bug.global_position)

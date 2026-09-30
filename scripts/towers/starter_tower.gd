@@ -101,7 +101,12 @@ func _act() -> void:
 		resources.add_gold(income)
 		$Effect.play(income)
 	elif kind == "defense":
-		guards = guards.filter(func(guard: Node3D) -> bool: return is_instance_valid(guard) and not guard.is_queued_for_deletion())
+		# Validate before a freed Object can be cast by a typed lambda.
+		for i in range(guards.size() - 1, -1, -1):
+			if not is_instance_valid(guards[i]):
+				guards.remove_at(i)
+			elif guards[i].is_queued_for_deletion() or guards[i].health <= 0:
+				guards.remove_at(i)
 		var spawned: int = 0
 		while guards.size() < guard_count:
 			var offset: float = route.curve.get_closest_offset(route.to_local(global_position))

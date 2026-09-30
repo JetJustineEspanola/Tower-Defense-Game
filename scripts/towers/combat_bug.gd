@@ -34,16 +34,10 @@ func _physics_process(delta: float) -> void:
 			burn_tick -= 1.0
 			take_damage(burn_amount)
 			if not alive: return
-	if is_instance_valid(blocker) and blocker.health > 0:
+	acquire_blocker()
+	if is_instance_valid(blocker):
 		$CharacterAnimation.set_moving(false)
 		return
-	blocker = null
-	for guard in get_tree().get_nodes_in_group("defenders"):
-		if guard.available() and global_position.distance_to(guard.global_position) < 0.65:
-			blocker = guard
-			guard.enemy = self
-			$CharacterAnimation.set_moving(false)
-			return
 	$CharacterAnimation.set_moving(speed > 0.0)
 	$Model.rotation.y = 0.0
 	progress += speed * delta
@@ -89,3 +83,19 @@ func _resolve() -> void:
 func _update() -> void:
 	$Health.text = "%d / %d" % [health, maximum_health]
 
+
+func can_be_blocked() -> bool:
+	return true
+
+func acquire_blocker() -> void:
+	if not can_be_blocked():
+		if is_instance_valid(blocker) and blocker.enemy == self: blocker.enemy = null
+		blocker = null
+		return
+	if is_instance_valid(blocker) and blocker.health > 0 and not blocker.is_queued_for_deletion(): return
+	blocker = null
+	for guard in get_tree().get_nodes_in_group("defenders"):
+		if guard.available() and global_position.distance_to(guard.global_position) < 0.65:
+			blocker = guard
+			guard.enemy = self
+			return

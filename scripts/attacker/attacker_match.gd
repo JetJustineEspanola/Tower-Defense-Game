@@ -1,4 +1,5 @@
 extends Node3D
+const BALANCE = preload("res://resources/attacker/combat_balance.tres")
 @export_range(10, 3600, 1) var match_duration_seconds: int = 720
 @export var starting_gold: int = 300
 @export var base_maximum_health: int = 100
@@ -60,6 +61,7 @@ func train(index: int) -> void:
 		if not order.is_empty(): reserved += 1
 	if reserved >= active_troop_limit: return
 	var roster = rosters[index]
+	if roster.definition.role == "economy" and BALANCE.attacker_economy_count(get_tree(), resources) >= BALANCE.attacker_economy_limit: return
 	if resources.gold < roster.definition.cost: return
 	var snapshot: Dictionary = roster.stats.duplicate(true)
 	# Reserve before the wallet signal fires. New upgrades cannot alter this order.
@@ -96,10 +98,12 @@ func _refresh_cards() -> void:
 		var card = cards[i]
 		var roster = rosters[i]
 		var training: bool = not orders[i].is_empty()
-		card.get_node("Content/Actions/Train").disabled = ended or training or full or resources.gold < roster.definition.cost
+		var economy_full: bool = roster.definition.role == "economy" and BALANCE.attacker_economy_count(get_tree(), resources) + (1 if training else 0) >= BALANCE.attacker_economy_limit
+		card.get_node("Content/Actions/Train").disabled = ended or training or full or economy_full or resources.gold < roster.definition.cost
 		card.get_node("Content/Actions/Train").text = "Train • %d Gold" % roster.definition.cost
 		card.get_node("Content/Progress").value = 100.0 * (1.0 - orders[i].remaining / orders[i].total) if training else 0.0
 		card.get_node("Content/Status").text = "Training %.1fs" % orders[i].remaining if training else "Ready • %.1fs training" % roster.stats.training
+		if economy_full and not training: card.get_node("Content/Status").text = "Canguit limit: %d active" % BALANCE.attacker_economy_limit
 		card.get_node("Content/Actions/Upgrade").disabled = ended
 func _open_upgrades(index: int) -> void:
 	if not ended and not get_tree().paused: sidebar.open(rosters[index])
