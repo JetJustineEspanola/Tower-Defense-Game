@@ -1,0 +1,21 @@
+WEB DEVELOPMENT - STARTER NOTES
+
+HTML describes the structure of a web page. The <a> element creates a hyperlink when it has an href. An image's alt attribute provides a text alternative; decorative images generally use an empty alt value.
+
+CSS means Cascading Style Sheets. The color property sets text color. The background-color property sets background color. display: flex enables flexbox, a layout model for arranging items along a main axis.
+
+JavaScript adds behavior to a page. let declares a block-scoped variable that can be reassigned. const declares a block-scoped binding that cannot be reassigned.
+
+DOM means Document Object Model. JavaScript can use document.querySelector to find the first element matching a CSS selector. Use "#hero" to select an element whose id is hero; "hero" selects an element with the tag name hero.
+
+addEventListener registers a listener for an event, such as a button click. Its capitalization and spelling matter.
+
+In JavaScript, = assigns a value. === compares values using strict equality.
+
+Code-fix examples:
+1. p { colour: red; } - replace colour with color.
+2. document.querySelector("hero"); - use "#hero" when selecting id="hero".
+3. if (score = 10) { win(); } - replace = with === to compare.
+4. button.addEventListner("click", startGame); - use addEventListener.
+
+Use these notes as a reference when creating or reviewing Astral cards.

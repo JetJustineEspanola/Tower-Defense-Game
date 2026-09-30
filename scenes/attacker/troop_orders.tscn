@@ -1,0 +1,56 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/attacker/troop_orders.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[node name="TroopOrders" type="Node3D"]
+script = ExtResource("script")
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 3
+[node name="Panel" type="PanelContainer" parent="UI"]
+visible = false
+offset_left = 20.0
+offset_top = 150.0
+offset_right = 320.0
+theme = ExtResource("theme")
+[node name="Margin" type="MarginContainer" parent="UI/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+[node name="Content" type="VBoxContainer" parent="UI/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+[node name="Title" type="Label" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+text = "SELECTED TROOP"
+theme_override_colors/font_color = Color(0.3, 0.85, 1, 1)
+[node name="Health" type="Label" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+text = "Health"
+[node name="Description" type="Label" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(268, 0)
+autowrap_mode = 2
+text = "Troop orders"
+[node name="Priority" type="OptionButton" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Nearest tower"
+popup/item_0/id = 0
+popup/item_1/text = "Economy first"
+popup/item_1/id = 1
+popup/item_2/text = "Strongest tower"
+popup/item_2/id = 2
+popup/item_3/text = "Weakest tower"
+popup/item_3/id = 3
+[node name="Auto" type="CheckButton" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+text = "Auto bombardment"
+button_pressed = true
+[node name="Ability" type="Button" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+text = "Fire bombardment"
+[node name="Close" type="Button" parent="UI/Panel/Margin/Content"]
+layout_mode = 2
+text = "Close"

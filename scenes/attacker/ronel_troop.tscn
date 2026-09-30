@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/combat/health_feedback.tscn" id="health_feedback"]
 [ext_resource type="PackedScene" path="res://scenes/towers/effects/gold_burst.tscn" id="income_fx"]
 [ext_resource type="PackedScene" path="res://scenes/towers/effects/summon_burst.tscn" id="siege_fx"]
 [ext_resource type="PackedScene" path="res://scenes/towers/character_anime_style.tscn" id="anime_style"]
@@ -7,6 +8,13 @@
 [ext_resource type="PackedScene" path="res://assets/characters/codeborn/ronel.glb" id="character"]
 [ext_resource type="Script" path="res://scripts/attacker/attacker_troop.gd" id="script"]
 [ext_resource type="PackedScene" path="res://scenes/Bug/bug.glb" id="model"]
+[ext_resource type="PackedScene" path="res://scenes/towers/tower_selection.tscn" id="troop_selection"]
+[sub_resource type="StandardMaterial3D" id="siege_tracer_mat"]
+shading_mode = 0
+albedo_color = Color(1, 0.6, 0.15, 1)
+[sub_resource type="BoxMesh" id="siege_tracer_mesh"]
+size = Vector3(0.05, 0.05, 1)
+material = SubResource("siege_tracer_mat")
 [node name="CombatBug" type="PathFollow3D" groups=["combat_bugs"]]
 rotation_mode = 1
 use_model_front = true
@@ -39,3 +47,16 @@ fixed_idle_facing = false
 idle_clip = &"Book_Idle"
 action_clip = &"Book_Attack"
 [connection signal="timeout" from="AttackTimer" to="." method="_attack"]
+
+[node name="HealthFeedback" parent="." instance=ExtResource("health_feedback")]
+position = Vector3(0, 1.05, 0)
+
+
+[node name="TroopSelection" parent="." instance=ExtResource("troop_selection")]
+[node name="PickArea" parent="TroopSelection" index="1"]
+collision_layer = 32
+[node name="SiegeTracer" type="MeshInstance3D" parent="."]
+visible = false
+cast_shadow = 0
+mesh = SubResource("siege_tracer_mesh")
+[editable path="TroopSelection"]

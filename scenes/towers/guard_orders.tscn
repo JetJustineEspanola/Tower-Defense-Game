@@ -1,0 +1,16 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/towers/guard_orders.gd" id="script"]
+[sub_resource type="StandardMaterial3D" id="material"]
+shading_mode = 0
+albedo_color = Color(0.3, 1, 0.75, 1)
+no_depth_test = true
+[sub_resource type="TorusMesh" id="marker"]
+inner_radius = 0.24
+outer_radius = 0.29
+material = SubResource("material")
+[node name="GuardOrders" type="Node3D"]
+script = ExtResource("script")
+[node name="Destination" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("marker")
+cast_shadow = 0

@@ -1,0 +1,484 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/questions/deck_editor.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="heading"]
+[sub_resource type="StyleBoxFlat" id="field"]
+bg_color = Color(0.035, 0.07, 0.12, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14, 0.32, 0.43, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_left = 7
+corner_radius_bottom_right = 7
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+[sub_resource type="StyleBoxFlat" id="accent"]
+bg_color = Color(0.03, 0.28, 0.39, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.83, 1, 1)
+corner_radius_top_left = 9
+corner_radius_bottom_right = 9
+content_margin_left = 18.0
+content_margin_right = 18.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+[node name="DeckEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Shade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.012, 0.027, 0.055, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = -20.0
+
+[node name="Layout" type="VBoxContainer" parent="Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Margin/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="Title" type="Label" parent="Margin/Layout/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ASTRAL LIBRARY"
+theme_override_fonts/font = ExtResource("heading")
+theme_override_colors/font_color = Color(0.4, 0.86, 1, 1)
+theme_override_font_sizes/font_size = 26
+
+[node name="Close" type="Button" parent="Margin/Layout/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Close"
+
+[node name="Toolbar" type="HBoxContainer" parent="Margin/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="DeckName" type="LineEdit" parent="Margin/Layout/Toolbar"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Deck name"
+
+[node name="Saved" type="OptionButton" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(220, 0)
+
+[node name="Load" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load saved"
+
+[node name="New" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New deck"
+
+[node name="Import" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Import deck"
+tooltip_text = "Import a formatted JSON question deck"
+
+[node name="Save" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="Use" type="Button" parent="Margin/Layout/Toolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Use this deck"
+tooltip_text = "Save changes and select this deck for matches"
+theme_override_styles/normal = SubResource("accent")
+
+[node name="Filters" type="HBoxContainer" parent="Margin/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="FilterLabel" type="Label" parent="Margin/Layout/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Question types"
+custom_minimum_size = Vector2(135, 0)
+
+[node name="Enable0" type="CheckBox" parent="Margin/Layout/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Multiple choice"
+button_pressed = true
+
+[node name="Enable1" type="CheckBox" parent="Margin/Layout/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Identification"
+button_pressed = true
+
+[node name="Enable2" type="CheckBox" parent="Margin/Layout/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Code fix"
+button_pressed = true
+
+[node name="Columns" type="HBoxContainer" parent="Margin/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 22
+
+[node name="Library" type="VBoxContainer" parent="Margin/Layout/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(255, 0)
+
+[node name="CardsLabel" type="Label" parent="Margin/Layout/Columns/Library"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "YOUR QUESTIONS"
+autowrap_mode = 2
+
+[node name="Cards" type="ItemList" parent="Margin/Layout/Columns/Library"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 160)
+size_flags_vertical = 3
+
+[node name="CardActions" type="HBoxContainer" parent="Margin/Layout/Columns/Library"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="Add" type="Button" parent="Margin/Layout/Columns/Library/CardActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+ Add card"
+
+[node name="Delete" type="Button" parent="Margin/Layout/Columns/Library/CardActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete"
+
+[node name="NoteLabel" type="Label" parent="Margin/Layout/Columns/Library"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Notes (optional)"
+autowrap_mode = 2
+
+[node name="Notes" type="ItemList" parent="Margin/Layout/Columns/Library"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+
+
+[node name="Attach" type="Button" parent="Margin/Layout/Columns/Library"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Attach PDF / DOCX / TXT"
+
+[node name="NoteActions" type="HBoxContainer" parent="Margin/Layout/Columns/Library"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="OpenNote" type="Button" parent="Margin/Layout/Columns/Library/NoteActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Open"
+
+[node name="RemoveNote" type="Button" parent="Margin/Layout/Columns/Library/NoteActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Detach"
+
+[node name="NoteHelp" type="Label" parent="Margin/Layout/Columns/Library"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Attach notes, open them, and write your questions."
+autowrap_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/Layout/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="Form" type="VBoxContainer" parent="Margin/Layout/Columns/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TypeLabel" type="Label" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Answer format"
+autowrap_mode = 2
+
+[node name="Type" type="OptionButton" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Multiple choice"
+popup/item_0/id = 0
+popup/item_1/text = "Identification"
+popup/item_1/id = 1
+popup/item_2/text = "Code fix"
+popup/item_2/id = 2
+
+[node name="PromptLabel" type="Label" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Question / instructions"
+autowrap_mode = 2
+
+[node name="Prompt" type="TextEdit" parent="Margin/Layout/Columns/Scroll/Form"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 78)
+wrap_mode = 1
+
+[node name="CodeLabel" type="Label" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Code to fix"
+autowrap_mode = 2
+
+[node name="Code" type="TextEdit" parent="Margin/Layout/Columns/Scroll/Form"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 85)
+
+
+[node name="Multiple" type="VBoxContainer" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="ChoiceA" type="LineEdit" parent="Margin/Layout/Columns/Scroll/Form/Multiple"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Option A"
+
+[node name="ChoiceB" type="LineEdit" parent="Margin/Layout/Columns/Scroll/Form/Multiple"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Option B"
+
+[node name="ChoiceC" type="LineEdit" parent="Margin/Layout/Columns/Scroll/Form/Multiple"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Option C"
+
+[node name="ChoiceD" type="LineEdit" parent="Margin/Layout/Columns/Scroll/Form/Multiple"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Option D"
+
+[node name="Correct" type="OptionButton" parent="Margin/Layout/Columns/Scroll/Form/Multiple"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Correct: A"
+popup/item_0/id = 0
+popup/item_1/text = "Correct: B"
+popup/item_1/id = 1
+popup/item_2/text = "Correct: C"
+popup/item_2/id = 2
+popup/item_3/text = "Correct: D"
+popup/item_3/id = 3
+
+[node name="Typed" type="VBoxContainer" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+
+
+[node name="AnswerHelp" type="Label" parent="Margin/Layout/Columns/Scroll/Form/Typed"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Accepted answers"
+autowrap_mode = 2
+
+[node name="Accepted" type="TextEdit" parent="Margin/Layout/Columns/Scroll/Form/Typed"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+
+
+[node name="GoldLabel" type="Label" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gold for a correct answer"
+autowrap_mode = 2
+
+[node name="Gold" type="SpinBox" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 25.0
+
+[node name="ExplanationLabel" type="Label" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Short explanation shown after submission"
+autowrap_mode = 2
+
+[node name="Explanation" type="TextEdit" parent="Margin/Layout/Columns/Scroll/Form"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 75)
+wrap_mode = 1
+
+[node name="ReviewHelp" type="Label" parent="Margin/Layout/Columns/Scroll/Form"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Check your answers before saving. Code answers must match an accepted version."
+autowrap_mode = 2
+
+[node name="PreviewColumn" type="VBoxContainer" parent="Margin/Layout/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(280, 0)
+
+[node name="PreviewTitle" type="Label" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PLAYER PREVIEW"
+autowrap_mode = 2
+
+[node name="Preview" type="Button" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Preview question"
+
+[node name="PreviewText" type="RichTextLabel" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+size_flags_vertical = 3
+bbcode_enabled = false
+
+[node name="PreviewChoice" type="OptionButton" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "A"
+popup/item_0/id = 0
+popup/item_1/text = "B"
+popup/item_1/id = 1
+popup/item_2/text = "C"
+popup/item_2/id = 2
+popup/item_3/text = "D"
+popup/item_3/id = 3
+
+[node name="PreviewAnswer" type="TextEdit" parent="Margin/Layout/Columns/PreviewColumn"]
+theme_override_styles/normal = SubResource("field")
+theme_override_styles/panel = SubResource("field")
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+wrap_mode = 1
+
+[node name="Check" type="Button" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Check answer"
+
+[node name="PreviewResult" type="Label" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Preview only — no gold awarded."
+autowrap_mode = 2
+
+[node name="Rules" type="Label" parent="Margin/Layout/Columns/PreviewColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Try your question here before saving it."
+autowrap_mode = 2
+
+[node name="Status" type="Label" parent="Margin/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1. Choose a card    2. Edit the question    3. Use this deck"
+custom_minimum_size = Vector2(0, 36)
+autowrap_mode = 2
+
+[node name="NoteDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Choose a file"
+size = Vector2i(850, 550)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.pdf ; PDF notes", "*.docx ; Word notes", "*.txt ; Text notes")
+
+[node name="ImportDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Choose a file"
+size = Vector2i(850, 550)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json ; Question deck")
+
+[node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Delete question?"
+dialog_text = "Remove this question from the deck?"
+ok_button_text = "Delete question"
+

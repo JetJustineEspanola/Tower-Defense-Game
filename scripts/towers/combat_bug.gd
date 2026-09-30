@@ -63,9 +63,13 @@ func _hit() -> void:
 		target.take_damage(15)
 func take_damage(amount: int) -> void:
 	if not alive or amount <= 0: return
+	var health_before: int = health
 	health = maxi(0, health - amount)
+	$HealthFeedback.hit(health_before, health)
 	_update()
 	if health == 0:
+		var experience = get_tree().current_scene.get_node_or_null("Experience")
+		if experience: experience.bugs_defeated += 1
 		var collector: Node3D
 		var nearest: float = INF
 		for tower in get_tree().get_nodes_in_group("placed_towers"):
@@ -84,3 +88,4 @@ func _resolve() -> void:
 	queue_free()
 func _update() -> void:
 	$Health.text = "%d / %d" % [health, maximum_health]
+

@@ -20,9 +20,12 @@ func spawn_bug() -> void:
 	bug.clock = hud.get_node("MatchClock")
 	bug.arrived.connect(_arrived)
 	route.add_child(bug)
-func _arrived() -> void:
-	if ended: return
-	base_health = maxi(0, base_health - 10)
+func _arrived(damage: int = 10) -> void:
+	if ended or not hud.get_node("MatchClock").running: return
+	var health_before: int = base_health
+	base_health = maxi(0, base_health - damage)
+	if damage > 0: get_node("../AlliedBase/BaseFeedback").hit(health_before, base_health, true)
+	get_node("../AlliedBase/BaseFeedback").set_health(base_health, 100)
 	hud.set_base_health(base_health, 100)
 	if base_health == 0:
 		_finish(false)

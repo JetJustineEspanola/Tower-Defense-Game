@@ -36,11 +36,14 @@ func _ready() -> void:
 	if popup != null:
 		popup_origin = popup.position
 func play(amount: int = 0) -> void:
+	var experience = get_tree().current_scene.get_node_or_null("Experience")
+	var reduced: bool = experience != null and experience.reduced_effects
 	var coins: CPUParticles3D = get_node_or_null("Coins")
 	if coins != null:
 		coins.amount = clampi(roundi(coins_per_ten_gold * amount / 10.0), 6, maximum_coin_particles)
 	for child in get_children():
 		if child is CPUParticles3D:
+			if reduced and child.name != "RedSlash": continue
 			if child.name == "Embers" and not burning:
 				continue
 			child.restart()

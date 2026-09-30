@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/practice/computer_defender.gd" id="defender_ai"]
 [ext_resource type="PackedScene" path="res://maps/main_map.tscn" id="map"]
 [ext_resource type="Script" path="res://scripts/attacker/attacker_match.gd" id="match"]
 [ext_resource type="Script" path="res://scripts/attacker/troop_roster.gd" id="roster"]
@@ -9,6 +10,7 @@
 [ext_resource type="Resource" path="res://resources/attacker/ronel.tres" id="ronel"]
 [ext_resource type="Resource" path="res://resources/attacker/matthew.tres" id="matthew"]
 [ext_resource type="Resource" path="res://resources/attacker/canguit.tres" id="canguit"]
+[ext_resource type="PackedScene" path="res://scenes/attacker/troop_orders.tscn" id="orders_ui"]
 [node name="AttackerMatch" instance=ExtResource("map")]
 script = ExtResource("match")
 [node name="CombatReview" parent="Gameplay" index="0"]
@@ -26,7 +28,7 @@ pixel_size = 0.004
 text = "ENEMY BASE"
 [node name="DefenderResources" type="Node" parent="."]
 script = ExtResource("wallet")
-starting_gold = 0
+starting_gold = 300
 [node name="Roster" type="Node3D" parent="."]
 [node name="Ronel" type="Node3D" parent="Roster"]
 script = ExtResource("roster")
@@ -64,3 +66,8 @@ layout_mode = 2
 role = "attacker"
 [editable path="Gameplay/TowerShop"]
 
+
+[node name="ComputerDefender" type="Node" parent="."]
+script = ExtResource("defender_ai")
+
+[node name="TroopOrders" parent="." instance=ExtResource("orders_ui")]

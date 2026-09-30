@@ -1,12 +1,8 @@
 extends Node3D
+@export_range(10, 3600, 1) var match_duration_seconds: int = 720
 @export var starting_gold: int = 300
 @export var base_maximum_health: int = 100
 @export var active_troop_limit: int = 60
-@export var preset_pad_indices: Array[int] = [1, 3, 5]
-@export var preset_towers: Array[PackedScene] = [
-	preload("res://scenes/towers/attack_tower.tscn"),
-	preload("res://scenes/towers/defense_tower.tscn"),
-	preload("res://scenes/towers/attack_tower.tscn")]
 var base_health: int
 var ended: bool = false
 var orders: Array[Dictionary] = [{}, {}, {}]
@@ -18,11 +14,13 @@ var cards: Array[Node] = []
 @onready var resources: PlayerResources = hud.resources
 @onready var sidebar = $AttackerUI/UpgradeSidebar
 func _ready() -> void:
+	clock.duration_seconds = match_duration_seconds
+	clock.start()
 	base_health = base_maximum_health
 	resources.gold = starting_gold
 	resources.changed.emit(resources.gold, resources.mana)
 	hud.get_node("TopBar/Row/Health").hide()
-	hud.get_node("TopBar/Row/Brand/Tagline").text = "ATTACKER  /  BREAK THE BASE"
+	hud.get_node("TopBar/Row/Brand/Tagline").text = "ATTACKER PRACTICE"
 	hud.get_node("PauseOverlay").visibility_changed.connect(_pause_overlay_changed)
 	sidebar.setup(hud)
 	for troop_name in ["Ronel", "Matthew", "Canguit"]:
@@ -38,27 +36,13 @@ func _ready() -> void:
 		card.get_node("Content/Header/Text/Name").text = troop_name
 		card.get_node("Content/Header/Text/Role").text = roster.upgrade_path.role
 	clock.expired.connect(_timeout)
-	_deploy_defenders()
+	_prepare_defender_nodes()
 	_update_base_label()
 	_refresh_cards()
-func _deploy_defenders() -> void:
+func _prepare_defender_nodes() -> void:
 	var pads = get_tree().get_nodes_in_group("tower_placement_pads")
 	for pad in pads:
 		pad.input_ray_pickable = false
-	for i in mini(preset_pad_indices.size(), preset_towers.size()):
-		var index: int = preset_pad_indices[i]
-		if index < 0 or index >= pads.size(): continue
-		var pad = pads[index]
-		var tower = preset_towers[i].instantiate()
-		tower.resources = $DefenderResources
-		tower.clock = clock
-		tower.route = route
-		tower.placement_pad = pad
-		pad.occupied = true
-		pad.tower = tower
-		pad.get_parent().add_child(tower)
-		tower.position = Vector3.ZERO
-		tower.get_node("Selection/PickArea").input_ray_pickable = false
 func _process(delta: float) -> void:
 	if ended or not clock.running: return
 	for i in orders.size():
@@ -94,11 +78,15 @@ func _spawn(index: int, snapshot: Dictionary) -> Node3D:
 	return troop
 func _arrived(damage: int) -> void:
 	if ended or not clock.running: return
+	var health_before: int = base_health
 	base_health = maxi(0, base_health - damage)
+	$Gameplay/AlliedBase/BaseFeedback.hit(health_before, base_health, true)
 	_update_base_label()
 	if base_health == 0: _finish(true)
 func _update_base_label() -> void:
-	$Gameplay/AlliedBase/TargetHealth.text = "ENEMY BASE\n%d / %d" % [base_health, base_maximum_health]
+	$Gameplay/AlliedBase/BaseFeedback.set_health(base_health, base_maximum_health)
+	$Gameplay/AlliedBase/TargetHealth.text = "ENEMY BASE"
+	$Gameplay/AlliedBase/TargetHealth.position.y = 1.8
 func _refresh_cards() -> void:
 	var reserved: int = get_tree().get_nodes_in_group("attacker_troops").size()
 	for order in orders:

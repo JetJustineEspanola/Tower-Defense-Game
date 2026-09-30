@@ -6,9 +6,11 @@
 process_mode = 3
 script = ExtResource("script")
 [node name="Calm" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 stream = ExtResource("calm")
 volume_db = -60.0
 [node name="Combat" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 stream = ExtResource("combat")
 volume_db = -60.0
 [node name="Check" type="Timer" parent="."]

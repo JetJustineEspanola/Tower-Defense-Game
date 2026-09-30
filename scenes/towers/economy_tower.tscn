@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/combat/health_feedback.tscn" id="health_feedback"]
 [ext_resource type="PackedScene" path="res://scenes/towers/character_anime_style.tscn" id="anime_style"]
 [ext_resource type="Resource" path="res://resources/upgrades/canguit_path.tres" id="upgrade_path"]
 [ext_resource type="PackedScene" path="res://scenes/towers/tower_selection.tscn" id="selection"]
@@ -34,7 +35,7 @@ metadata/tower_type = "economy"
 script = ExtResource("logic")
 kind = "economy"
 upgrade_path = ExtResource("upgrade_path")
-interval = 5.0
+interval = 8.0
 [node name="Model" parent="." instance=ExtResource("character")]
 rotation = Vector3(0, -3.14159265, 0)
 position = Vector3(0, -0.001, 0)
@@ -61,3 +62,7 @@ fixed_idle_facing = true
 idle_clip = &"Market_Idle"
 action_clip = &"Market_Support_Cast"
 [connection signal="timeout" from="ActionTimer" to="." method="_act"]
+
+[node name="HealthFeedback" parent="." instance=ExtResource("health_feedback")]
+position = Vector3(0, 1.25, 0)
+

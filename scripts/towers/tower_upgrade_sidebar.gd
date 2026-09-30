@@ -10,6 +10,7 @@ var active: bool = false
 	$Panel/Content/Scroll/Choices/Upgrade3, $Panel/Content/Scroll/Choices/Upgrade4,
 	$Panel/Content/Scroll/Choices/Upgrade5]
 func setup(resource_hud: Control) -> void:
+	$Panel/Content/Targeting/Priority.item_selected.connect(_priority_selected)
 	hud = resource_hud
 	resources = hud.resources
 	resources.changed.connect(_resources_changed)
@@ -49,6 +50,11 @@ func refresh() -> void:
 		close()
 		return
 	var path: TowerUpgradePath = tower.upgrade_path
+	var targeting: bool = tower.has_method("supports_targeting") and tower.supports_targeting()
+	$Panel/Content/Targeting.visible = targeting
+	if targeting:
+		$Panel/Content/Targeting/Priority.select(tower.targeting_priority)
+		$Panel/Content/Targeting/Priority.tooltip_text = ["Nearest to the base along the path.", "Furthest from the base along the path.", "Highest current health.", "Lowest current health.", "Nearest to the attacking unit."][tower.targeting_priority]
 	$Panel/Content/Header/Name.text = path.character_name + " • " + path.role
 	$Panel/Content/Portrait.texture = path.portrait
 	$Panel/Content/Stats.text = tower.get_stats_text()
@@ -77,6 +83,10 @@ func _buy(index: int) -> void:
 	if is_instance_valid(tower):
 		tower.buy_upgrade(index)
 		refresh()
+
+func _priority_selected(index: int) -> void:
+	if is_instance_valid(tower) and tower.has_method("set_targeting_priority"):
+		tower.set_targeting_priority(index)
 func _input(event: InputEvent) -> void:
 	if active and event.is_action_pressed("ui_cancel"):
 		close()

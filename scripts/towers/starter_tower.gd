@@ -1,6 +1,25 @@
 extends Node3D
 signal selected(tower: Node3D)
 signal upgraded
+const BALANCE = preload("res://resources/attacker/combat_balance.tres")
+const TARGET_PRIORITY = preload("res://scripts/towers/target_priority.gd")
+@export_enum("First", "Last", "Strongest", "Weakest", "Closest") var targeting_priority: int = 0
+
+func supports_targeting() -> bool:
+	return kind != "economy"
+
+func set_targeting_priority(value: int) -> void:
+	if value < 0 or value > 4 or not supports_targeting(): return
+	if get_tree().paused or clock == null or not clock.running or health <= 0: return
+	targeting_priority = value
+	upgraded.emit()
+
+func choose_attack_target() -> Node3D:
+	var candidates: Array = []
+	for enemy in get_tree().get_nodes_in_group("combat_bugs"):
+		if is_instance_valid(enemy) and global_position.distance_to(enemy.global_position) <= attack_range:
+			candidates.append(enemy)
+	return TARGET_PRIORITY.select(candidates, global_position, targeting_priority)
 @export var upgrade_path: TowerUpgradePath
 @export var maximum_health: int = 100
 @export var armor: int = 0
@@ -34,8 +53,16 @@ var pending_target: WeakRef
 var facing_target: WeakRef
 var original_damage: int
 var original_interval: float
+var overcharge_remaining: float = 0.0
+var overcharge_multiplier: float = 1.5
+
+func effective_interval() -> float:
+	var slowdown: float = 1.0
+	if kind == "economy" and BALANCE.disrupted(get_tree(), resources): slowdown = 1.0 / (1.0 - BALANCE.disruption_fraction)
+	return interval * slowdown / (overcharge_multiplier if overcharge_remaining > 0.0 else 1.0)
 func _ready() -> void:
 	original_damage = damage
+	if kind == "economy": interval = BALANCE.economy_interval
 	original_interval = interval
 	add_to_group("placed_towers")
 	health = maximum_health
@@ -45,11 +72,22 @@ func _ready() -> void:
 	$CharacterAnimation.impact.connect(_apply_hit)
 	$ActionTimer.start(interval)
 	_refresh_effects()
+	var experience = get_tree().current_scene.get_node_or_null("Experience")
+	if experience: experience.call_deferred("celebrate", $Model)
 func _process(delta: float) -> void:
 	beam_time = maxf(0.0, beam_time - delta)
 	$Beam.visible = beam_time > 0.0
 	if clock == null or not clock.running:
 		return
+	if overcharge_remaining > 0.0:
+		overcharge_remaining = maxf(0.0, overcharge_remaining - delta)
+	var desired_interval: float = effective_interval()
+	if not is_equal_approx($ActionTimer.wait_time, desired_interval):
+		var fraction: float = $ActionTimer.time_left / $ActionTimer.wait_time
+		$ActionTimer.start(maxf(0.001, desired_interval * fraction))
+		$ActionTimer.wait_time = desired_interval
+	if kind == "economy":
+		$NameLabel.text = "ECONOMY | DISRUPTED -%.0f%%" % (BALANCE.disruption_fraction * 100) if BALANCE.disrupted(get_tree(), resources) else "ECONOMY"
 	var target = facing_target.get_ref() if facing_target != null else null
 	if is_instance_valid(target) and target.alive and global_position.distance_to(target.global_position) <= attack_range:
 		$CharacterAnimation.face_towards(target.global_position)
@@ -89,17 +127,10 @@ func _act() -> void:
 			$Effect.configure_summon(spawned)
 			$Effect.play()
 	else:
-		var target: Node3D
-		var nearest: float = attack_range
-		for enemy in get_tree().get_nodes_in_group("combat_bugs"):
-			if not enemy.alive: continue
-			var distance: float = global_position.distance_to(enemy.global_position)
-			if distance < nearest:
-				nearest = distance
-				target = enemy
+		var target: Node3D = choose_attack_target()
 		if is_instance_valid(target):
 			facing_target = weakref(target)
-			if $CharacterAnimation.play_action(interval * 0.8):
+			if $CharacterAnimation.play_action(effective_interval() * 0.8):
 				pending_target = weakref(target)
 				$CharacterAnimation.face_towards(target.global_position)
 
@@ -137,7 +168,10 @@ func _apply_hit() -> void:
 		var victim: Node3D = victims[i]
 		if burn_damage > 0:
 			victim.apply_burn(burn_damage, burn_seconds)
+		var before: int = victim.health
 		victim.take_damage(damage if i == 0 else maxi(1, roundi(damage * secondary_damage_fraction)))
+		var experience = get_tree().current_scene.get_node_or_null("Experience")
+		if experience: experience.record_damage(self, before - victim.health)
 
 func _on_selected(_camera: Node, event: InputEvent, _position: Vector3, _normal: Vector3, _shape: int) -> void:
 	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or (event is InputEventScreenTouch and event.pressed):
@@ -171,7 +205,7 @@ func buy_upgrade(index: int) -> bool:
 	income += choice.income_bonus
 	attack_range += choice.range_bonus
 	interval = maxf(0.1, interval * maxf(0.05, choice.interval_multiplier))
-	$ActionTimer.start(interval)
+	$ActionTimer.start(effective_interval())
 	extra_targets += choice.extra_targets
 	secondary_damage_fraction = choice.secondary_damage_fraction if choice.extra_targets > 0 else secondary_damage_fraction
 	burn_damage += choice.burn_damage
@@ -195,6 +229,8 @@ func buy_upgrade(index: int) -> bool:
 	set_selected($Selection/RangeCircle.visible)
 	buying_upgrade = false
 	_refresh_effects()
+	var experience = get_tree().current_scene.get_node_or_null("Experience")
+	if experience: experience.celebrate($Model)
 	upgraded.emit()
 	return true
 
@@ -204,9 +240,13 @@ func _refresh_effects() -> void:
 
 func take_damage(amount: int) -> void:
 	if health <= 0 or amount <= 0: return
+	var health_before: int = health
 	health = maxi(0, health - maxi(1, amount - armor))
+	$HealthFeedback.hit(health_before, health)
 	upgraded.emit()
 	if health == 0:
+		var experience = get_tree().current_scene.get_node_or_null("Experience")
+		if experience: experience.towers_destroyed += 1
 		if is_instance_valid(placement_pad):
 			placement_pad.occupied = false
 			placement_pad.tower = null

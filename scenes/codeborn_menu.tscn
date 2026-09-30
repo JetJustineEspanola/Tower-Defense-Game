@@ -11,6 +11,22 @@
 [ext_resource type="Texture2D" uid="uid://dh1wu0nu3wllx" path="res://assets/Buttons_Ubac/7.png" id="9_leexa"]
 [ext_resource type="Texture2D" uid="uid://duymh76pmgmyy" path="res://assets/Buttons_Ubac/8.png" id="10_4rb5s"]
 
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="practice_theme"]
+[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="practice_font"]
+[sub_resource type="StyleBoxFlat" id="PracticePanel"]
+content_margin_left = 36.0
+content_margin_right = 36.0
+content_margin_top = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.015, 0.035, 0.07, 0.98)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.15, 0.7, 0.9, 1)
+corner_radius_top_left = 18
+corner_radius_bottom_right = 18
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxPanel"]
 content_margin_left = 48.0
 content_margin_top = 40.0
@@ -228,9 +244,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="DeveloperScreen/CenterContainer" unique_id=158137792]
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(600, 0)
+theme = ExtResource("practice_theme")
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxPanel")
+theme_override_styles/panel = SubResource("PracticePanel")
 
 [node name="Content" type="VBoxContainer" parent="DeveloperScreen/CenterContainer/PanelContainer" unique_id=1383644576]
 layout_mode = 2
@@ -240,14 +257,39 @@ theme_override_constants/separation = 22
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.95, 0.9, 1)
 theme_override_font_sizes/font_size = 30
-text = "Question Editor Placeholder"
+text = "PRACTICE ARENA"
+theme_override_fonts/font = ExtResource("practice_font")
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=267394575]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.68, 0.76, 0.82, 1)
-text = "Question authoring tools will be built here."
+text = "Choose your side. Learn the battle at your own pace.\nOffline practice • No connection needed"
 horizontal_alignment = 1
+
+[node name="Defender" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 58)
+text = "DEFENDER  /  Protect your base"
+tooltip_text = "Build towers, answer questions and survive until time runs out."
+
+[node name="DefenderHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
+layout_mode = 2
+text = "Prepare your towers before the first enemy arrives."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="Attacker" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 58)
+text = "ATTACKER  /  Break their defenses"
+tooltip_text = "Train Ronel, Matthew and Canguit. Destroy the base before time expires."
+
+[node name="AttackerHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
+layout_mode = 2
+text = "Attack while the computer builds, earns gold, and upgrades its defenses."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
 
 [node name="BackButton" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=49520902]
 custom_minimum_size = Vector2(0, 48)

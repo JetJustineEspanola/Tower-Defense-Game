@@ -384,6 +384,13 @@ button_group = SubResource("answers")
 text = "D      24"
 alignment = 0
 
+[node name="TypedAnswer" type="TextEdit" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+wrap_mode = 1
+placeholder_text = "Type your answer"
+
 [node name="RewardLabel" type="Label" parent="QuestionPanel/Scroll/Content"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -448,6 +455,56 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "GAME PAUSED"
 horizontal_alignment = 1
+
+[node name="AudioOptions" type="VBoxContainer" parent="PauseOverlay/Center/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Music" type="HBoxContainer" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+[node name="Label" type="Label" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+text = "Music"
+[node name="Volume" type="HSlider" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 24)
+size_flags_horizontal = 3
+value = 80.0
+
+[node name="SFX" type="HBoxContainer" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+[node name="Label" type="Label" parent="PauseOverlay/Center/Panel/Content/AudioOptions/SFX"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+text = "Sound effects"
+[node name="Volume" type="HSlider" parent="PauseOverlay/Center/Panel/Content/AudioOptions/SFX"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 24)
+size_flags_horizontal = 3
+value = 80.0
+
+[node name="Voice" type="HBoxContainer" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+[node name="Label" type="Label" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Voice"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+text = "Announcer"
+[node name="Volume" type="HSlider" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Voice"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 24)
+size_flags_horizontal = 3
+value = 80.0
+
+[node name="ReducedEffects" type="CheckBox" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+text = "Reduce particle effects"
+button_pressed = false
+
+[node name="Subtitles" type="CheckBox" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+text = "Announcer subtitles"
+button_pressed = true
 
 [node name="Resume" type="Button" parent="PauseOverlay/Center/Panel/Content"]
 unique_name_in_owner = true

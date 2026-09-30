@@ -11,6 +11,9 @@ func _ready() -> void:
 func present(won: bool, role: String, clock: MatchClock, wallet: PlayerResources, health: int, maximum: int) -> void:
 	if completed: return
 	completed = true
+	var experience = get_parent().get_node_or_null("Experience")
+	if experience:
+		$Screen/Content/Highlights.text = experience.finish(won, health)
 	clock.running = false
 	var accent := Color("#46d9ff") if won else Color("#ff557e")
 	$Screen/Background.texture = VICTORY if won else DEFEAT
@@ -58,4 +61,3 @@ func _again() -> void:
 func _home() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/codeborn_menu.tscn")
-

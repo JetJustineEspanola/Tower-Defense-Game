@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/combat/health_feedback.tscn" id="health_feedback"]
 [ext_resource type="PackedScene" path="res://scenes/towers/character_anime_style.tscn" id="anime_style"]
 [ext_resource type="Resource" path="res://resources/upgrades/jet_path.tres" id="upgrade_path"]
 [ext_resource type="PackedScene" path="res://scenes/towers/tower_selection.tscn" id="selection"]
@@ -61,3 +62,7 @@ idle_clip = &"Sword_Idle"
 facing_offset = 0.0
 action_clip = &"Sword_Attack"
 [connection signal="timeout" from="ActionTimer" to="." method="_act"]
+
+[node name="HealthFeedback" parent="." instance=ExtResource("health_feedback")]
+position = Vector3(0, 1.25, 0)
+

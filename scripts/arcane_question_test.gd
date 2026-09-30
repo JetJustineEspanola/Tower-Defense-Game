@@ -1,11 +1,14 @@
 extends Control
 ## Scene-authored resource bar, countdown, question sidebar and local pause menu.
 signal answer_submitted(correct: bool)
+signal question_rewarded(amount: int)
 @export_range(1, 10000) var preview_maximum_health: int = 100
 @export_range(0, 1000) var question_cost: int = 10
 @export_range(1, 1000) var question_reward: int = 25
 var selected_answer: int = -1
 var answered: bool = false
+const DECK_STORE = preload("res://scripts/questions/deck_store.gd")
+var question_run = preload("res://scripts/questions/question_run.gd").new()
 @onready var resources: PlayerResources = $Resources
 @onready var answers: Array[Button] = [%AnswerButtonA, %AnswerButtonB, %AnswerButtonC, %AnswerButtonD]
 
@@ -14,13 +17,15 @@ func _ready() -> void:
 	_update_resources(resources.gold, resources.mana)
 	set_time_remaining($MatchClock.displayed_seconds)
 	set_base_health(preview_maximum_health, preview_maximum_health)
-	_refresh_question()
+	question_run.setup(DECK_STORE.active())
+	%TypedAnswer.text_changed.connect(_refresh_question)
+	_show_next_question()
 
 func _update_resources(gold: int, mana: int) -> void:
 	%GoldLabel.text = str(gold)
 	%ManaLabel.text = "%d / %d" % [mana, resources.maximum_mana]
 	%NewQuestionButton.disabled = mana < question_cost
-	%NewQuestionButton.text = "New question  /  %d mana" % question_cost
+	%NewQuestionButton.text = "Next / skip  •  %d mana" % question_cost
 
 func _select_answer(index: int) -> void:
 	if answered or get_tree().paused:
@@ -30,34 +35,58 @@ func _select_answer(index: int) -> void:
 	%SubmitButton.disabled = false
 
 func _submit_answer() -> void:
-	if answered or selected_answer < 0 or get_tree().paused:
+	if answered or get_tree().paused or not $MatchClock.running:
 		return
+	if question_run.current.type == "multiple_choice" and selected_answer < 0: return
+	if question_run.current.type != "multiple_choice" and %TypedAnswer.text.strip_edges().is_empty(): return
 	answered = true
-	var correct: bool = selected_answer == 0
+	var outcome: Dictionary = question_run.submit(%TypedAnswer.text, selected_answer)
+	var correct: bool = outcome.correct
 	if correct:
-		resources.add_gold(question_reward)
-		%ResultLabel.text = "Correct! +%d gold" % question_reward
+		resources.add_gold(int(outcome.gold))
+		question_rewarded.emit(int(outcome.gold))
+		%ResultLabel.text = "Correct! +%d gold" % int(outcome.gold)
 	else:
-		%ResultLabel.text = "Not quite. The correct answer is 14."
+		%ResultLabel.text = "Not quite. Try this card again next cycle."
+	%ResultLabel.text += "\n" + str(question_run.current.get("explanation", ""))
 	_refresh_question()
 	answer_submitted.emit(correct)
 
 func _on_new_question_button_pressed() -> void:
-	if get_tree().paused:
+	if get_tree().paused or not $MatchClock.running:
 		return
 	if not resources.spend_mana(question_cost):
 		return
+	_show_next_question()
+
+func _show_next_question() -> void:
+	var card: Dictionary = question_run.next()
 	answered = false
 	selected_answer = -1
+	%TypedAnswer.text = ""
 	for button in answers:
 		button.set_pressed_no_signal(false)
-	%ResultLabel.text = "Choose one answer, then submit."
+	var multiple: bool = card.type == "multiple_choice"
+	for i in answers.size():
+		answers[i].visible = multiple
+		if multiple: answers[i].text = "%s   %s" % ["ABCD"[i], card.choices[i]]
+	%TypedAnswer.visible = not multiple
+	%TypedAnswer.placeholder_text = "Type the corrected code here" if card.type == "code_fix" else "Type your answer"
+	$QuestionPanel/Scroll/Content/Type.text = str(card.type).replace("_", " ").to_upper() + "  •  CYCLE " + str(question_run.cycle)
+	$QuestionPanel/Scroll/Content/QuestionLabel.text = str(card.prompt)
+	$QuestionPanel/Scroll/Content/Code.visible = not str(card.get("code", "")).is_empty()
+	$QuestionPanel/Scroll/Content/Code/CodeText.bbcode_enabled = false
+	$QuestionPanel/Scroll/Content/Code/CodeText.text = str(card.get("code", ""))
+	question_reward = int(card.get("reward", 25))
+	%ResultLabel.text = "One attempt. Choose an answer, then submit." if multiple else "One attempt. Type your answer, then submit."
 	_refresh_question()
 
 func _refresh_question() -> void:
 	for button in answers:
 		button.disabled = answered
-	%SubmitButton.disabled = answered or selected_answer < 0
+	%TypedAnswer.editable = not answered
+	var has_answer: bool = selected_answer >= 0 if question_run.current.get("type") == "multiple_choice" else not %TypedAnswer.text.strip_edges().is_empty()
+	%SubmitButton.disabled = answered or not has_answer
 	%RewardLabel.text = "CORRECT ANSWER  +%d GOLD" % question_reward
 
 func _toggle_question() -> void:

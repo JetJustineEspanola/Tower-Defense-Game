@@ -49,6 +49,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+anchor_top = 0.36
+
 [node name="Panel" type="PanelContainer" parent="Picker/Center"]
 custom_minimum_size = Vector2(820, 0)
 layout_mode = 2
@@ -70,7 +72,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 [node name="Economy" type="Button" parent="Picker/Center/Panel/Content/Choices"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 340)
+custom_minimum_size = Vector2(250, 220)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("frame_style")
@@ -87,7 +89,7 @@ offset_bottom = -18.0
 mouse_filter = 2
 theme_override_constants/separation = 6
 [node name="Portrait" type="TextureRect" parent="Picker/Center/Panel/Content/Choices/Economy/Content"]
-custom_minimum_size = Vector2(0, 170)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("portrait_canguit")
@@ -120,7 +122,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 [node name="Attack" type="Button" parent="Picker/Center/Panel/Content/Choices"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 340)
+custom_minimum_size = Vector2(250, 220)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("frame_style")
@@ -137,7 +139,7 @@ offset_bottom = -18.0
 mouse_filter = 2
 theme_override_constants/separation = 6
 [node name="Portrait" type="TextureRect" parent="Picker/Center/Panel/Content/Choices/Attack/Content"]
-custom_minimum_size = Vector2(0, 170)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("portrait_jet")
@@ -170,7 +172,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 [node name="Defense" type="Button" parent="Picker/Center/Panel/Content/Choices"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 340)
+custom_minimum_size = Vector2(250, 220)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("frame_style")
@@ -187,7 +189,7 @@ offset_bottom = -18.0
 mouse_filter = 2
 theme_override_constants/separation = 6
 [node name="Portrait" type="TextureRect" parent="Picker/Center/Panel/Content/Choices/Defense/Content"]
-custom_minimum_size = Vector2(0, 170)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("portrait_arjie")
@@ -230,3 +232,6 @@ text = "Cancel"
 [connection signal="pressed" from="Picker/Center/Panel/Content/Choices/Defense" to="." method="_buy" binds=[2]]
 [connection signal="pressed" from="Picker/Center/Panel/Content/Cancel" to="." method="_close"]
 [connection signal="pressed" from="PracticeBug" to="." method="_send_practice_bug"]
+
+[node name="PreviewRoot" type="Node3D" parent="."]
+visible = false

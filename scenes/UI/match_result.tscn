@@ -64,7 +64,7 @@ theme_override_font_sizes/font_size = 14
 [node name="Content" type="VBoxContainer" parent="Screen"]
 anchor_left = 0.15
 anchor_right = 0.85
-anchor_top = 0.43
+anchor_top = 0.34
 anchor_bottom = 0.97
 theme_override_constants/separation = 12
 [node name="Banner" type="PanelContainer" parent="Screen/Content"]
@@ -135,6 +135,13 @@ theme_override_font_sizes/font_size = 13
 text = "100 / 100"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 26
+[node name="Highlights" type="Label" parent="Screen/Content"]
+text = "Match highlights"
+horizontal_alignment = 1
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_constants/outline_size = 4
+
 [node name="TipPanel" type="PanelContainer" parent="Screen/Content"]
 theme_override_styles/panel = SubResource("panel")
 [node name="Tip" type="Label" parent="Screen/Content/TipPanel"]

@@ -6,6 +6,7 @@ extends Node
 var combat_active: bool = false
 var initialized: bool = false
 var fade: Tween
+var final_minute: bool = false
 @onready var clock: MatchClock = get_parent().get_node("Gameplay/ResourceHUD/ArcaneQuestionTest/MatchClock")
 
 func _ready() -> void:
@@ -16,6 +17,7 @@ func _ready() -> void:
 	call_deferred("_update_music")
 
 func _process(_delta: float) -> void:
+	$Combat.pitch_scale = 1.06 if final_minute else 1.0
 	$Calm.stream_paused = get_tree().paused
 	$Combat.stream_paused = get_tree().paused
 	if not clock.running:
@@ -25,7 +27,7 @@ func _process(_delta: float) -> void:
 
 func _update_music() -> void:
 	if not clock.running or get_tree().paused: return
-	var threat: bool = false
+	var threat: bool = final_minute
 	var group: String = "placed_towers" if role == "attacker" else "combat_bugs"
 	for actor in get_tree().get_nodes_in_group(group):
 		if actor.is_queued_for_deletion(): continue
