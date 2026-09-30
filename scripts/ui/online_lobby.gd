@@ -1,7 +1,8 @@
 extends "res://scripts/ui/lan_lobby.gd"
-@onready var service: Node = $RoomService
+@onready var service: Node = get_node("/root/OnlineSession")
 func _ready() -> void:
  super._ready()
+ service.match_started.connect(_enter_match)
  service.room_changed.connect(_room_update)
  service.status_changed.connect(_status)
  service.room_closed.connect(_disconnected)
@@ -15,6 +16,7 @@ func _ready() -> void:
  ready_button.set_pressed_no_signal(false)
  _status("Create a room or enter the code your friend shared.")
  _update_start()
+ if not service.room.is_empty(): _room_update(service.room)
 func _host() -> void:
  service.create_room(_name(), preload("res://scripts/questions/deck_store.gd").active())
 func _join() -> void:
@@ -70,10 +72,18 @@ func _ready_changed(value: bool) -> void:
  if service.room.is_empty(): return
  service.set_ready(value)
 func _update_start() -> void:
- start_button.disabled = true
- start_button.text = "MATCH COMING NEXT"
- start_button.tooltip_text = "This build connects online rooms. Shared combat will be added next."
- $HostRoom/Panel/Content/Status.text = "Waiting for your friend. Copy and share the room code." if not guest_connected else "Room connected. Ready and deck selection are shared.\nOnline combat will be connected in the next step."
+ var both_ready: bool = service.room.get("players", []).size() == 2
+ for member in service.room.get("players", []): both_ready = both_ready and member.ready
+ start_button.disabled = not (both_ready and service.is_host())
+ start_button.text = "START MATCH" if service.is_host() else "HOST STARTS MATCH"
+ $HostRoom/Panel/Content/Status.text = "Both players ready." if both_ready else "Share the code, choose your deck, and ready up."
+func _start() -> void:
+ if not start_button.disabled: service.start_match()
+func _enter_match() -> void:
+ get_tree().change_scene_to_file("res://scenes/network/online_match.tscn")
+func _exit_tree() -> void:
+ for pair in [[service.match_started, _enter_match], [service.room_changed, _room_update], [service.status_changed, _status], [service.room_closed, _disconnected]]:
+  if pair[0].is_connected(pair[1]): pair[0].disconnect(pair[1])
 func _deck_applied() -> void:
  if service.player_id == str(service.room.get("host_id", "")):
   service.update_deck(preload("res://scripts/questions/deck_store.gd").active())

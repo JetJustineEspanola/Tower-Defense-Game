@@ -42,6 +42,8 @@ func play_action(duration: float = 0.8) -> bool:
 		return false
 	if clock != null and not clock.running:
 		return false
+	var online = get_tree().current_scene
+	if online != null and online.has_method("record_visual"): online.record_visual(get_parent(), "action", {"duration": duration})
 	busy = true
 	duration = maxf(0.1, duration)
 	player.speed_scale = player.get_animation(action_clip).length / duration

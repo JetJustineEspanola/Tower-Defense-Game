@@ -2,5 +2,5 @@
 [ext_resource type="Script" path="res://scripts/network/room_connection_config.gd" id="script"]
 [resource]
 script = ExtResource("script")
-relay_url = ""
+relay_url = "wss://tower-defense-game-2vgi.onrender.com/rooms"
 connection_timeout_seconds = 75

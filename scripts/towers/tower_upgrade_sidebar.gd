@@ -82,11 +82,23 @@ func refresh() -> void:
 		rows[i].get_node("Content").modulate = Color(0.62, 0.68, 0.76) if rows[i].disabled and not owned else Color.WHITE
 		rows[i].get_node("Content/Text/Cost").modulate = Color(0.45, 1.0, 0.7) if owned else Color.WHITE
 func _buy(index: int) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if not is_instance_valid(tower): return
+		if tower.is_in_group("placed_towers"): online.online_action("tower_upgrade", {"id": online.online_id(tower), "index": index})
+		else: online.online_action("troop_upgrade", {"index": online.rosters.find(tower), "upgrade": index})
+		return
+
 	if is_instance_valid(tower):
 		tower.buy_upgrade(index)
 		refresh()
 
 func _priority_selected(index: int) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if is_instance_valid(tower): online.online_action("tower_priority", {"id": online.online_id(tower), "index": index})
+		return
+
 	if is_instance_valid(tower) and tower.has_method("set_targeting_priority"):
 		tower.set_targeting_priority(index)
 func _input(event: InputEvent) -> void:

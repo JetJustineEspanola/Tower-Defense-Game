@@ -6,6 +6,7 @@ var popup_origin: Vector3
 @export var maximum_coin_particles: int = 70
 @export var slash_duration: float = 0.32
 var burning: bool = false
+var attack_distance: float = 1.0
 
 func configure_attack(damage_ratio: float, extra_targets: int, burns: bool, cadence_ratio: float) -> void:
 	var slash: CPUParticles3D = get_node_or_null("RedSlash")
@@ -20,6 +21,7 @@ func configure_attack(damage_ratio: float, extra_targets: int, burns: bool, cade
 	slash.lifetime = slash_duration * clampf(cadence_ratio, 0.65, 1.0)
 
 func aim_attack(distance: float) -> void:
+	attack_distance = distance
 	var slash: CPUParticles3D = get_node_or_null("RedSlash")
 	if slash == null: return
 	# The visible arc reaches the struck enemy, including Long Reach targets.
@@ -36,6 +38,9 @@ func _ready() -> void:
 	if popup != null:
 		popup_origin = popup.position
 func play(amount: int = 0) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("record_visual"):
+		online.record_visual(get_parent(), "effect", {"path": str(name), "amount": amount, "distance": attack_distance, "position": [global_position.x, global_position.y, global_position.z], "rotation": [global_rotation.x, global_rotation.y, global_rotation.z]})
 	var visibility_gate = get_node_or_null("Visibility")
 	if visibility_gate != null and not visibility_gate.allows_burst(): return
 	var experience = get_tree().current_scene.get_node_or_null("Experience")

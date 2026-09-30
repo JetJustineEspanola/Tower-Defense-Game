@@ -1,7 +1,6 @@
 [gd_scene format=3]
 [ext_resource type="PackedScene" path="res://scenes/UI/lan_lobby.tscn" id="base"]
 [ext_resource type="Script" path="res://scripts/ui/online_lobby.gd" id="script"]
-[ext_resource type="Script" path="res://scripts/network/online_room_client.gd" id="client"]
 [node name="OnlineLobby" instance=ExtResource("base")]
 script = ExtResource("script")
 [node name="Title" parent="Header" index="1"]
@@ -24,8 +23,6 @@ tooltip_text = "Join using your friend's room code"
 text = "CREATE ROOM"
 [node name="Connection" parent="HostRoom/Panel/Content" index="1"]
 text = "ONLINE • PRIVATE ROOM"
-[node name="RoomService" type="Node" parent="."]
-script = ExtResource("client")
 [node name="CodeEntry" type="VBoxContainer" parent="Browser/Panel/Content/ListArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0

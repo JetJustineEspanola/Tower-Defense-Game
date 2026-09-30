@@ -62,6 +62,12 @@ func _process(_delta: float) -> void:
 			buttons[0].tooltip_text = "Maximum %d active economy towers." % BALANCE.economy_limit
 
 func _buy(index: int) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if is_instance_valid(selected_pad): online.online_action("place", {"pad": online.pads.find(selected_pad), "index": index})
+		_close()
+		return
+
 	if index == 0 and BALANCE.economy_count(get_tree(), resources) >= BALANCE.economy_limit: return
 	if purchasing or get_tree().paused or not %Picker.visible or not hud.get_node("MatchClock").running:
 		return

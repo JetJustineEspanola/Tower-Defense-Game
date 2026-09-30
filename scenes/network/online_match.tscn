@@ -1,0 +1,38 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/attacker/attacker_match.tscn" id="base"]
+[ext_resource type="Script" path="res://scripts/network/online_match.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/towers/tower_shop.gd" id="shop"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[node name="OnlineMatch" instance=ExtResource("base")]
+script = ExtResource("script")
+[node name="TowerShop" parent="Gameplay"]
+visible = true
+process_mode = 0
+script = ExtResource("shop")
+[node name="ComputerDefender" parent="."]
+process_mode = 4
+script = null
+[node name="OnlineOverlay" type="CanvasLayer" parent="."]
+layer = 20
+[node name="Panel" type="PanelContainer" parent="OnlineOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -120.0
+offset_right = 290.0
+offset_bottom = 120.0
+theme = ExtResource("theme")
+[node name="Content" type="VBoxContainer" parent="OnlineOverlay/Panel"]
+theme_override_constants/separation = 18
+[node name="Title" type="Label" parent="OnlineOverlay/Panel/Content"]
+text = "CONNECTING MATCH"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+[node name="Detail" type="Label" parent="OnlineOverlay/Panel/Content"]
+text = "Waiting for both players..."
+horizontal_alignment = 1
+autowrap_mode = 2
+[node name="Home" type="Button" parent="OnlineOverlay/Panel/Content"]
+text = "Leave room"

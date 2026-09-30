@@ -38,6 +38,11 @@ func _select_answer(index: int) -> void:
 	%SubmitButton.disabled = false
 
 func _submit_answer() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if not answered: online.online_action("answer", {"token": get_meta("question_token", -1), "choice": selected_answer, "answer": %TypedAnswer.text})
+		return
+
 	if answered or get_tree().paused or not $MatchClock.running:
 		return
 	if question_run.current.type == "multiple_choice" and selected_answer < 0: return
@@ -56,6 +61,11 @@ func _submit_answer() -> void:
 	answer_submitted.emit(correct)
 
 func _on_new_question_button_pressed() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		online.online_action("next_question", {"token": get_meta("question_token", -1)})
+		return
+
 	if get_tree().paused or not $MatchClock.running:
 		return
 	if emergency_ready():
@@ -73,7 +83,9 @@ func _process(delta: float) -> void:
 	_update_resources(resources.gold, resources.mana)
 
 func _show_next_question() -> void:
-	var card: Dictionary = question_run.next()
+	_render_card(question_run.next())
+
+func _render_card(card: Dictionary) -> void:
 	answered = false
 	selected_answer = -1
 	%TypedAnswer.text = ""
@@ -115,8 +127,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _toggle_pause() -> void:
-	var paused: bool = not get_tree().paused
-	get_tree().paused = paused
+	var online: bool = get_tree().current_scene.has_method("online_action")
+	var paused: bool = not %PauseOverlay.visible if online else not get_tree().paused
+	if not online: get_tree().paused = paused
 	%PauseOverlay.visible = paused
 	if paused:
 		%Resume.grab_focus()
@@ -124,6 +137,11 @@ func _toggle_pause() -> void:
 		%PauseButton.grab_focus()
 
 func _main_menu() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		online.leave_online()
+		return
+
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/codeborn_menu.tscn")
 

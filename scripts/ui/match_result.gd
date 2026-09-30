@@ -46,7 +46,7 @@ func present(won: bool, role: String, clock: MatchClock, wallet: PlayerResources
 			style.bg_color = accent.darkened(0.65 if state == "normal" else 0.35)
 			button.add_theme_stylebox_override(state, style)
 	# Freeze gameplay, including remaining training and mana regeneration.
-	get_tree().paused = true
+	if not get_parent().has_method("online_action"): get_tree().paused = true
 	show()
 	$Screen/Content/Buttons/Again.grab_focus()
 
@@ -55,9 +55,19 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _again() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		online.request_rematch()
+		return
+
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _home() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		online.leave_online()
+		return
+
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/codeborn_menu.tscn")

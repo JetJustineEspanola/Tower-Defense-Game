@@ -9,7 +9,7 @@ func _process(_delta: float) -> void:
 		clear_selection()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if get_parent().has_node("Roster") or get_tree().paused or not clock.running: return
+	if (get_parent().has_node("Roster") and not get_parent().has_method("online_action")) or get_tree().paused or not clock.running: return
 	if event.is_action_pressed("ui_cancel") and is_instance_valid(selected_guard):
 		clear_selection()
 		get_viewport().set_input_as_handled()
@@ -55,7 +55,9 @@ func order_to(point: Vector3) -> bool:
 	if Vector2(point.x - destination.x, point.z - destination.z).length() > 1.0 or tower.global_position.distance_to(destination) > tower.attack_range:
 		get_parent().get_node("Experience").notice("Choose a path position inside Arjie's white range circle.")
 		return false
-	selected_guard.walk_to(destination)
+	if get_parent().has_method("online_action"):
+		get_parent().online_action("guard", {"id": get_parent().online_id(selected_guard), "position": [destination.x, destination.y, destination.z]})
+	else: selected_guard.walk_to(destination)
 	$Destination.global_position = destination + Vector3.UP * 0.07
 	$Destination.show()
 	get_parent().get_node("Experience").notice("Small Arjie is moving to the new rally point.")

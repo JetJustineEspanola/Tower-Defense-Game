@@ -9,10 +9,25 @@ func _ready() -> void:
 	content.get_node("Auto").toggled.connect(_auto)
 	content.get_node("Ability").pressed.connect(_ability)
 func _priority(index: int) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if _can_order(): online.online_action("troop_priority", {"id": online.online_id(selected_troop), "index": index})
+		return
+
 	if _can_order() and selected_troop.role == "siege": selected_troop.targeting_priority = index
 func _auto(value: bool) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if _can_order(): online.online_action("troop_auto", {"id": online.online_id(selected_troop), "value": value})
+		return
+
 	if _can_order(): selected_troop.auto_siege = value
 func _ability() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		if _can_order(): online.online_action("siege", {"id": online.online_id(selected_troop)})
+		return
+
 	if _can_order(): selected_troop.fire_siege()
 func _can_order() -> bool:
 	return is_instance_valid(selected_troop) and selected_troop.alive and clock.running and not get_tree().paused

@@ -72,6 +72,10 @@ func _subtitles(value: bool) -> void:
 	config.save("user://presentation.cfg")
 
 func _health() -> int:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		return online.base_health
+
 	return get_parent().base_health if role == "attacker" else get_parent().get_node("Gameplay/CombatReview").base_health
 
 func announce(key: String, text: String, priority: int) -> void:
@@ -134,6 +138,12 @@ func notice(text: String) -> void:
 	$Notice.show()
 
 func _ability() -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("online_action"):
+		var target = online.get_node("Gameplay/TowerShop/UpgradeSidebar").tower
+		online.online_action("boost", {"id": online.online_id(target) if is_instance_valid(target) else 0})
+		return
+
 	if finished or get_tree().paused or not clock.running or cooldown > 0.0: return
 	if role == "attacker":
 		var count: int = 0

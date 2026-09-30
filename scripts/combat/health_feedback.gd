@@ -39,6 +39,9 @@ func set_health(current: int, maximum: int) -> void:
 	$Fill.modulate = healthy_color if ratio > 0.5 else (Color("#ffc55c") if ratio > 0.25 else Color("#ff5268"))
 	$Value.text = "%d / %d" % [current, maximum]
 func hit(before: int, after: int, base_hit: bool = false) -> void:
+	var online = get_tree().current_scene
+	if online != null and online.has_method("record_visual"): online.record_visual(get_parent(), "hit", {"before": before, "after": after})
+
 	var actual: int = before - after
 	if actual <= 0: return
 	var popup = POPUP.instantiate()
