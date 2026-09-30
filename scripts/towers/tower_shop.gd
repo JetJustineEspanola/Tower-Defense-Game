@@ -9,6 +9,7 @@ const BALANCE = preload("res://resources/attacker/combat_balance.tres")
 const NAMES: Array[String] = ["Economy", "Attack", "Defense"]
 var selected_pad: TowerPlacementPad
 var purchasing: bool = false
+var question_was_visible: bool = true
 @onready var hud = get_node("../ResourceHUD/ArcaneQuestionTest")
 var resources: PlayerResources
 @onready var buttons: Array[Button] = [%Economy, %Attack, %Defense]
@@ -35,14 +36,12 @@ func open_for_pad(pad: TowerPlacementPad) -> void:
 		return
 	$UpgradeSidebar.close()
 	selected_pad = pad
-	var camera := get_viewport().get_camera_3d()
-	if camera:
-		var below: bool = camera.unproject_position(pad.global_position).y > get_viewport().get_visible_rect().size.y * 0.55
-		$Picker/Center.anchor_top = 0.08 if below else 0.36
-		$Picker/Center.anchor_bottom = 0.72 if below else 1.0
+	if not %Picker.visible: question_was_visible = hud.get_node("%QuestionPanel").visible
+	hud.get_node("%QuestionPanel").hide()
+	hud.get_node("%QuestionToggle").hide()
 	%Picker.show()
 	_preview(1)
-	%Title.text = "DEPLOY STARTER TOWER"
+	%Title.text = "Deploy Tower"
 	_refresh(resources.gold, resources.mana)
 
 func _refresh(gold: int, _mana: int) -> void:
@@ -97,6 +96,9 @@ func _buy(index: int) -> void:
 	_close()
 
 func _close() -> void:
+	if %Picker.visible:
+		hud.get_node("%QuestionPanel").visible = question_was_visible
+		hud.get_node("%QuestionToggle").show()
 	$PreviewRoot.hide()
 	for child in $PreviewRoot.get_children(): child.queue_free()
 	%Picker.hide()
