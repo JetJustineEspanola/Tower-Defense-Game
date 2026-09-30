@@ -1,0 +1,68 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/combat/health_feedback.tscn" id="health_feedback"]
+[ext_resource type="PackedScene" path="res://scenes/towers/character_anime_style.tscn" id="anime_style"]
+[ext_resource type="Resource" path="res://resources/upgrades/canguit_path.tres" id="upgrade_path"]
+[ext_resource type="PackedScene" path="res://scenes/towers/tower_selection.tscn" id="selection"]
+[ext_resource type="PackedScene" path="res://scenes/towers/effects/gold_burst.tscn" id="vfx"]
+[ext_resource type="PackedScene" path="res://scenes/towers/character_animation.tscn" id="animation_driver"]
+[ext_resource type="PackedScene" path="res://assets/characters/codeborn/canguit.glb" id="character"]
+[ext_resource type="Script" path="res://scripts/towers/starter_tower.gd" id="logic"]
+[sub_resource type="StandardMaterial3D" id="base_mat"]
+albedo_color = Color(0.09, 0.15, 0.23, 1)
+metallic = 0.6
+[sub_resource type="StandardMaterial3D" id="accent"]
+albedo_color = Color(1, 0.67, 0.12, 1)
+emission_enabled = true
+emission = Color(1, 0.67, 0.12, 1)
+emission_energy_multiplier = 0.35
+[sub_resource type="CylinderMesh" id="base"]
+top_radius = 0.32
+bottom_radius = 0.42
+height = 0.5
+material = SubResource("base_mat")
+[sub_resource type="SphereMesh" id="top"]
+radius = 0.25
+height = 0.5
+material = SubResource("accent")
+[sub_resource type="StandardMaterial3D" id="beam_mat"]
+albedo_color = Color(0.2, 0.9, 1, 1)
+shading_mode = 0
+[sub_resource type="BoxMesh" id="beam"]
+size = Vector3(0.035, 0.035, 1)
+material = SubResource("beam_mat")
+[node name="economyTower" type="Node3D"]
+metadata/tower_type = "economy"
+script = ExtResource("logic")
+kind = "economy"
+upgrade_path = ExtResource("upgrade_path")
+interval = 8.0
+[node name="Model" parent="." instance=ExtResource("character")]
+rotation = Vector3(0, -3.14159265, 0)
+position = Vector3(0, -0.001, 0)
+scale = Vector3(0.67, 0.67, 0.67)
+[node name="NameLabel" type="Label3D" parent="."]
+position = Vector3(0, 1.45, 0)
+billboard = 1
+font_size = 32
+pixel_size = 0.004
+text = "ECONOMY"
+[node name="Beam" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("beam")
+[node name="ActionTimer" type="Timer" parent="."]
+[node name="Selection" parent="." instance=ExtResource("selection")]
+[node name="Effect" parent="." instance=ExtResource("vfx")]
+
+
+
+[node name="AnimeStyle" parent="." instance=ExtResource("anime_style")]
+[node name="CharacterAnimation" parent="." instance=ExtResource("animation_driver")]
+walk_clip = &"Market_Walk"
+fixed_idle_facing = true
+idle_clip = &"Market_Idle"
+action_clip = &"Market_Support_Cast"
+[connection signal="timeout" from="ActionTimer" to="." method="_act"]
+
+[node name="HealthFeedback" parent="." instance=ExtResource("health_feedback")]
+position = Vector3(0, 1.25, 0)
+

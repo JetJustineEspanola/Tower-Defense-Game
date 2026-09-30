@@ -1,0 +1,14 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/towers/character_anime_style.tscn" id="anime_style"]
+[ext_resource type="PackedScene" path="res://scenes/towers/character_animation.tscn" id="animation_driver"]
+[ext_resource type="PackedScene" path="res://assets/characters/codeborn/canguit.glb" id="model"]
+[node name="economy_bug_visual" type="Node3D"]
+[node name="Model" parent="." instance=ExtResource("model")]
+position = Vector3(0, -0.001, 0)
+scale = Vector3(0.44, 0.44, 0.44)
+[node name="AnimeStyle" parent="." instance=ExtResource("anime_style")]
+[node name="CharacterAnimation" parent="." instance=ExtResource("animation_driver")]
+walk_clip = &"Market_Walk"
+fixed_idle_facing = false
+idle_clip = &"Market_Idle"
+action_clip = &"Market_Support_Cast"

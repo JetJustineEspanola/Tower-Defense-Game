@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TroopDefinition" format=3]
+[ext_resource type="Script" path="res://scripts/attacker/troop_definition.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/attacker/ronel_troop.tscn" id="scene"]
+[ext_resource type="Resource" path="res://resources/attacker/ronel_upgrades.tres" id="upgrades"]
+[resource]
+script = ExtResource("script")
+character_name = "Ronel"
+scene = ExtResource("scene")
+upgrades = ExtResource("upgrades")
+role = "objective"
+cost = 50
+training_seconds = 3
+health = 90
+speed = 1
+base_damage = 15

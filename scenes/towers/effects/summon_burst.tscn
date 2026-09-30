@@ -1,0 +1,38 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/towers/particle_visibility.gd" id="visibility_script"]
+[ext_resource type="Script" path="res://scripts/towers/tower_burst.gd" id="logic"]
+[ext_resource type="Shader" path="res://assets/ui/summon_smoke.gdshader" id="shader"]
+[sub_resource type="ShaderMaterial" id="smoke_mat"]
+shader = ExtResource("shader")
+[sub_resource type="QuadMesh" id="puff"]
+material = SubResource("smoke_mat")
+size = Vector2(0.8, 0.8)
+[sub_resource type="Gradient" id="fade"]
+offsets = PackedFloat32Array(0, 0.15, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[node name="SummonSmoke" type="Node3D"]
+script = ExtResource("logic")
+[node name="Smoke" type="CPUParticles3D" parent="."]
+position = Vector3(0, 0.25, 0)
+emitting = false
+amount = 28
+lifetime = 1.1
+one_shot = true
+explosiveness = 0.85
+local_coords = false
+mesh = SubResource("puff")
+emission_shape = 1
+emission_sphere_radius = 0.35
+direction = Vector3(0, 1, 0)
+spread = 65.0
+gravity = Vector3(0, 0.2, 0)
+initial_velocity_min = 0.3
+initial_velocity_max = 0.8
+scale_amount_min = 0.6
+scale_amount_max = 1.4
+color_ramp = SubResource("fade")
+
+[node name="Visibility" type="VisibleOnScreenNotifier3D" parent="."]
+script = ExtResource("visibility_script")
+aabb = AABB(-2, -1, -2, 4, 5, 4)

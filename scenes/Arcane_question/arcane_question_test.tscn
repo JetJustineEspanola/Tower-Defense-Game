@@ -1,95 +1,534 @@
 [gd_scene format=3 uid="uid://bx7yhp68fdv3t"]
 
-[ext_resource type="Script" uid="uid://buj2f6hsc40ud" path="res://scripts/arcane_question_test.gd" id="1_586t4"]
+[ext_resource type="Script" path="res://scripts/arcane_question_test.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/resources/player_resources.gd" id="resources"]
+[ext_resource type="Script" path="res://scripts/resources/match_clock.gd" id="clock"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/frame.svg" id="frame"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/gold.svg" id="gold"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/mana.svg" id="mana"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/time.svg" id="time"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/health.svg" id="health"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/book.svg" id="book"]
 
-[node name="ArcaneQuestionTest" type="Control" unique_id=1101563791]
+[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="heading_font"]
+[ext_resource type="Font" path="res://assets/ui/resources/font_code.tres" id="code_font"]
+
+[sub_resource type="StyleBoxFlat" id="frame_style"]
+bg_color = Color(0.025, 0.045, 0.07, 0.98)
+border_width_top = 2
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14, 0.35, 0.43, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="bar"]
+bg_color = Color(0.022, 0.035, 0.055, 0.98)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.3)
+border_width_bottom = 2
+border_color = Color(0.1, 0.28, 0.35, 1)
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="compact_card"]
+bg_color = Color(0.04, 0.065, 0.095, 1)
+content_margin_left = 14.0
+content_margin_right = 14.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+border_width_bottom = 2
+border_color = Color(0.11, 0.2, 0.27, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[sub_resource type="ButtonGroup" id="answers"]
+allow_unpress = false
+
+[node name="ArcaneQuestionTest" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_586t4")
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
 
-[node name="GoldLabel" type="Label" parent="." unique_id=1332811081]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 25.0
-offset_right = 102.0
-offset_bottom = 48.0
-text = "Gold: 100"
+[node name="Resources" type="Node" parent="."]
+process_mode = 1
+script = ExtResource("resources")
 
-[node name="ManaLabel" type="Label" parent="." unique_id=72965343]
-layout_mode = 0
-offset_left = 150.0
-offset_top = 25.0
-offset_right = 221.0
-offset_bottom = 48.00001
-text = "Mana: 50"
-
-[node name="QuestionPanel" type="Panel" parent="." unique_id=477482350]
-layout_mode = 0
-offset_left = 1000.0
-offset_top = 20.0
-offset_right = 1330.0
-offset_bottom = 470.0
-
-[node name="QuestionLabel" type="Label" parent="QuestionPanel" unique_id=348475363]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 310.0
-offset_bottom = 110.0
-text = "What does this code output?
-print(2 + 3 * 4)"
-
-[node name="AnswerButtonA" type="Button" parent="QuestionPanel" unique_id=84775232]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 150.0
-offset_right = 310.0
-offset_bottom = 190.0
-text = "14"
-
-[node name="AnswerButtonB" type="Button" parent="QuestionPanel" unique_id=861271139]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 200.0
-offset_right = 310.0
-offset_bottom = 240.0
-text = "20"
-
-[node name="AnswerButtonC" type="Button" parent="QuestionPanel" unique_id=373826947]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 250.0
-offset_right = 310.0
-offset_bottom = 290.0
-text = "10"
-
-[node name="ResultLabel" type="Label" parent="QuestionPanel" unique_id=430739201]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 320.0
-offset_right = 310.0
-offset_bottom = 350.0
-text = "Answer"
-horizontal_alignment = 1
-
-[node name="NewQuestionButton" type="Button" parent="." unique_id=137325360]
-layout_mode = 0
-offset_left = 1020.0
-offset_top = 401.0
-offset_right = 1310.0
-offset_bottom = 451.0
-text = "New Question"
-
-[node name="ManaTimer" type="Timer" parent="." unique_id=1839634255]
+[node name="ManaTimer" type="Timer" parent="Resources"]
 wait_time = 5.0
 autostart = true
 
-[connection signal="pressed" from="QuestionPanel/AnswerButtonA" to="." method="_on_answer_button_a_pressed"]
-[connection signal="pressed" from="QuestionPanel/AnswerButtonB" to="." method="_on_answer_button_b_pressed"]
-[connection signal="pressed" from="QuestionPanel/AnswerButtonC" to="." method="_on_answer_button_c_pressed"]
-[connection signal="pressed" from="NewQuestionButton" to="." method="_on_new_question_button_pressed"]
-[connection signal="timeout" from="ManaTimer" to="." method="_on_mana_timer_timeout"]
+[node name="MatchClock" type="Node" parent="."]
+process_mode = 1
+script = ExtResource("clock")
+
+[node name="TopBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_right = -12.0
+offset_top = 8.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("bar")
+
+[node name="Row" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Brand" type="VBoxContainer" parent="TopBar/Row"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="TopBar/Row/Brand"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46, 0.89, 1, 1)
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 23
+text = "CODE BORN"
+
+[node name="Tagline" type="Label" parent="TopBar/Row/Brand"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.65, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+text = "LEARN  /  DEFEND  /  LEVEL UP"
+
+[node name="Gold" type="PanelContainer" parent="TopBar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("compact_card")
+
+[node name="Row" type="HBoxContainer" parent="TopBar/Row/Gold"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="TopBar/Row/Gold/Row"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("gold")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="TopBar/Row/Gold/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="TopBar/Row/Gold/Row/Text"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.32, 1)
+theme_override_font_sizes/font_size = 10
+text = "GOLD"
+
+[node name="GoldLabel" type="Label" parent="TopBar/Row/Gold/Row/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 24
+text = "100"
+
+[node name="Mana" type="PanelContainer" parent="TopBar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("compact_card")
+
+[node name="Row" type="HBoxContainer" parent="TopBar/Row/Mana"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="TopBar/Row/Mana/Row"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("mana")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="TopBar/Row/Mana/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="TopBar/Row/Mana/Row/Text"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43, 0.84, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "MANA"
+
+[node name="ManaLabel" type="Label" parent="TopBar/Row/Mana/Row/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 24
+text = "50 / 50"
+
+[node name="Time" type="PanelContainer" parent="TopBar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("compact_card")
+tooltip_text = "Countdown pauses with the game."
+
+[node name="Row" type="HBoxContainer" parent="TopBar/Row/Time"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="TopBar/Row/Time/Row"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("time")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="TopBar/Row/Time/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="TopBar/Row/Time/Row/Text"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "MATCH TIME"
+
+[node name="TimeLabel" type="Label" parent="TopBar/Row/Time/Row/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 24
+text = "12:00"
+
+[node name="Health" type="PanelContainer" parent="TopBar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("compact_card")
+tooltip_text = "Defend your base."
+
+[node name="Row" type="HBoxContainer" parent="TopBar/Row/Health"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="TopBar/Row/Health/Row"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("health")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="TopBar/Row/Health/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="TopBar/Row/Health/Row/Text"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.58, 0.71, 1)
+theme_override_font_sizes/font_size = 10
+text = "BASE HEALTH"
+
+[node name="HealthLabel" type="Label" parent="TopBar/Row/Health/Row/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 24
+text = "100 / 100"
+
+[node name="PauseButton" type="Button" parent="TopBar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "II  Menu"
+tooltip_text = "Pause game (Esc)"
+
+[node name="QuestionToggle" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -390.0
+offset_right = -348.0
+offset_top = 84.0
+offset_bottom = 132.0
+text = ">"
+tooltip_text = "Collapse Arcane Question sidebar"
+
+[node name="QuestionPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -344.0
+offset_top = 84.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("frame_style")
+
+[node name="Scroll" type="ScrollContainer" parent="QuestionPanel"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Content" type="VBoxContainer" parent="QuestionPanel/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Heading" type="HBoxContainer" parent="QuestionPanel/Scroll/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="QuestionPanel/Scroll/Content/Heading"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("book")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="QuestionPanel/Scroll/Content/Heading"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("heading_font")
+theme_override_font_sizes/font_size = 24
+text = "Astral Question"
+
+[node name="Separator" type="HSeparator" parent="QuestionPanel/Scroll/Content"]
+layout_mode = 2
+
+[node name="Type" type="Label" parent="QuestionPanel/Scroll/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.73, 0.86, 1)
+theme_override_font_sizes/font_size = 11
+text = "MULTIPLE CHOICE  /  PROGRAMMING"
+
+[node name="QuestionLabel" type="Label" parent="QuestionPanel/Scroll/Content"]
+layout_mode = 2
+text = "What does this code output?"
+autowrap_mode = 2
+
+[node name="Code" type="PanelContainer" parent="QuestionPanel/Scroll/Content"]
+layout_mode = 2
+
+[node name="CodeText" type="RichTextLabel" parent="QuestionPanel/Scroll/Content/Code"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("code_font")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[color=#627e99]1   [/color][color=#ffda6b]print[/color]([color=#b988ff]2[/color] + [color=#b988ff]3[/color] * [color=#b988ff]4[/color])"
+fit_content = true
+scroll_active = false
+
+[node name="AnswerButtonA" type="Button" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("answers")
+text = "A      14"
+alignment = 0
+
+[node name="AnswerButtonB" type="Button" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("answers")
+text = "B      20"
+alignment = 0
+
+[node name="AnswerButtonC" type="Button" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("answers")
+text = "C      10"
+alignment = 0
+
+[node name="AnswerButtonD" type="Button" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("answers")
+text = "D      24"
+alignment = 0
+
+[node name="TypedAnswer" type="TextEdit" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+wrap_mode = 1
+placeholder_text = "Type your answer"
+
+[node name="RewardLabel" type="Label" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.37, 1)
+theme_override_font_sizes/font_size = 12
+text = "CORRECT ANSWER  +25 GOLD"
+horizontal_alignment = 1
+
+[node name="SubmitButton" type="Button" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "SUBMIT ANSWER"
+
+[node name="ResultLabel" type="Label" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63, 0.79, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Choose one answer, then submit."
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="NewQuestionButton" type="Button" parent="QuestionPanel/Scroll/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "New question  /  10 mana"
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.01, 0.025, 0.05, 0.8)
+mouse_filter = 0
+
+[node name="Center" type="CenterContainer" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="PauseOverlay/Center"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("frame_style")
+
+[node name="Content" type="VBoxContainer" parent="PauseOverlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="PauseOverlay/Center/Panel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "GAME PAUSED"
+horizontal_alignment = 1
+
+[node name="AudioOptions" type="VBoxContainer" parent="PauseOverlay/Center/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Music" type="HBoxContainer" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+[node name="Label" type="Label" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+text = "Music"
+[node name="Volume" type="HSlider" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 24)
+size_flags_horizontal = 3
+value = 80.0
+
+[node name="SFX" type="HBoxContainer" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+[node name="Label" type="Label" parent="PauseOverlay/Center/Panel/Content/AudioOptions/SFX"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+text = "Sound effects"
+[node name="Volume" type="HSlider" parent="PauseOverlay/Center/Panel/Content/AudioOptions/SFX"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 24)
+size_flags_horizontal = 3
+value = 80.0
+
+[node name="Voice" type="HBoxContainer" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+[node name="Label" type="Label" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Voice"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+text = "Announcer"
+[node name="Volume" type="HSlider" parent="PauseOverlay/Center/Panel/Content/AudioOptions/Voice"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 24)
+size_flags_horizontal = 3
+value = 80.0
+
+[node name="ReducedEffects" type="CheckBox" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+text = "Reduce particle effects"
+button_pressed = false
+
+[node name="Subtitles" type="CheckBox" parent="PauseOverlay/Center/Panel/Content/AudioOptions"]
+layout_mode = 2
+text = "Announcer subtitles"
+button_pressed = true
+
+[node name="Resume" type="Button" parent="PauseOverlay/Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="PauseOverlay/Center/Panel/Content"]
+layout_mode = 2
+text = "Back to main menu"
+
+[connection signal="pressed" from="QuestionPanel/Scroll/Content/AnswerButtonA" to="." method="_select_answer" binds=[0]]
+
+[connection signal="pressed" from="QuestionPanel/Scroll/Content/AnswerButtonB" to="." method="_select_answer" binds=[1]]
+
+[connection signal="pressed" from="QuestionPanel/Scroll/Content/AnswerButtonC" to="." method="_select_answer" binds=[2]]
+
+[connection signal="pressed" from="QuestionPanel/Scroll/Content/AnswerButtonD" to="." method="_select_answer" binds=[3]]
+
+[connection signal="pressed" from="QuestionPanel/Scroll/Content/SubmitButton" to="." method="_submit_answer"]
+[connection signal="pressed" from="QuestionPanel/Scroll/Content/NewQuestionButton" to="." method="_on_new_question_button_pressed"]
+[connection signal="pressed" from="QuestionToggle" to="." method="_toggle_question"]
+[connection signal="timeout" from="Resources/ManaTimer" to="Resources" method="regenerate_mana"]
+[connection signal="pressed" from="TopBar/Row/PauseButton" to="." method="_toggle_pause"]
+[connection signal="pressed" from="PauseOverlay/Center/Panel/Content/Resume" to="." method="_toggle_pause"]
+[connection signal="pressed" from="PauseOverlay/Center/Panel/Content/MainMenu" to="." method="_main_menu"]
+[connection signal="changed" from="MatchClock" to="." method="set_time_remaining"]
+[connection signal="expired" from="MatchClock" to="." method="_on_time_expired"]

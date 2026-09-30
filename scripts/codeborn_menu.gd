@@ -7,6 +7,8 @@ extends Control
 @onready var volume_slider: HSlider = $SettingsScreen/CenterContainer/PanelContainer/Content/VolumeSlider
 
 func _ready() -> void:
+	$DeveloperScreen/CenterContainer/PanelContainer/Content/Defender.pressed.connect(_start_practice.bind("res://scenes/practice/defender_practice.tscn"))
+	$DeveloperScreen/CenterContainer/PanelContainer/Content/Attacker.pressed.connect(_start_practice.bind("res://scenes/attacker/attacker_match.tscn"))
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/PlayButton.pressed.connect(_show_play_screen)
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/SettingsButton.pressed.connect(_show_settings_screen)
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/DeveloperButton.pressed.connect(_show_developer_screen)
@@ -23,7 +25,7 @@ func _show_main_menu() -> void:
 	developer_screen.hide()
 
 func _show_play_screen() -> void:
-	_show_screen(play_screen)
+	get_tree().change_scene_to_file("res://scenes/ui/lan_lobby.tscn")
 
 func _show_settings_screen() -> void:
 	_show_screen(settings_screen)
@@ -40,3 +42,7 @@ func _show_screen(screen: Control) -> void:
 
 func _quit_game() -> void:
 	get_tree().quit()
+
+func _start_practice(scene_path: String) -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(scene_path)

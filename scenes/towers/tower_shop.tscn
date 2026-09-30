@@ -1,0 +1,237 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/towers/tower_upgrade_sidebar.tscn" id="upgrades"]
+[ext_resource type="Script" path="res://scripts/towers/tower_shop.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/frame.svg" id="frame"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/gold.svg" id="gold"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/mana.svg" id="attack"]
+[ext_resource type="Texture2D" path="res://assets/ui/resources/health.svg" id="defense"]
+[ext_resource type="Texture2D" path="res://assets/ui/portraits/canguit.png" id="portrait_canguit"]
+[ext_resource type="Texture2D" path="res://assets/ui/portraits/jet.png" id="portrait_jet"]
+[ext_resource type="Texture2D" path="res://assets/ui/portraits/arjie.png" id="portrait_arjie"]
+[sub_resource type="StyleBoxTexture" id="frame_style"]
+texture = ExtResource("frame")
+texture_margin_left = 24.0
+texture_margin_right = 24.0
+texture_margin_top = 24.0
+texture_margin_bottom = 24.0
+content_margin_left = 28.0
+content_margin_right = 28.0
+content_margin_top = 24.0
+content_margin_bottom = 24.0
+[node name="TowerShop" type="CanvasLayer"]
+layer = 2
+script = ExtResource("script")
+[node name="PracticeBug" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 84.0
+offset_right = 228.0
+offset_bottom = 130.0
+theme = ExtResource("theme")
+text = "Send practice bug"
+[node name="UpgradeSidebar" parent="." instance=ExtResource("upgrades")]
+[node name="Picker" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+[node name="Dim" type="ColorRect" parent="Picker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.015, 0.03, 0.06, 0.45)
+[node name="Center" type="CenterContainer" parent="Picker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+anchor_top = 0.36
+
+[node name="Panel" type="PanelContainer" parent="Picker/Center"]
+custom_minimum_size = Vector2(820, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("frame_style")
+[node name="Content" type="VBoxContainer" parent="Picker/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+[node name="Title" type="Label" parent="Picker/Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Choose a starter tower"
+[node name="Balance" type="Label" parent="Picker/Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gold: 100"
+[node name="Choices" type="HBoxContainer" parent="Picker/Center/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="Economy" type="Button" parent="Picker/Center/Panel/Content/Choices"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("frame_style")
+tooltip_text = "Deploy Canguit"
+[node name="Content" type="VBoxContainer" parent="Picker/Center/Panel/Content/Choices/Economy"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -18.0
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Portrait" type="TextureRect" parent="Picker/Center/Panel/Content/Choices/Economy/Content"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("portrait_canguit")
+expand_mode = 1
+stretch_mode = 5
+[node name="CharacterName" type="Label" parent="Picker/Center/Panel/Content/Choices/Economy/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "Canguit"
+horizontal_alignment = 1
+[node name="Role" type="Label" parent="Picker/Center/Panel/Content/Choices/Economy/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.55, 0.8, 0.95, 1)
+text = "Economy Tower"
+horizontal_alignment = 1
+[node name="Cost" type="Label" parent="Picker/Center/Panel/Content/Choices/Economy/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.25, 1)
+text = "80 Gold"
+horizontal_alignment = 1
+[node name="Description" type="Label" parent="Picker/Center/Panel/Content/Choices/Economy/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+text = "Produces 10 gold every 5 seconds"
+horizontal_alignment = 1
+autowrap_mode = 2
+[node name="Attack" type="Button" parent="Picker/Center/Panel/Content/Choices"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("frame_style")
+tooltip_text = "Deploy Jet"
+[node name="Content" type="VBoxContainer" parent="Picker/Center/Panel/Content/Choices/Attack"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -18.0
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Portrait" type="TextureRect" parent="Picker/Center/Panel/Content/Choices/Attack/Content"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("portrait_jet")
+expand_mode = 1
+stretch_mode = 5
+[node name="CharacterName" type="Label" parent="Picker/Center/Panel/Content/Choices/Attack/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "Jet"
+horizontal_alignment = 1
+[node name="Role" type="Label" parent="Picker/Center/Panel/Content/Choices/Attack/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.55, 0.8, 0.95, 1)
+text = "Attack Tower"
+horizontal_alignment = 1
+[node name="Cost" type="Label" parent="Picker/Center/Panel/Content/Choices/Attack/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.25, 1)
+text = "100 Gold"
+horizontal_alignment = 1
+[node name="Description" type="Label" parent="Picker/Center/Panel/Content/Choices/Attack/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+text = "Strikes enemies with a red qi slash"
+horizontal_alignment = 1
+autowrap_mode = 2
+[node name="Defense" type="Button" parent="Picker/Center/Panel/Content/Choices"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("frame_style")
+tooltip_text = "Deploy Arjie"
+[node name="Content" type="VBoxContainer" parent="Picker/Center/Panel/Content/Choices/Defense"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -18.0
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Portrait" type="TextureRect" parent="Picker/Center/Panel/Content/Choices/Defense/Content"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("portrait_arjie")
+expand_mode = 1
+stretch_mode = 5
+[node name="CharacterName" type="Label" parent="Picker/Center/Panel/Content/Choices/Defense/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "Arjie"
+horizontal_alignment = 1
+[node name="Role" type="Label" parent="Picker/Center/Panel/Content/Choices/Defense/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.55, 0.8, 0.95, 1)
+text = "Defense Tower"
+horizontal_alignment = 1
+[node name="Cost" type="Label" parent="Picker/Center/Panel/Content/Choices/Defense/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.25, 1)
+text = "120 Gold"
+horizontal_alignment = 1
+[node name="Description" type="Label" parent="Picker/Center/Panel/Content/Choices/Defense/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+text = "Summons a guard to block enemies"
+horizontal_alignment = 1
+autowrap_mode = 2
+[node name="Status" type="Label" parent="Picker/Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Choose a starter tower."
+[node name="Cancel" type="Button" parent="Picker/Center/Panel/Content"]
+layout_mode = 2
+text = "Cancel"
+[connection signal="pressed" from="Picker/Center/Panel/Content/Choices/Economy" to="." method="_buy" binds=[0]]
+[connection signal="pressed" from="Picker/Center/Panel/Content/Choices/Attack" to="." method="_buy" binds=[1]]
+[connection signal="pressed" from="Picker/Center/Panel/Content/Choices/Defense" to="." method="_buy" binds=[2]]
+[connection signal="pressed" from="Picker/Center/Panel/Content/Cancel" to="." method="_close"]
+[connection signal="pressed" from="PracticeBug" to="." method="_send_practice_bug"]
+
+[node name="PreviewRoot" type="Node3D" parent="."]
+visible = false

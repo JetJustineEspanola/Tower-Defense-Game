@@ -1,0 +1,5 @@
+[gd_resource type="SystemFont" format=3]
+[resource]
+font_names = PackedStringArray("Bahnschrift", "Segoe UI")
+font_weight = 600
+allow_system_fallback = true

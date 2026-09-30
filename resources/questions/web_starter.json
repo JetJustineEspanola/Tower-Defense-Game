@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "id": "web_basics",
+  "name": "Web Development • Starter",
+  "enabled_types": [
+    "multiple_choice",
+    "identification",
+    "code_fix"
+  ],
+  "notes": [],
+  "cards": [
+    {
+      "id": "web_01",
+      "type": "multiple_choice",
+      "prompt": "Which HTML element creates a hyperlink?",
+      "answers": [],
+      "code": "",
+      "choices": [
+        "<a>",
+        "<p>",
+        "<section>",
+        "<span>"
+      ],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "The anchor element <a> creates a hyperlink when it has an href."
+    },
+    {
+      "id": "web_02",
+      "type": "multiple_choice",
+      "prompt": "Which CSS property sets text color?",
+      "answers": [],
+      "code": "",
+      "choices": [
+        "background-color",
+        "font-style",
+        "color",
+        "text-align"
+      ],
+      "correct": 2,
+      "reward": 25,
+      "explanation": "color sets the foreground color of text."
+    },
+    {
+      "id": "web_03",
+      "type": "multiple_choice",
+      "prompt": "Which JavaScript keyword declares a block-scoped variable that can be reassigned?",
+      "answers": [],
+      "code": "",
+      "choices": [
+        "const",
+        "let",
+        "return",
+        "import"
+      ],
+      "correct": 1,
+      "reward": 25,
+      "explanation": "let declares a block-scoped variable whose value may be reassigned."
+    },
+    {
+      "id": "web_04",
+      "type": "multiple_choice",
+      "prompt": "Which method attaches a click listener to a button?",
+      "answers": [],
+      "code": "",
+      "choices": [
+        "querySelector()",
+        "getAttribute()",
+        "appendChild()",
+        "addEventListener()"
+      ],
+      "correct": 3,
+      "reward": 25,
+      "explanation": "Use button.addEventListener('click', handler)."
+    },
+    {
+      "id": "web_05",
+      "type": "identification",
+      "prompt": "What does CSS stand for?",
+      "answers": [
+        "Cascading Style Sheets"
+      ],
+      "code": "",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "CSS describes the presentation of a document."
+    },
+    {
+      "id": "web_06",
+      "type": "identification",
+      "prompt": "Which HTML attribute provides an image's text alternative? Enter the attribute name.",
+      "answers": [
+        "alt"
+      ],
+      "code": "",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "The alt attribute supplies replacement text for an image."
+    },
+    {
+      "id": "web_07",
+      "type": "identification",
+      "prompt": "What does DOM stand for?",
+      "answers": [
+        "Document Object Model"
+      ],
+      "code": "",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "The DOM represents a document as objects that scripts can access."
+    },
+    {
+      "id": "web_08",
+      "type": "identification",
+      "prompt": "Which CSS layout model is enabled by display: flex?",
+      "answers": [
+        "flexbox",
+        "flexible box",
+        "flexible box layout"
+      ],
+      "code": "",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "Flexbox arranges items along a main axis."
+    },
+    {
+      "id": "web_09",
+      "type": "code_fix",
+      "prompt": "Replace only the misspelled CSS property name with the correct name.",
+      "answers": [
+        "color"
+      ],
+      "code": "p { colour: red; }",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "The CSS property is color, without a u."
+    },
+    {
+      "id": "web_10",
+      "type": "code_fix",
+      "prompt": "Replace only the selector string, including quotes, to select the element with id hero.",
+      "answers": [
+        "\"#hero\"",
+        "'#hero'"
+      ],
+      "code": "document.querySelector(\"hero\");",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "An ID selector begins with #. Both quote styles shown in the accepted answers are valid."
+    },
+    {
+      "id": "web_11",
+      "type": "code_fix",
+      "prompt": "Replace only the assignment operator with JavaScript's strict equality operator.",
+      "answers": [
+        "==="
+      ],
+      "code": "if (score = 10) { win(); }",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "=== compares values and types; = assigns a value."
+    },
+    {
+      "id": "web_12",
+      "type": "code_fix",
+      "prompt": "Replace only the misspelled method name so this registers an event listener.",
+      "answers": [
+        "addEventListener"
+      ],
+      "code": "button.addEventListner(\"click\", startGame);",
+      "choices": [],
+      "correct": 0,
+      "reward": 25,
+      "explanation": "The correct method name is addEventListener."
+    }
+  ]
+}

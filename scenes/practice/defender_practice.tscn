@@ -1,0 +1,12 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://maps/main_map.tscn" id="map"]
+[ext_resource type="Script" path="res://scripts/practice/defender_practice.gd" id="practice"]
+[ext_resource type="Script" path="res://scripts/practice/computer_attacker.gd" id="ai"]
+[ext_resource type="Script" path="res://scripts/resources/player_resources.gd" id="wallet"]
+[node name="DefenderPractice" instance=ExtResource("map")]
+script = ExtResource("practice")
+[node name="ComputerAttacker" type="Node" parent="."]
+script = ExtResource("ai")
+[node name="Wallet" type="Node" parent="ComputerAttacker"]
+script = ExtResource("wallet")
+starting_gold = 150

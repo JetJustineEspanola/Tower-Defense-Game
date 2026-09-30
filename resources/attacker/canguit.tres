@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TroopDefinition" format=3]
+[ext_resource type="Script" path="res://scripts/attacker/troop_definition.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/attacker/canguit_troop.tscn" id="scene"]
+[ext_resource type="Resource" path="res://resources/attacker/canguit_upgrades.tres" id="upgrades"]
+[resource]
+script = ExtResource("script")
+character_name = "Canguit"
+scene = ExtResource("scene")
+upgrades = ExtResource("upgrades")
+role = "economy"
+cost = 80
+training_seconds = 5
+health = 80
+speed = 0.65
+base_damage = 0
+income = 10
+income_interval = 5

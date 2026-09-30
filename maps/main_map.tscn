@@ -1,4 +1,16 @@
 [gd_scene format=4 uid="uid://88ewinq6x8ui"]
+[ext_resource type="PackedScene" path="res://scenes/combat/health_feedback.tscn" id="base_feedback"]
+[ext_resource type="PackedScene" path="res://scenes/audio/battle_music.tscn" id="battle_music"]
+[ext_resource type="PackedScene" path="res://scenes/ui/match_result.tscn" id="match_result"]
+
+[ext_resource type="Script" path="res://scripts/towers/combat_review.gd" id="combat_review"]
+
+[ext_resource type="PackedScene" path="res://scenes/towers/placement_pad.tscn" id="tower_pad"]
+[ext_resource type="PackedScene" path="res://scenes/towers/tower_shop.tscn" id="tower_shop"]
+
+[ext_resource type="PackedScene" path="res://scenes/Arcane_question/arcane_question_test.tscn" id="resource_hud"]
+[ext_resource type="PackedScene" path="res://scenes/combat/match_experience.tscn" id="experience"]
+[ext_resource type="PackedScene" path="res://scenes/towers/guard_orders.tscn" id="guard_orders"]
 
 [ext_resource type="Shader" uid="uid://jp6fdk0aswdu" path="res://maps/style/map_outline.gdshader" id="1_sj5dd"]
 [ext_resource type="PackedScene" uid="uid://byjxvkhdloc8h" path="res://assets/Models/Jet 3D Assets/Rocks and Waterfalls/water_edge_straight_01.glb" id="1_um3n3"]
@@ -59,6 +71,7 @@
 [ext_resource type="Script" uid="uid://d0pmp14bdms3j" path="res://scripts/robot_cat.gd" id="58_4n2fp"]
 [ext_resource type="Script" uid="uid://hxljgfohed1d" path="res://maps/style/living_environment.gd" id="living_environment_script"]
 
+[ext_resource type="Script" path="res://scripts/practice/base_income.gd" id="base_income"]
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_112s5"]
 resource_name = "mat_grass_tile_anime_GLB"
 cull_mode = 2
@@ -3790,6 +3803,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn" unique_id=2058046687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
+[node name="PlacementPad" parent="Tiles/TowerSpawn/PlacementCenter" instance=ExtResource("tower_pad")]
+
 [node name="TowerSpawn2" type="MeshInstance3D" parent="Tiles" unique_id=1672686960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.082409, 0.26099348, 2.4912271)
 metadata/reference_position_preserved = true
@@ -3799,6 +3814,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn2" unique_id=1473417702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="PlacementPad" parent="Tiles/TowerSpawn2/PlacementCenter" instance=ExtResource("tower_pad")]
 
 [node name="TowerSpawn3" type="MeshInstance3D" parent="Tiles" unique_id=1471019711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.082409, 0.26099348, 5.5068655)
@@ -3810,6 +3827,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn3" unique_id=1458798919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
+[node name="PlacementPad" parent="Tiles/TowerSpawn3/PlacementCenter" instance=ExtResource("tower_pad")]
+
 [node name="TowerSpawn4" type="MeshInstance3D" parent="Tiles" unique_id=1749370611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676652, 0.26099348, 5.5068655)
 metadata/reference_position_preserved = true
@@ -3819,6 +3838,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn4" unique_id=1431837670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="PlacementPad" parent="Tiles/TowerSpawn4/PlacementCenter" instance=ExtResource("tower_pad")]
 
 [node name="TowerSpawn5" type="MeshInstance3D" parent="Tiles" unique_id=626642517]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0762887, 0.26099348, 5.5068655)
@@ -3830,6 +3851,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn5" unique_id=136058819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
+[node name="PlacementPad" parent="Tiles/TowerSpawn5/PlacementCenter" instance=ExtResource("tower_pad")]
+
 [node name="TowerSpawn6" type="MeshInstance3D" parent="Tiles" unique_id=1116184770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676657, 0.26099348, 8.310135)
 metadata/reference_position_preserved = true
@@ -3840,6 +3863,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn6" unique_id=1407735368]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
+[node name="PlacementPad" parent="Tiles/TowerSpawn6/PlacementCenter" instance=ExtResource("tower_pad")]
+
 [node name="TowerSpawn7" type="MeshInstance3D" parent="Tiles" unique_id=986790873]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1077003, 0.26099348, 8.310135)
 metadata/reference_position_preserved = true
@@ -3849,6 +3874,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="PlacementCenter" type="Marker3D" parent="Tiles/TowerSpawn7" unique_id=1732041490]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="PlacementPad" parent="Tiles/TowerSpawn7/PlacementCenter" instance=ExtResource("tower_pad")]
 
 [node name="Environment" type="Node3D" parent="." unique_id=135882949]
 
@@ -5465,6 +5492,15 @@ metadata/living_applied = true
 
 [node name="Gameplay" type="Node3D" parent="." unique_id=190686688]
 
+[node name="CombatReview" type="Node" parent="Gameplay"]
+script = ExtResource("combat_review")
+
+[node name="TowerShop" parent="Gameplay" instance=ExtResource("tower_shop")]
+
+[node name="ResourceHUD" type="CanvasLayer" parent="Gameplay"]
+
+[node name="ArcaneQuestionTest" parent="Gameplay/ResourceHUD" instance=ExtResource("resource_hud")]
+
 [node name="EnemySpawn" type="Marker3D" parent="Gameplay" unique_id=2018392731]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.211, 1)
 
@@ -6642,3 +6678,19 @@ script = ExtResource("58_4n2fp")
 walk_speed = 0.15000000000000002
 rotation_speed = 2.0
 arrival_distance = 0.3
+
+[node name="MatchResult" parent="." instance=ExtResource("match_result")]
+[node name="BaseFeedback" parent="Gameplay/AlliedBase" instance=ExtResource("base_feedback")]
+position = Vector3(0, 1.3, 0)
+track_parent_health = false
+[node name="BattleMusic" parent="." instance=ExtResource("battle_music")]
+[editable path="Gameplay/ResourceHUD/ArcaneQuestionTest"]
+
+[editable path="Gameplay/TowerShop"]
+
+
+[node name="Experience" parent="." instance=ExtResource("experience")]
+[node name="GuardOrders" parent="." instance=ExtResource("guard_orders")]
+
+[node name="BaseIncome" type="Node" parent="."]
+script = ExtResource("base_income")

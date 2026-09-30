@@ -1,0 +1,69 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/combat/health_feedback.tscn" id="health_feedback"]
+[ext_resource type="PackedScene" path="res://scenes/towers/effects/gold_burst.tscn" id="income_fx"]
+[ext_resource type="PackedScene" path="res://scenes/towers/effects/summon_burst.tscn" id="siege_fx"]
+[ext_resource type="PackedScene" path="res://scenes/towers/character_anime_style.tscn" id="anime_style"]
+[ext_resource type="PackedScene" path="res://scenes/towers/effects/burning_embers.tscn" id="burn_fx"]
+[ext_resource type="PackedScene" path="res://scenes/towers/character_animation.tscn" id="animation_driver"]
+[ext_resource type="PackedScene" path="res://assets/characters/codeborn/canguit.glb" id="character"]
+[ext_resource type="Script" path="res://scripts/attacker/attacker_troop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/Bug/bug.glb" id="model"]
+[ext_resource type="PackedScene" path="res://scenes/towers/tower_selection.tscn" id="troop_selection"]
+[sub_resource type="StandardMaterial3D" id="siege_tracer_mat"]
+shading_mode = 0
+albedo_color = Color(1, 0.6, 0.15, 1)
+[sub_resource type="BoxMesh" id="siege_tracer_mesh"]
+size = Vector3(0.05, 0.05, 1)
+material = SubResource("siege_tracer_mat")
+[node name="CombatBug" type="PathFollow3D" groups=["combat_bugs"]]
+rotation_mode = 1
+use_model_front = true
+loop = false
+script = ExtResource("script")
+[node name="Model" parent="." instance=ExtResource("character")]
+position = Vector3(0, -0.001, 0)
+scale = Vector3(0.44, 0.44, 0.44)
+[node name="Health" type="Label3D" parent="."]
+position = Vector3(0, 1.05, 0)
+billboard = 1
+font_size = 28
+pixel_size = 0.004
+text = "60 / 60"
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.0
+autostart = true
+[node name="BurningEmbers" parent="." instance=ExtResource("burn_fx")]
+position = Vector3(0, 0.4, 0)
+one_shot = false
+explosiveness = 0.0
+amount = 18
+
+[node name="AnimeStyle" parent="." instance=ExtResource("anime_style")]
+[node name="IncomeEffect" parent="." instance=ExtResource("income_fx")]
+[node name="SiegeImpact" parent="." instance=ExtResource("siege_fx")]
+[node name="CharacterAnimation" parent="." instance=ExtResource("animation_driver")]
+walk_clip = &"Market_Walk"
+fixed_idle_facing = false
+idle_clip = &"Market_Idle"
+action_clip = &"Market_Support_Cast"
+[connection signal="timeout" from="AttackTimer" to="." method="_attack"]
+
+[node name="HealthFeedback" parent="." instance=ExtResource("health_feedback")]
+position = Vector3(0, 1.05, 0)
+
+
+[node name="TroopSelection" parent="." instance=ExtResource("troop_selection")]
+[node name="PickArea" parent="TroopSelection" index="1"]
+collision_layer = 32
+[node name="SiegeTracer" type="MeshInstance3D" parent="."]
+visible = false
+cast_shadow = 0
+mesh = SubResource("siege_tracer_mesh")
+[editable path="TroopSelection"]
+[node name="AbilityStatus" type="Label3D" parent="."]
+visible = false
+position = Vector3(0, 1.35, 0)
+billboard = 1
+font_size = 24
+pixel_size = 0.004
+modulate = Color(0.3, 0.95, 1, 1)

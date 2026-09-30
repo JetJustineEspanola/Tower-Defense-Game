@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cif5san1apfqn"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/player_resources.gd" id="1_3coki"]
+
+[node name="PlayerResources" type="Node" unique_id=708989595]
+script = ExtResource("1_3coki")
+
+[node name="ManaTimer" type="Timer" parent="." unique_id=1762272786]
+wait_time = 5.0
+
+[connection signal="timeout" from="ManaTimer" to="." method="regenerate_mana"]

@@ -1,0 +1,7 @@
+# Guard crash, siege blocking, and visibility fixes
+
+- Guard cleanup removes invalid, queued, and dead entries in reverse index order. It no longer sends freed Objects into a typed filter callback or assigns its untyped fallback to Array[Node3D].
+- Troops acquire nearby available guards before siege decisions. Matthew also checks blocking at impact time: a pending tower shot cannot damage a tower after a guard engages him. Guards remain subject to capacity and manual movement rules.
+- Matthew base health is now 110 (was 140), regular damage 22 (was 30). Cost stays 100 and bombardment remains 30 damage / 20 seconds with the shared delay. Existing purchases retain their snapshot stats; start a new match to test these defaults.
+- Godot already performs automatic mesh frustum culling. Gold and summon/siege-smoke effects now additionally use a scene-authored VisibleOnScreenNotifier3D to skip offscreen cosmetic bursts. Bounds include space for particles drifting beyond the emitter. Visibility never disables damage, movement, income, targeting, timers, or gameplay animations. Headless simulations bypass the visual gate. Each effect exposes Culling Enabled on its Visibility child.
+- Runtime regression checks pass for repeated freed-guard replacement, upgraded siege interception, pre-shot blocking, cancelling a pending tower hit, damage to the blocking guard, and particle exit/reentry. No measured FPS improvement is claimed. Existing preview-owner warnings and Windows certificate-store errors are unrelated to these fixes.
