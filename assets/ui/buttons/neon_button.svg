@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="180" viewBox="0 0 900 180">
+  <defs>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#082f5d"/>
+      <stop offset="0.5" stop-color="#071d3d"/>
+      <stop offset="1" stop-color="#06152d"/>
+    </linearGradient>
+    <pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#18aaff" fill-opacity="0.45"/>
+    </pattern>
+  </defs>
+  <path d="M42 8H858L892 42V138L858 172H42L8 138V42Z" fill="url(#face)" stroke="#128cff" stroke-width="14" stroke-linejoin="round" stroke-opacity="0.62"/>
+  <path d="M42 12H858L888 42V138L858 168H42L12 138V42Z" fill="none" stroke="#48e5ff" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 28H842L870 54V126L842 152H48L30 134V46Z" fill="none" stroke="#159eff" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.9"/>
+  <path d="M710 32H840L866 56V124L840 148H710Z" fill="url(#dots)"/>
+  <path d="M54 42L36 60V120L54 138M82 42L64 60V120L82 138" fill="none" stroke="#48e5ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M50 26H842" stroke="#b7f8ff" stroke-width="2" stroke-opacity="0.8"/>
+</svg>

@@ -13,6 +13,7 @@
 [ext_resource type="SystemFont" path="res://assets/ui/resources/font_heading.tres" id="practice_font"]
 [ext_resource type="Theme" uid="uid://cvr5xnlqee4w8" path="res://assets/ui/resources/hud_theme.tres" id="practice_theme"]
 [ext_resource type="Texture2D" path="res://assets/ui/lobby/frame.svg" id="menu_frame"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/neon_button.svg" id="neon_button"]
 
 [sub_resource type="StyleBoxTexture" id="MenuFrame"]
 texture = ExtResource("menu_frame")
@@ -24,6 +25,41 @@ content_margin_left = 26.0
 content_margin_top = 22.0
 content_margin_right = 26.0
 content_margin_bottom = 22.0
+
+[sub_resource type="StyleBoxTexture" id="NeonButton"]
+texture = ExtResource("neon_button")
+texture_margin_left = 34.0
+texture_margin_top = 12.0
+texture_margin_right = 34.0
+texture_margin_bottom = 12.0
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="NeonButtonHover"]
+texture = ExtResource("neon_button")
+texture_margin_left = 34.0
+texture_margin_top = 12.0
+texture_margin_right = 34.0
+texture_margin_bottom = 12.0
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+modulate_color = Color(1.2, 1.25, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="NeonButtonPressed"]
+texture = ExtResource("neon_button")
+texture_margin_left = 34.0
+texture_margin_top = 12.0
+texture_margin_right = 34.0
+texture_margin_bottom = 12.0
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+modulate_color = Color(0.72, 1.0, 1.15, 1)
 
 [node name="CodeBornMenu" type="Control" unique_id=336241842]
 layout_mode = 3
@@ -60,6 +96,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 shortcut_context = NodePath("../../PlayScreen")
@@ -256,6 +293,10 @@ horizontal_alignment = 1
 [node name="Defender" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=846225538]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
+theme_override_styles/focus = SubResource("NeonButtonHover")
+theme_override_styles/hover = SubResource("NeonButtonHover")
+theme_override_styles/normal = SubResource("NeonButton")
+theme_override_styles/pressed = SubResource("NeonButtonPressed")
 tooltip_text = "Build towers, answer questions and survive until time runs out."
 text = "DEFENDER  /  Protect your base"
 
@@ -268,6 +309,10 @@ horizontal_alignment = 1
 [node name="Attacker" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=936291040]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
+theme_override_styles/focus = SubResource("NeonButtonHover")
+theme_override_styles/hover = SubResource("NeonButtonHover")
+theme_override_styles/normal = SubResource("NeonButton")
+theme_override_styles/pressed = SubResource("NeonButtonPressed")
 tooltip_text = "Train Ronel, Matthew and Canguit. Destroy the base before time expires."
 text = "ATTACKER  /  Break their defenses"
 

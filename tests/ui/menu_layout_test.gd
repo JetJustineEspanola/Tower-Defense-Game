@@ -29,9 +29,12 @@ func _run() -> void:
 		menu.get_node("SettingsScreen").hide()
 		menu.get_node("DeveloperScreen").show()
 		await process_frame
-		_check_panel(menu.get_node("DeveloperScreen/CenterContainer/PanelContainer"), viewport_size, "Developer")
+		var developer_panel: Control = menu.get_node("DeveloperScreen/CenterContainer/PanelContainer")
+		_check_panel(developer_panel, viewport_size, "Developer")
+		_check_neon_button(developer_panel.get_node("Content/Defender"), "Defender")
+		_check_neon_button(developer_panel.get_node("Content/Attacker"), "Attacker")
 		_check_full_rect(menu.get_node("MainMenu"), viewport_size, "MainMenu")
-		_check_full_rect(menu.get_node("MainMenu/CenterContainer"), viewport_size, "MainMenu center")
+		_check_menu_button_clearance(menu, viewport_size)
 
 	_check_anchor_mode(menu.get_node("MainMenu"), 1, "MainMenu")
 	_check_anchor_mode(menu.get_node("MainMenu/CenterContainer"), 1, "MainMenu/CenterContainer")
@@ -103,10 +106,22 @@ func _check_panel(panel: Control, viewport_size: Vector2i, label: String) -> voi
 	_expect(rect.position.y >= 0.0 and rect.end.y <= viewport_size.y, "%s panel fits viewport height at %s" % [label, viewport_size])
 	_expect(panel.get_theme_stylebox("panel") is StyleBoxTexture, "%s panel uses the lobby frame texture" % label)
 
+func _check_neon_button(button: Button, label: String) -> void:
+	for state: String in ["normal", "hover", "pressed"]:
+		var style: StyleBox = button.get_theme_stylebox(state)
+		_expect(style is StyleBoxTexture, "%s %s state uses the neon texture button style" % [label, state])
+		if style is StyleBoxTexture:
+			_expect(style.texture.resource_path.ends_with("neon_button.svg"), "%s %s state uses the shared neon button artwork" % [label, state])
+
 func _check_full_rect(control: Control, viewport_size: Vector2i, label: String) -> void:
 	var rect: Rect2 = control.get_global_rect()
 	_expect(rect.position.distance_to(Vector2.ZERO) <= 1.0, "%s begins at viewport origin" % label)
 	_expect(rect.size.distance_to(Vector2(viewport_size)) <= 1.0, "%s fills the viewport" % label)
+
+func _check_menu_button_clearance(menu: Control, viewport_size: Vector2i) -> void:
+	var panel: Control = menu.get_node("MainMenu/CenterContainer/PanelContainer")
+	var panel_center_y: float = panel.get_global_rect().get_center().y
+	_expect(panel_center_y >= viewport_size.y * 0.5 + 28.0, "main menu buttons sit below the logo subtitle at %s" % viewport_size)
 
 func _check_anchor_mode(control: Control, expected_mode: int, label: String) -> void:
 	_expect(int(control.get("layout_mode")) == expected_mode, "%s stores explicit anchor layout mode" % label)
