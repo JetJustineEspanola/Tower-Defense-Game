@@ -57,6 +57,9 @@ func select_troop(troop: Node3D) -> void:
 	clear_selection()
 	selected_troop = troop
 	troop.set_selected(true)
+	var character: String = "Matthew" if troop.role == "siege" else ("Canguit" if troop.role == "economy" else ("Ronel" if troop.role == "objective" else ""))
+	var voice = get_tree().current_scene.get_node_or_null("JetVoice")
+	if not character.is_empty() and voice != null and voice.is_node_ready(): voice.request_for(character, "selected", troop)
 	panel.show()
 	get_parent().get_node("AttackerUI/UpgradeSidebar").close()
 	var names := {"siege": "MATTHEW", "objective": "RONEL", "economy": "CANGUIT"}

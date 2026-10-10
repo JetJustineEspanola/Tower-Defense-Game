@@ -1,0 +1,27 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/combat/jet_voice_bank.gd" id="script"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_selected.wav" id="v1"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_deployed.wav" id="v2"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_upgraded.wav" id="v3"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_extrasound_attack_01.wav" id="v4"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_extrasound_attack_02.wav" id="v5"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_extrasound_attack_03.wav" id="v6"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_extrasound_hurt_01.wav" id="v7"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_extrasound_hurt_02.wav" id="v8"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_extrasound_defeat.wav" id="v9"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_defeated.wav" id="v10"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_destroys-tower.wav" id="v11"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_bombardment.wav" id="v12"]
+[ext_resource type="AudioStream" path="res://voice_lines/Matthew/matthew_blocked-by-guard.wav" id="v13"]
+[resource]
+script = ExtResource("script")
+selected = Array[AudioStream]([ExtResource("v1")])
+deployed = Array[AudioStream]([ExtResource("v2")])
+upgraded = Array[AudioStream]([ExtResource("v3")])
+attack = Array[AudioStream]([ExtResource("v4"), ExtResource("v5"), ExtResource("v6")])
+hurt_light = Array[AudioStream]([ExtResource("v7")])
+hurt_heavy = Array[AudioStream]([ExtResource("v8")])
+defeated = Array[AudioStream]([ExtResource("v9"), ExtResource("v10")])
+tower_destroyed = Array[AudioStream]([ExtResource("v11")])
+bombardment = Array[AudioStream]([ExtResource("v12")])
+guard_blocked = Array[AudioStream]([ExtResource("v13")])

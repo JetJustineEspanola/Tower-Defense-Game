@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cgt28wyeukbfa"
+path="res://.godot/imported/5 can_t hold me - 1790864070982.wav-bc6bfbdf7bf1055fba864724f5a84c7f.sample"
+
+[deps]
+
+source_file="res://voice_lines/Ronel/5 can_t hold me - 1790864070982.wav"
+dest_files=["res://.godot/imported/5 can_t hold me - 1790864070982.wav-bc6bfbdf7bf1055fba864724f5a84c7f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

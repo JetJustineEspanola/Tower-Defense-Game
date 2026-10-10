@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cfyu5try6yjs5"
+path="res://.godot/imported/3 One step ahead - 1790864161584.wav-996436385aa75bc0eae5ac08d8eb1839.sample"
+
+[deps]
+
+source_file="res://voice_lines/Ronel/3 One step ahead - 1790864161584.wav"
+dest_files=["res://.godot/imported/3 One step ahead - 1790864161584.wav-996436385aa75bc0eae5ac08d8eb1839.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cha426bncky7q"
+path="res://.godot/imported/2 Ready to break though !- 1790864201249.wav-16d1055cc62d92acb3d08ff8e0295de2.sample"
+
+[deps]
+
+source_file="res://voice_lines/Ronel/2 Ready to break though !- 1790864201249.wav"
+dest_files=["res://.godot/imported/2 Ready to break though !- 1790864201249.wav-16d1055cc62d92acb3d08ff8e0295de2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

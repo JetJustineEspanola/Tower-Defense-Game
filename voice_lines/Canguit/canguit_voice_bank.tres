@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/combat/jet_voice_bank.gd" id="script"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/keep the route clear.wav" id="v1"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/open for business.wav" id="v2"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/lets make this count.wav" id="v3"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/good spot setting up.wav" id="v4"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/3 short attack efforts.wav" id="v5"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/now thats an investment.wav" id="v6"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/a little more gold.wav" id="v7"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/2 hurt reaction.wav" id="v8"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/i could use some cover.wav" id="v9"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/deafeat.wav" id="v10"]
+[ext_resource type="AudioStream" path="res://voice_lines/Canguit/closing early.wav" id="v11"]
+[resource]
+script = ExtResource("script")
+selected = Array[AudioStream]([ExtResource("v1")])
+deployed = Array[AudioStream]([ExtResource("v2"), ExtResource("v3")])
+stationed = Array[AudioStream]([ExtResource("v4")])
+income = Array[AudioStream]([ExtResource("v5"), ExtResource("v6"), ExtResource("v7")])
+hurt_light = Array[AudioStream]([ExtResource("v8"), ExtResource("v9")])
+defeated = Array[AudioStream]([ExtResource("v10"), ExtResource("v11")])

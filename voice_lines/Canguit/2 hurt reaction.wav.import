@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bfu6qvtwoyo3x"
+path="res://.godot/imported/2 hurt reaction.wav-588bda4017a9ac5bd7b54c633bd2528d.sample"
+
+[deps]
+
+source_file="res://voice_lines/Canguit/2 hurt reaction.wav"
+dest_files=["res://.godot/imported/2 hurt reaction.wav-588bda4017a9ac5bd7b54c633bd2528d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

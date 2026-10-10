@@ -1,10 +1,10 @@
-# Matthew and Canguit Voice Line Integration
+# Matthew, Canguit, and Ronel Voice Line Integration
 
 Date: 2026-10-10
 
 ## Goal
 
-Integrate the available Matthew and Canguit voice recordings from the linked Google Drive folder into CodeBorn matches. Use each clip's filename as the event cue, keep the existing Jet voice behavior, and play all character lines through the match-level voice player so lines do not overlap.
+Integrate the available Matthew, Canguit, and Ronel voice recordings into CodeBorn matches. Use each clip's filename as the event cue, keep the existing Jet voice behavior, and play all character lines through the match-level voice player so lines do not overlap.
 
 ## Current project context
 
@@ -12,6 +12,7 @@ Integrate the available Matthew and Canguit voice recordings from the linked Goo
 - `JetVoice` has one `AudioStreamPlayer` on the Voice bus, plus event cooldown and priority handling. The announcer stops the Jet player when a match announcement begins.
 - Matthew and Canguit are attacker troop scenes. Matthew is the siege troop; Canguit is the economy troop and generates gold. Canguit has no attack gameplay event.
 - The Drive folder contains 13 Matthew clips and 11 Canguit clips. The Jet, Ronel, and Arjie folders are empty.
+- The user later supplied seven Ronel recordings in a ZIP archive. Their phrases map to selection, deployment, guard blocking, the guard-phase start/completion, hurt, and low-health events.
 - The supplied clips are AAC. Godot 4.7 imports WAV, Ogg Vorbis, and MP3, so the project will contain decoded WAV playback assets. The Drive originals remain the source of record.
 
 ## Design
@@ -41,12 +42,22 @@ Troops and match controls request a character/event pair from the shared manager
 - `2 hurt reaction` and `i could use some cover`: Canguit takes damage.
 - `deafeat` and `closing early`: Canguit dies.
 
+### Ronel event mapping
+
+- `One step ahead`: player selects a Ronel troop.
+- `see the finish line`: a Ronel troop finishes training and spawns.
+- `you_re slowing me down`: a guard blocks Ronel when he has no guard-phase upgrade.
+- `Ready to break though !`: Ronel's guard-phase dash begins.
+- `made it through`: Ronel's guard-phase dash ends.
+- `can_t hold me`: Ronel takes damage.
+- `just a little further`: Ronel first falls to or below 25% health.
+
 Repeated events use random clip selection without immediately repeating the same clip when multiple choices exist. A shared cooldown prevents repeated income events and large groups from flooding the voice channel.
 
 ## Scope
 
-- Bring all 24 clips from the two populated Drive folders into the project and convert them to WAV playback files without trimming, gain changes, or pitch changes.
-- Add two voice bank resources and extend the existing manager without changing Jet's event map.
+- Bring all 31 clips from the populated Matthew, Canguit, and Ronel archives into the project and convert them to WAV playback files without trimming, gain changes, or pitch changes.
+- Add three voice bank resources and extend the existing manager without changing Jet's event map.
 - Wire events at the current troop spawn, selection, upgrade, attack, damage, death, blocker, bombardment, tower destruction, stationing, and income points.
 - Cover both practice and online matches through the shared map.
 - Do not change character gameplay rules, add attack behavior to Canguit, or add content for empty character folders.
@@ -54,5 +65,3 @@ Repeated events use random clip selection without immediately repeating the same
 ## Verification
 
 Use Godot's audio import and scene/script parse checks for the affected project files. Exercise representative Matthew and Canguit events in practice and online matches, including the announcer interrupt and Canguit's income cooldown. Do not add a separate test harness.
-
-
