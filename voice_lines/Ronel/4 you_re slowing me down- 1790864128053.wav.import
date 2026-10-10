@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d124ivns6eamx"
+path="res://.godot/imported/4 you_re slowing me down- 1790864128053.wav-8366bd30a5dd44589fec1b37f7f20007.sample"
+
+[deps]
+
+source_file="res://voice_lines/Ronel/4 you_re slowing me down- 1790864128053.wav"
+dest_files=["res://.godot/imported/4 you_re slowing me down- 1790864128053.wav-8366bd30a5dd44589fec1b37f7f20007.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

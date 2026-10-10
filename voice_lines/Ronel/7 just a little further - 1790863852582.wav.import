@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://q8ndfyd02ei6"
+path="res://.godot/imported/7 just a little further - 1790863852582.wav-a97cc3eb0708020096f3dd4a5eca4296.sample"
+
+[deps]
+
+source_file="res://voice_lines/Ronel/7 just a little further - 1790863852582.wav"
+dest_files=["res://.godot/imported/7 just a little further - 1790863852582.wav-a97cc3eb0708020096f3dd4a5eca4296.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

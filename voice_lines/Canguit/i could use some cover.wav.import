@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://imrspxffo2l1"
+path="res://.godot/imported/i could use some cover.wav-ab4491b0bac9e2937117e4b8969e2e6f.sample"
+
+[deps]
+
+source_file="res://voice_lines/Canguit/i could use some cover.wav"
+dest_files=["res://.godot/imported/i could use some cover.wav-ab4491b0bac9e2937117e4b8969e2e6f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

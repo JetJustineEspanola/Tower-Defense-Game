@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dc1yemh1wycg"
+path="res://.godot/imported/lets make this count.wav-7bf00989a6a4c3e62f6b3d23aa53e7eb.sample"
+
+[deps]
+
+source_file="res://voice_lines/Canguit/lets make this count.wav"
+dest_files=["res://.godot/imported/lets make this count.wav-7bf00989a6a4c3e62f6b3d23aa53e7eb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

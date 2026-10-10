@@ -48,6 +48,9 @@ func buy_upgrade(index: int) -> bool:
 	upgraded.emit()
 	var experience = get_tree().current_scene.get_node_or_null("Experience")
 	if experience: experience.notice("%s | Future troops upgraded" % definition.character_name)
+	if definition.character_name == "Matthew":
+		var voice = get_tree().current_scene.get_node_or_null("JetVoice")
+		if voice != null and voice.is_node_ready(): voice.request_for("Matthew", "upgraded", self)
 	return true
 func get_stats_text() -> String:
 	var info: String = "HP: %d  Armor: %d  Speed: %.2f\nTraining: %.1fs  Base damage: %d" % [stats.health, stats.armor, stats.speed, stats.training, stats.base_damage]

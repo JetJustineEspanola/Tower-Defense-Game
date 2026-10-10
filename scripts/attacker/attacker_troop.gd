@@ -19,6 +19,9 @@ var income_elapsed: float = 0.0
 var cruise_speed: float
 var rush_remaining: float = 0.0
 var rush_multiplier: float = 1.5
+var last_voiced_blocker: int = 0
+var station_voiced: bool = false
+var low_health_voiced: bool = false
 func _ready() -> void:
 	maximum_health = stats.health
 	speed = stats.speed
@@ -28,6 +31,7 @@ func _ready() -> void:
 	$AttackTimer.wait_time = stats.interval
 	add_to_group("attacker_troops")
 	_reserve_post()
+	_request_voice("deployed")
 	for ally in get_tree().get_nodes_in_group("attacker_troops"):
 		if ally != self and ally.resources == resources and ally.role == "siege": shared_remaining = maxf(shared_remaining, ally.shared_remaining)
 func _physics_process(delta: float) -> void:
@@ -35,12 +39,20 @@ func _physics_process(delta: float) -> void:
 		super._physics_process(delta)
 		return
 	if get_tree().paused: return
+	var phase_was_active: bool = phase_remaining > 0.0
 	phase_remaining = maxf(0.0, phase_remaining - delta)
+	if role == "objective" and phase_was_active and phase_remaining <= 0.0:
+		_request_voice("phase_complete")
 	phase_wait = maxf(0.0, phase_wait - delta)
 	acquire_blocker()
+	var blocker_id: int = blocker.get_instance_id() if is_instance_valid(blocker) else 0
+	if role in ["siege", "objective"] and blocker_id != 0 and blocker_id != last_voiced_blocker and not (role == "objective" and stats.get("guard_phase", false)):
+		_request_voice("guard_blocked")
+	last_voiced_blocker = blocker_id
 	if role == "objective" and stats.get("guard_phase", false) and is_instance_valid(blocker) and phase_wait <= 0.0:
 		phase_remaining = BALANCE.phase_duration
 		phase_wait = BALANCE.phase_cooldown
+		_request_voice("phase")
 		acquire_blocker()
 	siege_remaining = maxf(0.0, siege_remaining - delta)
 	shared_remaining = maxf(0.0, shared_remaining - delta)
@@ -59,6 +71,7 @@ func _physics_process(delta: float) -> void:
 			income_elapsed -= stats.income_interval
 			resources.add_gold(stats.income)
 			$IncomeEffect.play(stats.income)
+			_request_voice("income")
 		var leader_progress: float = -1.0
 		for ally in get_tree().get_nodes_in_group("attacker_troops"):
 			if ally != self and ally.alive and ally.role != "economy":
@@ -68,6 +81,9 @@ func _physics_process(delta: float) -> void:
 	if post_reserved:
 		speed = minf(speed, maxf(0.0, post_progress - progress) / maxf(delta, 0.0001))
 		stationed = progress >= post_progress - 0.01
+		if stationed and not station_voiced:
+			station_voiced = true
+			_request_voice("stationed")
 	$AbilityStatus.text = "PHASE DASH" if phase_remaining > 0.0 else ("TRADING POST" if stationed else ("TO TRADING POST" if post_reserved else ""))
 	$AbilityStatus.visible = not $AbilityStatus.text.is_empty()
 	super._physics_process(delta)
@@ -91,10 +107,23 @@ func _hit() -> void:
 	if target != blocker and global_position.distance_to(target.global_position) > stats.attack_range: return
 	$SiegeImpact.global_position = target.global_position + Vector3.UP * 0.6
 	$SiegeImpact.play()
+	var health_before: int = target.health
 	target.take_damage(stats.damage)
+	_request_voice("attack")
+	if target.is_in_group("placed_towers") and health_before > 0 and target.health <= 0:
+		_request_voice("tower_destroyed")
 func take_damage(amount: int) -> void:
-	if amount <= 0: return
+	if amount <= 0 or not alive: return
+	var health_before: int = health
 	super.take_damage(maxi(1, amount - int(stats.armor)))
+	var damage_event: String = "hurt_heavy" if role == "siege" and health_before - health >= maximum_health * 0.15 else "hurt_light"
+	if health <= 0:
+		_request_voice("defeated")
+	elif role == "objective" and health <= maximum_health * 0.25 and not low_health_voiced:
+		low_health_voiced = true
+		_request_voice("low_health")
+	else:
+		_request_voice(damage_event)
 
 func choose_tower(radius: float) -> Node3D:
 	var best: Node3D
@@ -137,6 +166,9 @@ func fire_siege() -> bool:
 	tracer_remaining = 0.25
 	$SiegeTracer.show()
 	target.take_damage(BALANCE.siege_damage)
+	_request_voice("bombardment")
+	if target.is_in_group("placed_towers") and target.health <= 0:
+		_request_voice("tower_destroyed")
 	var experience = get_tree().current_scene.get_node_or_null("Experience")
 	if experience: experience.notice("MATTHEW | Backline bombardment")
 	return true
@@ -146,6 +178,13 @@ func set_selected(value: bool) -> void:
 	$TroopSelection/RangeCircle.scale = Vector3.ONE * (BALANCE.siege_range if role == "siege" else 0.6)
 func can_be_blocked() -> bool:
 	return phase_remaining <= 0.0
+
+func _request_voice(event: String) -> void:
+	if not is_inside_tree(): return
+	var character: String = "Matthew" if role == "siege" else ("Canguit" if role == "economy" else ("Ronel" if role == "objective" else ""))
+	if character.is_empty(): return
+	var voice = get_tree().current_scene.get_node_or_null("JetVoice")
+	if voice != null and voice.is_node_ready(): voice.request_for(character, event, self)
 
 func _reserve_post() -> void:
 	if role != "economy" or not stats.get("stationary_economy", false): return

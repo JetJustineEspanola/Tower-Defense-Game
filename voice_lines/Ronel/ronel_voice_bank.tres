@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/combat/jet_voice_bank.gd" id="script"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/3 One step ahead - 1790864161584.wav" id="v1"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/1 see the finish line - 1790769569645.wav" id="v2"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/2 Ready to break though !- 1790864201249.wav" id="v3"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/4 you_re slowing me down- 1790864128053.wav" id="v4"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/5 can_t hold me - 1790864070982.wav" id="v5"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/6 made it through - 1790863796166.wav" id="v6"]
+[ext_resource type="AudioStream" path="res://voice_lines/Ronel/7 just a little further - 1790863852582.wav" id="v7"]
+[resource]
+script = ExtResource("script")
+selected = Array[AudioStream]([ExtResource("v1")])
+deployed = Array[AudioStream]([ExtResource("v2")])
+phase = Array[AudioStream]([ExtResource("v3")])
+guard_blocked = Array[AudioStream]([ExtResource("v4")])
+hurt_light = Array[AudioStream]([ExtResource("v5")])
+phase_complete = Array[AudioStream]([ExtResource("v6")])
+low_health = Array[AudioStream]([ExtResource("v7")])
