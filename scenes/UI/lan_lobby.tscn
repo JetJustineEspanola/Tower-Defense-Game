@@ -55,6 +55,7 @@ anchor_bottom = 1.0
 theme = ExtResource("theme")
 script = ExtResource("logic")
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("bg")
@@ -62,6 +63,7 @@ expand_mode = 1
 stretch_mode = 6
 mouse_filter = 2
 [node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0, 0.02, 0.08, 0.18)
@@ -74,6 +76,7 @@ offset_top = 20.0
 theme_override_fonts/font = ExtResource("font")
 modulate = Color(0.65, 0.95, 1, 1)
 [node name="Motto" type="Label" parent="."]
+layout_mode = 1
 text = "SMALL STEPS\nBRIGHTER FUTURES"
 theme_override_font_sizes/font_size = 14
 anchor_left = 1.0
@@ -83,6 +86,7 @@ offset_right = -32.0
 offset_top = 30.0
 horizontal_alignment = 2
 [node name="Header" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchor_left = 0.25
 anchor_right = 0.75
 offset_top = 30.0
@@ -104,10 +108,12 @@ text = "JOIN OR HOST A LOCAL NETWORK GAME"
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 [node name="Browser" type="Control" parent="."]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 [node name="Panel" type="PanelContainer" parent="Browser"]
+layout_mode = 1
 anchor_left = 0.25
 anchor_right = 0.75
 anchor_top = 0.26
@@ -116,11 +122,13 @@ theme_override_styles/panel = SubResource("panel")
 [node name="Content" type="VBoxContainer" parent="Browser/Panel"]
 theme_override_constants/separation = 12
 [node name="HostRoom" type="Control" parent="."]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 visible = false
 [node name="Panel" type="PanelContainer" parent="HostRoom"]
+layout_mode = 1
 anchor_left = 0.25
 anchor_right = 0.75
 anchor_top = 0.26
@@ -163,6 +171,7 @@ custom_minimum_size = Vector2(0, 150)
 size_flags_vertical = 3
 mouse_filter = 2
 [node name="Empty" type="VBoxContainer" parent="Browser/Panel/Content/ListArea"]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
@@ -181,6 +190,7 @@ theme_override_font_sizes/font_size = 15
 horizontal_alignment = 1
 autowrap_mode = 2
 [node name="Rooms" type="ItemList" parent="Browser/Panel/Content/ListArea"]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
@@ -201,6 +211,7 @@ theme_override_font_sizes/font_size = 23
 disabled = true
 tooltip_text = "Select an available lobby"
 [node name="Back" type="Button" parent="Browser"]
+layout_mode = 1
 text = "‹  BACK"
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/normal = SubResource("button")
@@ -215,6 +226,7 @@ offset_right = 230.0
 offset_top = -88.0
 offset_bottom = -32.0
 [node name="Host" type="Button" parent="Browser"]
+layout_mode = 1
 text = "HOST  ›"
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/normal = SubResource("button")
@@ -316,6 +328,7 @@ theme_override_font_sizes/font_size = 23
 disabled = true
 size_flags_horizontal = 3
 [node name="Leave" type="Button" parent="HostRoom"]
+layout_mode = 1
 text = "‹  LEAVE"
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/normal = SubResource("button")
@@ -330,6 +343,7 @@ offset_right = 230.0
 offset_top = -88.0
 offset_bottom = -32.0
 [node name="Settings" type="Button" parent="HostRoom"]
+layout_mode = 1
 text = "SETTINGS"
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/normal = SubResource("button")
@@ -346,11 +360,13 @@ offset_right = -38.0
 offset_top = -88.0
 offset_bottom = -32.0
 [node name="SettingsOverlay" type="ColorRect" parent="."]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
 color = Color(0, 0.015, 0.04, 0.88)
 [node name="Center" type="CenterContainer" parent="SettingsOverlay"]
+layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 [node name="Panel" type="PanelContainer" parent="SettingsOverlay/Center"]

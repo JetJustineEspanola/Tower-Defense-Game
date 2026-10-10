@@ -10,39 +10,20 @@
 [ext_resource type="Texture2D" uid="uid://cesuy0xi8jrrs" path="res://assets/Buttons_Ubac/6.png" id="8_wmt6p"]
 [ext_resource type="Texture2D" uid="uid://dh1wu0nu3wllx" path="res://assets/Buttons_Ubac/7.png" id="9_leexa"]
 [ext_resource type="Texture2D" uid="uid://duymh76pmgmyy" path="res://assets/Buttons_Ubac/8.png" id="10_4rb5s"]
+[ext_resource type="SystemFont" path="res://assets/ui/resources/font_heading.tres" id="practice_font"]
+[ext_resource type="Theme" uid="uid://cvr5xnlqee4w8" path="res://assets/ui/resources/hud_theme.tres" id="practice_theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/lobby/frame.svg" id="menu_frame"]
 
-[ext_resource type="Theme" path="res://assets/ui/resources/hud_theme.tres" id="practice_theme"]
-[ext_resource type="Font" path="res://assets/ui/resources/font_heading.tres" id="practice_font"]
-[sub_resource type="StyleBoxFlat" id="PracticePanel"]
-content_margin_left = 36.0
-content_margin_right = 36.0
-content_margin_top = 32.0
-content_margin_bottom = 32.0
-bg_color = Color(0.015, 0.035, 0.07, 0.98)
-border_width_left = 2
-border_width_right = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color(0.15, 0.7, 0.9, 1)
-corner_radius_top_left = 18
-corner_radius_bottom_right = 18
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxPanel"]
-content_margin_left = 48.0
-content_margin_top = 40.0
-content_margin_right = 48.0
-content_margin_bottom = 40.0
-bg_color = Color(0.075, 0.105, 0.15, 0.96)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.8, 0.8, 0.003921569)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
+[sub_resource type="StyleBoxTexture" id="MenuFrame"]
+texture = ExtResource("menu_frame")
+texture_margin_left = 28.0
+texture_margin_top = 28.0
+texture_margin_right = 28.0
+texture_margin_bottom = 28.0
+content_margin_left = 26.0
+content_margin_top = 22.0
+content_margin_right = 26.0
+content_margin_bottom = 22.0
 
 [node name="CodeBornMenu" type="Control" unique_id=336241842]
 layout_mode = 3
@@ -67,29 +48,27 @@ loop = true
 
 [node name="MainMenu" type="Control" parent="." unique_id=476134126]
 layout_mode = 1
-anchor_left = 0.52049786
-anchor_top = 0.5651041
-anchor_right = 0.52049786
-anchor_bottom = 0.5651041
-scale = Vector2(1.2521197, 1.2590717)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CenterContainer" type="CenterContainer" parent="MainMenu" unique_id=1987301262 node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 1
-anchors_preset = -1
-offset_left = -214.052
-offset_top = -159.5
-offset_right = 145.948
-offset_bottom = 173.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
 shortcut_context = NodePath("../../PlayScreen")
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu/CenterContainer" unique_id=785627375]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxPanel")
+theme = ExtResource("practice_theme")
+theme_override_styles/panel = SubResource("MenuFrame")
 
 [node name="Content" type="VBoxContainer" parent="MainMenu/CenterContainer/PanelContainer" unique_id=959196566]
 layout_mode = 2
@@ -159,7 +138,8 @@ grow_vertical = 2
 [node name="PanelContainer" type="PanelContainer" parent="PlayScreen/CenterContainer" unique_id=343393007]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxPanel")
+theme = ExtResource("practice_theme")
+theme_override_styles/panel = SubResource("MenuFrame")
 
 [node name="Content" type="VBoxContainer" parent="PlayScreen/CenterContainer/PanelContainer" unique_id=1739335708]
 layout_mode = 2
@@ -196,26 +176,31 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 503.0
-offset_top = 274.5
-offset_right = -503.0
-offset_bottom = -274.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="SettingsScreen/CenterContainer" unique_id=1837480501]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxPanel")
+theme = ExtResource("practice_theme")
+theme_override_styles/panel = SubResource("MenuFrame")
 
 [node name="Content" type="VBoxContainer" parent="SettingsScreen/CenterContainer/PanelContainer" unique_id=564834350]
 layout_mode = 2
 theme_override_constants/separation = 18
 
+[node name="Title" type="Label" parent="SettingsScreen/CenterContainer/PanelContainer/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("practice_font")
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+horizontal_alignment = 1
+
 [node name="VolumeLabel" type="Label" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=787860707]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Volume"
+text = "MASTER VOLUME"
 
 [node name="VolumeSlider" type="HSlider" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=1365276293]
 custom_minimum_size = Vector2(0, 32)
@@ -245,9 +230,9 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="DeveloperScreen/CenterContainer" unique_id=158137792]
 custom_minimum_size = Vector2(600, 0)
-theme = ExtResource("practice_theme")
 layout_mode = 2
-theme_override_styles/panel = SubResource("PracticePanel")
+theme = ExtResource("practice_theme")
+theme_override_styles/panel = SubResource("MenuFrame")
 
 [node name="Content" type="VBoxContainer" parent="DeveloperScreen/CenterContainer/PanelContainer" unique_id=1383644576]
 layout_mode = 2
@@ -256,40 +241,41 @@ theme_override_constants/separation = 22
 [node name="Title" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=522546477]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("practice_font")
 theme_override_font_sizes/font_size = 30
 text = "PRACTICE ARENA"
-theme_override_fonts/font = ExtResource("practice_font")
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=267394575]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.68, 0.76, 0.82, 1)
-text = "Choose your side. Learn the battle at your own pace.\nOffline practice • No connection needed"
+text = "Choose your side. Learn the battle at your own pace.
+Offline practice • No connection needed"
 horizontal_alignment = 1
 
-[node name="Defender" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
-layout_mode = 2
+[node name="Defender" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=846225538]
 custom_minimum_size = Vector2(0, 58)
-text = "DEFENDER  /  Protect your base"
-tooltip_text = "Build towers, answer questions and survive until time runs out."
-
-[node name="DefenderHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
 layout_mode = 2
+tooltip_text = "Build towers, answer questions and survive until time runs out."
+text = "DEFENDER  /  Protect your base"
+
+[node name="DefenderHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=1398342850]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Prepare your towers before the first enemy arrives."
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 14
 
-[node name="Attacker" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
-layout_mode = 2
+[node name="Attacker" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=936291040]
 custom_minimum_size = Vector2(0, 58)
-text = "ATTACKER  /  Break their defenses"
-tooltip_text = "Train Ronel, Matthew and Canguit. Destroy the base before time expires."
-
-[node name="AttackerHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content"]
 layout_mode = 2
+tooltip_text = "Train Ronel, Matthew and Canguit. Destroy the base before time expires."
+text = "ATTACKER  /  Break their defenses"
+
+[node name="AttackerHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=1721116988]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Attack while the computer builds, earns gold, and upgrades its defenses."
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 14
 
 [node name="BackButton" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=49520902]
 custom_minimum_size = Vector2(0, 48)
