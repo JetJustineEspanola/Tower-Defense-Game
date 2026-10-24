@@ -8,8 +8,8 @@ var played_at: Dictionary = {}
 var last_take: Dictionary = {}
 var current_priority: int = -1
 var last_event: String = ""
-const PRIORITIES = {"placed": 2, "deployed": 2, "selected": 1, "upgraded": 3, "attack": 0, "strong_attack": 0, "hurt_light": 1, "hurt_heavy": 1, "low_health": 4, "defeated": 5, "stationed": 2, "income": 0, "guard_blocked": 2, "tower_destroyed": 4, "bombardment": 2, "phase": 3, "phase_complete": 3}
-const COOLDOWNS = {"placed": 5.0, "deployed": 5.0, "selected": 6.0, "upgraded": 2.0, "attack": 10.0, "strong_attack": 10.0, "hurt_light": 8.0, "hurt_heavy": 8.0, "low_health": 15.0, "defeated": 8.0, "stationed": 30.0, "income": 8.0, "guard_blocked": 10.0, "tower_destroyed": 8.0, "bombardment": 8.0, "phase": 10.0, "phase_complete": 10.0}
+const PRIORITIES = {"placed": 2, "deployed": 2, "selected": 1, "upgraded": 3, "attack": 0, "strong_attack": 0, "hurt_light": 1, "hurt_heavy": 1, "low_health": 4, "defeated": 5, "stationed": 2, "income": 0, "guard_blocked": 2, "tower_destroyed": 4, "bombardment": 2, "phase": 3, "phase_complete": 3, "summons": 2, "guard_reposition": 2, "guard_attack": 0, "guard_hurt": 1, "guard_defeated": 3}
+const COOLDOWNS = {"placed": 5.0, "deployed": 5.0, "selected": 6.0, "upgraded": 2.0, "attack": 10.0, "strong_attack": 10.0, "hurt_light": 8.0, "hurt_heavy": 8.0, "low_health": 15.0, "defeated": 8.0, "stationed": 30.0, "income": 8.0, "guard_blocked": 10.0, "tower_destroyed": 8.0, "bombardment": 8.0, "phase": 10.0, "phase_complete": 10.0, "summons": 8.0, "guard_reposition": 6.0, "guard_attack": 10.0, "guard_hurt": 8.0, "guard_defeated": 8.0}
 @onready var experience = get_parent().get_node("Experience")
 @onready var clock = get_parent().get_node("Gameplay/ResourceHUD/ArcaneQuestionTest/MatchClock")
 func _process(delta: float) -> void:
@@ -19,6 +19,15 @@ func _process(delta: float) -> void:
 	if not get_tree().paused: elapsed += delta
 func request(event: String, actor: Node) -> bool:
 	return request_for("Jet", event, actor)
+func request_arjie(event: String, actor: Node) -> bool:
+	var scene = get_tree().current_scene
+	if scene != null and scene.has_method("record_visual"):
+		if scene.authority:
+			scene.record_visual(actor, "arjie_voice", {"event": event})
+			if scene.local_role != "defender": return false
+		elif scene.local_role != "defender" or event not in ["selected", "guard_reposition"]:
+			return false
+	return request_for("Arjie", event, actor)
 func request_for(character: String, event: String, actor: Node) -> bool:
 	var bank: Resource = voice_bank if character == "Jet" else character_banks.get(character)
 	if bank == null or not PRIORITIES.has(event): return false

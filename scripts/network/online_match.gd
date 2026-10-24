@@ -437,6 +437,10 @@ func _play_visual(event: Dictionary) -> void:
  if not is_instance_valid(actor): return
  var data: Dictionary = event.data
  match str(event.event):
+  "arjie_voice":
+   if local_role == "defender":
+    var source: Node = actor.get_parent() if actor.is_in_group("defenders") else actor
+    $JetVoice.request_for("Arjie", str(data.event), source)
   "action": actor.get_node("CharacterAnimation").play_action(float(data.duration))
   "hit": actor.get_node("HealthFeedback").hit(int(data.before), int(data.after))
   "boost": $Experience._boost_aura(actor)
