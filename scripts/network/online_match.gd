@@ -21,10 +21,14 @@ var begun: bool = false
 var last_state_time: int = 0
 var loading_started: int = 0
 var rendered_question: int = -1
-@onready var session: Node = get_node("/root/OnlineSession")
+@onready var session: Node = get_node("/root/LanSession" if get_meta("transport", "") == "lan" else "/root/OnlineSession")
+func _lobby_path() -> String:
+ return "res://scenes/UI/lan_lobby.tscn" if get_meta("transport", "") == "lan" else "res://scenes/UI/online_lobby.tscn"
+func _mode_name() -> String:
+ return "LAN" if get_meta("transport", "") == "lan" else "ONLINE"
 func _ready() -> void:
  if session.match_info.is_empty():
-  get_tree().change_scene_to_file.call_deferred("res://scenes/UI/online_lobby.tscn")
+  get_tree().change_scene_to_file.call_deferred(_lobby_path())
   return
  authority = session.is_host()
  local_role = str(session.match_info.role)
@@ -47,7 +51,7 @@ func _ready() -> void:
  pads = get_tree().get_nodes_in_group("tower_placement_pads")
  for pad in pads: pad.input_ray_pickable = local_role == "defender"
  hud.get_node("TopBar/Row/Health").visible = local_role == "defender"
- hud.get_node("TopBar/Row/Brand/Tagline").text = local_role.to_upper() + " • ONLINE"
+ hud.get_node("TopBar/Row/Brand/Tagline").text = local_role.to_upper() + " • " + _mode_name()
  hud.get_node("Resources/ManaTimer").stop()
  clock.running = false
  if not authority:
@@ -77,9 +81,9 @@ func _ready() -> void:
  _update_base_label()
  last_state_time = Time.get_ticks_msec()
  loading_started = Time.get_ticks_msec()
- hud.get_node("PauseOverlay/Center/Panel/Content/Title").text = "MATCH MENU\nOnline play keeps running"
+ hud.get_node("PauseOverlay/Center/Panel/Content/Title").text = "MATCH MENU\n%s play keeps running" % ("LAN" if _mode_name() == "LAN" else "Online")
  hud.get_node("PauseOverlay/Center/Panel/Content/Resume").text = "Back to match"
- hud.get_node("PauseOverlay/Center/Panel/Content/MainMenu").text = "Leave online match"
+ hud.get_node("PauseOverlay/Center/Panel/Content/MainMenu").text = "Leave %s match" % _mode_name().to_lower()
  session.loaded.call_deferred()
 func _prepare_defender_nodes() -> void: pass
 func _pause_overlay_changed() -> void:
@@ -290,7 +294,7 @@ func _connection_lost(message: String) -> void:
  $OnlineOverlay/Panel/Content/Detail.text = message
 func leave_online() -> void:
  session.leave(); get_tree().paused = false
- get_tree().change_scene_to_file("res://scenes/UI/online_lobby.tscn")
+ get_tree().change_scene_to_file(_lobby_path())
 func _notice(message: String) -> void: $Experience.notice(message)
 func _exit_tree() -> void:
  if session == null: return

@@ -2,6 +2,7 @@ extends SceneTree
 
 const MENU_SCENE: String = "res://scenes/codeborn_menu.tscn"
 const LOBBY_SCENE: String = "res://scenes/UI/online_lobby.tscn"
+const LAN_SCENE: String = "res://scenes/UI/lan_lobby.tscn"
 
 var failures: int = 0
 
@@ -21,6 +22,13 @@ func _run() -> void:
 	for viewport_size: Vector2i in viewport_sizes:
 		test_viewport.size = viewport_size
 		await process_frame
+		menu.get_node("PlayScreen").show()
+		await process_frame
+		var play_panel: Control = menu.get_node("PlayScreen/CenterContainer/PanelContainer")
+		_check_panel(play_panel, viewport_size, "Play choice")
+		_check_neon_button(play_panel.get_node("Content/OnlineLobby"), "Online Lobby")
+		_check_neon_button(play_panel.get_node("Content/LanLobby"), "LAN Lobby")
+		menu.get_node("PlayScreen").hide()
 		menu.get_node("SettingsScreen").show()
 		menu.get_node("DeveloperScreen").hide()
 		await process_frame
@@ -61,11 +69,39 @@ func _run() -> void:
 	await process_frame
 	play_menu.get_node("MainMenu/CenterContainer/PanelContainer/Content/Buttons/PlayButton").emit_signal("pressed")
 	await process_frame
+	_expect(current_scene == play_menu and play_menu.get_node("PlayScreen").visible, "Play opens the mode selection")
+	var online_button: Button = play_menu.get_node_or_null("PlayScreen/CenterContainer/PanelContainer/Content/OnlineLobby")
+	var lan_button: Button = play_menu.get_node_or_null("PlayScreen/CenterContainer/PanelContainer/Content/LanLobby")
+	_expect(online_button != null and lan_button != null, "Play offers online and LAN choices")
+	if online_button != null and lan_button != null:
+		_check_neon_button(online_button, "Online Lobby")
+		_check_neon_button(lan_button, "LAN Lobby")
+		online_button.emit_signal("pressed")
+		await process_frame
+		await process_frame
+		_expect(current_scene != null and current_scene.scene_file_path == LOBBY_SCENE, "Online Lobby opens the existing online room lobby")
+	var lan_menu: Control = load(MENU_SCENE).instantiate()
+	root.add_child(lan_menu)
+	current_scene = lan_menu
 	await process_frame
-	_expect(current_scene != null and current_scene.scene_file_path == LOBBY_SCENE, "Play opens the online room lobby")
-	if current_scene != null and current_scene.scene_file_path == LOBBY_SCENE:
-		_check_full_rect(current_scene.get_node("Background"), Vector2i(1366, 768), "Play lobby background")
-		_check_full_rect(current_scene.get_node("Browser"), Vector2i(1366, 768), "Play lobby Browser")
+	lan_menu.get_node("MainMenu/CenterContainer/PanelContainer/Content/Buttons/PlayButton").emit_signal("pressed")
+	lan_menu.get_node("PlayScreen/CenterContainer/PanelContainer/Content/LanLobby").emit_signal("pressed")
+	await process_frame
+	await process_frame
+	_expect(current_scene != null and current_scene.scene_file_path == LAN_SCENE, "LAN Lobby opens the local room lobby")
+	var lan_scene: Control = load(LAN_SCENE).instantiate()
+	root.add_child(lan_scene)
+	await process_frame
+	_expect(lan_scene.has_node("Browser/Panel/Content/ListArea/DirectIP"), "LAN lobby offers direct IP entry")
+	var ip_entry: LineEdit = lan_scene.get_node("Browser/Panel/Content/ListArea/DirectIP")
+	ip_entry.text = "192.168.1.2"
+	ip_entry.emit_signal("text_changed", ip_entry.text)
+	_expect(not lan_scene.get_node("Browser/Panel/Content/Join").disabled, "LAN join enables for a typed host IP")
+	lan_scene.get_node("Browser/Host").emit_signal("pressed")
+	await process_frame
+	_expect(root.get_node("LanSession").is_host() and lan_scene.get_node("HostRoom").visible, "LAN Host opens a local room")
+	root.get_node("LanSession").leave()
+	lan_scene.queue_free()
 
 	for viewport_size: Vector2i in viewport_sizes:
 		var lobby_viewport := SubViewport.new()

@@ -192,9 +192,18 @@ autowrap_mode = 2
 [node name="Rooms" type="ItemList" parent="Browser/Panel/Content/ListArea"]
 layout_mode = 1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.62
 visible = false
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 92)
+
+[node name="DirectIP" type="LineEdit" parent="Browser/Panel/Content/ListArea"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+placeholder_text = "Host IP, e.g. 192.168.1.2"
+tooltip_text = "Enter the host's local IPv4 address if discovery is unavailable"
 [node name="Status" type="Label" parent="Browser/Panel/Content"]
 text = "Host a room to invite another player."
 theme_override_font_sizes/font_size = 15
@@ -256,6 +265,8 @@ theme_override_font_sizes/font_size = 18
 text = "LOCAL NETWORK (LAN)"
 theme_override_font_sizes/font_size = 14
 modulate = Color(0.35, 0.8, 1, 1)
+autowrap_mode = 2
+tooltip_text = "Share the IP for the Wi-Fi or hotspot adapter with your friend"
 [node name="Player1" type="PanelContainer" parent="HostRoom/Panel/Content"]
 custom_minimum_size = Vector2(0, 96)
 [node name="Row" type="HBoxContainer" parent="HostRoom/Panel/Content/Player1"]

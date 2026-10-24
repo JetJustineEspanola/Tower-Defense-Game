@@ -14,6 +14,8 @@ func _ready() -> void:
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/SettingsButton.pressed.connect(_show_settings_screen)
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/DeveloperButton.pressed.connect(_show_developer_screen)
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/QuitButton.pressed.connect(_quit_game)
+	$PlayScreen/CenterContainer/PanelContainer/Content/OnlineLobby.pressed.connect(_open_online_lobby)
+	$PlayScreen/CenterContainer/PanelContainer/Content/LanLobby.pressed.connect(_open_lan_lobby)
 	$PlayScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	$SettingsScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	$DeveloperScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
@@ -30,7 +32,13 @@ func _show_main_menu() -> void:
 	developer_screen.hide()
 
 func _show_play_screen() -> void:
+	_show_screen(play_screen)
+
+func _open_online_lobby() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/online_lobby.tscn")
+
+func _open_lan_lobby() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/lan_lobby.tscn")
 
 func _show_settings_screen() -> void:
 	_show_screen(settings_screen)
