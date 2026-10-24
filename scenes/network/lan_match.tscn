@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://scenes/network/online_match.tscn" id="base"]
+[node name="LanMatch" instance=ExtResource("base")]
+metadata/transport = "lan"

@@ -16,6 +16,8 @@ tooltip_text = "Connection settings"
 text = "PRIVATE TWO-PLAYER ROOMS"
 [node name="Empty" parent="Browser/Panel/Content/ListArea" index="0"]
 visible = false
+[node name="DirectIP" parent="Browser/Panel/Content/ListArea" index="2"]
+visible = false
 [node name="Join" parent="Browser/Panel/Content" index="5"]
 disabled = false
 tooltip_text = "Join using your friend's room code"
