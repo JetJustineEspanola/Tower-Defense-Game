@@ -4,10 +4,11 @@
 [ext_resource type="Resource" path="res://voice_lines/Matthew/matthew_voice_bank.tres" id="matthew_bank"]
 [ext_resource type="Resource" path="res://voice_lines/Canguit/canguit_voice_bank.tres" id="canguit_bank"]
 [ext_resource type="Resource" path="res://voice_lines/Ronel/ronel_voice_bank.tres" id="ronel_bank"]
+[ext_resource type="Resource" path="res://voice_lines/Arjie/arjie_voice_bank.tres" id="arjie_bank"]
 [node name="JetVoice" type="Node"]
 script = ExtResource("script")
 voice_bank = ExtResource("bank")
-character_banks = {"Matthew": ExtResource("matthew_bank"), "Canguit": ExtResource("canguit_bank"), "Ronel": ExtResource("ronel_bank")}
+character_banks = {"Matthew": ExtResource("matthew_bank"), "Canguit": ExtResource("canguit_bank"), "Ronel": ExtResource("ronel_bank"), "Arjie": ExtResource("arjie_bank")}
 [node name="Player" type="AudioStreamPlayer" parent="."]
 bus = &"Voice"
 volume_db = -3.0

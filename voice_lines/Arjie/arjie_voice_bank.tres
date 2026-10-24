@@ -1,0 +1,26 @@
+[gd_resource type="Resource" format=3]
+[ext_resource type="Script" path="res://scripts/combat/jet_voice_bank.gd" id="script"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Placed.mp3" id="placed"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Selected.mp3" id="selected"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Upgraded.mp3" id="upgraded"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Summons.mp3" id="summons"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Guard-Reposition.mp3" id="reposition"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Low-health.mp3" id="low_health"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Defeated.mp3" id="defeated"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Extrasound_Attack-01.mp3" id="attack_1"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Extrasound_Attack-02.mp3" id="attack_2"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Extrasound_hurt-01.mp3" id="hurt_1"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Extrasound_hurt-02.mp3" id="hurt_2"]
+[ext_resource type="AudioStream" path="res://voice_lines/Arjie/Extrasound_Defeat.mp3" id="guard_defeat"]
+[resource]
+script = ExtResource("script")
+placed = Array[AudioStream]([ExtResource("placed")])
+selected = Array[AudioStream]([ExtResource("selected")])
+upgraded = Array[AudioStream]([ExtResource("upgraded")])
+summons = Array[AudioStream]([ExtResource("summons")])
+guard_reposition = Array[AudioStream]([ExtResource("reposition")])
+low_health = Array[AudioStream]([ExtResource("low_health")])
+defeated = Array[AudioStream]([ExtResource("defeated")])
+guard_attack = Array[AudioStream]([ExtResource("attack_1"), ExtResource("attack_2")])
+guard_hurt = Array[AudioStream]([ExtResource("hurt_1"), ExtResource("hurt_2")])
+guard_defeated = Array[AudioStream]([ExtResource("guard_defeat")])

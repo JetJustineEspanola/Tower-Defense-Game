@@ -58,6 +58,7 @@ func order_to(point: Vector3) -> bool:
 	if get_parent().has_method("online_action"):
 		get_parent().online_action("guard", {"id": get_parent().online_id(selected_guard), "position": [destination.x, destination.y, destination.z]})
 	else: selected_guard.walk_to(destination)
+	selected_guard._arjie_voice("guard_reposition")
 	$Destination.global_position = destination + Vector3.UP * 0.07
 	$Destination.show()
 	get_parent().get_node("Experience").notice("Small Arjie is moving to the new rally point.")

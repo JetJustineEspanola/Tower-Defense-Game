@@ -84,7 +84,11 @@ func take_damage(amount: int) -> void:
 	health = maxi(0, health - amount)
 	$HealthFeedback.hit(health_before, health)
 	_update()
-	if health == 0: queue_free()
+	if health == 0:
+		_arjie_voice("guard_defeated")
+		queue_free()
+	elif randf() < 0.35:
+		_arjie_voice("guard_hurt")
 func _attack() -> void:
 	if clock == null or not clock.running: return
 	var candidates: Array = []
@@ -97,6 +101,7 @@ func _attack() -> void:
 		if $CharacterAnimation.play_action(0.8):
 			pending_target = weakref(enemy)
 			$CharacterAnimation.face_towards(enemy.global_position)
+			if randf() < 0.25: _arjie_voice("guard_attack")
 	else:
 		enemy = null
 func _hit() -> void:
@@ -110,4 +115,11 @@ func _hit() -> void:
 		if experience: experience.record_damage(get_parent(), before - target.health)
 func _update() -> void:
 	$Health.text = "GUARD %d" % health
+
+func _arjie_voice(event: String) -> void:
+	if not is_inside_tree() or not is_instance_valid(get_parent()): return
+	var scene = get_tree().current_scene
+	if scene == null: return
+	var voice = scene.get_node_or_null("JetVoice")
+	if voice != null and voice.is_node_ready(): voice.request_arjie(event, get_parent())
 
