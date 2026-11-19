@@ -30,6 +30,7 @@ func _run() -> void:
 	guest_root.add_child(guest)
 	await process_frame
 	var deck: Dictionary = preload("res://scripts/questions/deck_store.gd").active()
+	deck.notes = [{"name": "notes.pdf", "path": "user://astral_notes/1_notes.pdf"}]
 	_expect(host.create_room("Host", deck), "host opens an ENet room")
 	var discovered: Array[Dictionary] = []
 	guest.rooms_found.connect(func(rooms: Array[Dictionary]): discovered.assign(rooms))
@@ -89,9 +90,16 @@ func _run() -> void:
 	guest.loaded()
 	for i in 20: await process_frame
 	_expect(beginnings.size() == 2, "match starts after both peers load")
-	guest.command("train", {"index": 0})
+	var guest_attacks: bool = guest.match_info.role == "attacker"
+	guest.command("train" if guest_attacks else "place", {"index": 0} if guest_attacks else {"pad": 0, "index": 0})
 	for i in 20: await process_frame
 	_expect(commands.size() == 1 and commands[0].get("role") == guest.match_info.role, "guest command reaches host with assigned role")
+	guest.command("place" if guest_attacks else "train", {"pad": 0, "index": 0} if guest_attacks else {"index": 0})
+	guest.command("guard" if not guest_attacks else "siege", {"id": 1, "position": "not a vector"} if not guest_attacks else {"id": "x"})
+	guest.command("answer", {"token": 1, "choice": 9, "answer": "A"})
+	for i in 20: await process_frame
+	_expect(commands.size() == 1, "host ignores other-role and malformed guest commands")
+	_expect(guest.match_info.deck.get("notes", []).is_empty(), "attached note paths are not sent to the guest")
 	host.snapshot({"position": [1, 2, 3]})
 	for i in 20: await process_frame
 	_expect(states.size() == 1 and states[0].get("position") == [1, 2, 3], "host snapshot reaches guest")

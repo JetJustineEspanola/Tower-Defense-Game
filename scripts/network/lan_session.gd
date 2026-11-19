@@ -17,6 +17,10 @@ const DISCOVERY_PORT := 42151
 const TIMEOUT_MS := 8000
 const ACTIONS := ["train", "place", "troop_upgrade", "tower_upgrade", "tower_priority", "troop_priority", "troop_auto", "siege", "guard", "answer", "next_question", "boost"]
 const DECK_STORE = preload("res://scripts/questions/deck_store.gd")
+const PERMITTED := {
+	"defender": ["place", "tower_upgrade", "tower_priority", "guard", "boost", "answer", "next_question"],
+	"attacker": ["train", "troop_upgrade", "troop_priority", "troop_auto", "siege", "boost", "answer", "next_question"],
+}
 var room: Dictionary = {}
 var match_info: Dictionary = {}
 var player_id := ""
@@ -67,7 +71,7 @@ func create_room(name: String, deck: Dictionary) -> bool:
 	_connected = true
 	player_id = "1"
 	_host_name = _clean_name(name)
-	_deck = deck.duplicate(true)
+	_deck = _network_deck(deck)
 	room = {"host_id": "1", "deck": _deck, "deck_revision": 1, "players": [_member("1", _host_name, true, false)]}
 	_sync_room()
 	_start_advertising()
@@ -261,7 +265,12 @@ func _client_message(message: Dictionary) -> void:
 			room = state
 			room_changed.emit(room)
 		"match_start":
-			match_info = message.get("info", {})
+			var info: Variant = message.get("info", {})
+			if not info is Dictionary or not info.get("deck") is Dictionary or not DECK_STORE.valid(info.deck).is_empty() or not str(info.get("role", "")) in ["attacker", "defender"]:
+				leave()
+				room_closed.emit("The host sent an invalid match. Rejoin the room.")
+				return
+			match_info = info
 			_ended = false
 			request_counter = 0
 			received_sequence = -1
@@ -301,7 +310,7 @@ func update_deck(deck: Dictionary) -> void:
 	if not DECK_STORE.valid(deck).is_empty():
 		status_changed.emit("The selected Astral deck is invalid.")
 		return
-	_deck = deck.duplicate(true)
+	_deck = _network_deck(deck)
 	room.deck = _deck
 	room.deck_revision = int(room.deck_revision) + 1
 	for member in room.players: member.ready = false
@@ -353,12 +362,49 @@ func command(action: String, data: Dictionary) -> void:
 func _receive_command(sender: int, message: Dictionary) -> void:
 	if match_info.is_empty() or message.get("match_id") != match_info.match_id: return
 	if not message.get("data", {}) is Dictionary or not str(message.get("action", "")) in ACTIONS: return
+	var role := str(match_info.role) if sender == 1 else ("defender" if match_info.role == "attacker" else "attacker")
+	var action := str(message.get("action", ""))
+	if not action in PERMITTED[role] or not valid_command(action, message.data): return
 	var key := str(sender)
 	var sequence := int(message.get("request_id", 0))
 	if sequence <= int(_last_requests.get(key, 0)): return
 	_last_requests[key] = sequence
-	var role := str(match_info.role) if sender == 1 else ("defender" if match_info.role == "attacker" else "attacker")
-	command_received.emit({"player_id": key, "role": role, "match_id": match_info.match_id, "request_id": sequence, "action": str(message.get("action", "")), "data": message.get("data", {})})
+	command_received.emit({"player_id": key, "role": role, "match_id": match_info.match_id, "request_id": sequence, "action": action, "data": message.get("data", {})})
+
+## Same rules as the online relay (server/room_relay/server.mjs validCommand), so a
+## modified or out-of-date guest cannot send data that breaks the host's match.
+static func valid_command(action: String, data: Dictionary) -> bool:
+	if JSON.stringify(data).length() > 12000: return false
+	match action:
+		"train": return _int_in(data, "index", 0, 2)
+		"place": return _int_in(data, "pad", 0, 1000) and _int_in(data, "index", 0, 2)
+		"troop_upgrade": return _int_in(data, "index", 0, 2) and _int_in(data, "upgrade", 0, 4)
+		"tower_upgrade", "tower_priority": return _int_in(data, "id", 1) and _int_in(data, "index", 0, 4)
+		"troop_priority": return _int_in(data, "id", 1) and _int_in(data, "index", 0, 3)
+		"troop_auto": return _int_in(data, "id", 1) and data.get("value") is bool
+		"siege": return _int_in(data, "id", 1)
+		"boost": return _int_in(data, "id", 0)
+		"guard":
+			var position: Variant = data.get("position")
+			if not _int_in(data, "id", 1) or not position is Array or position.size() != 3: return false
+			for value in position:
+				if not (value is int or value is float) or not is_finite(float(value)) or absf(float(value)) >= 10000.0: return false
+			return true
+		"answer": return _int_in(data, "token", 1) and _int_in(data, "choice", -1, 3) and data.get("answer") is String and str(data.answer).length() <= 10000
+		"next_question": return _int_in(data, "token", 1)
+	return false
+
+static func _int_in(data: Dictionary, key: String, minimum: int, maximum: int = 1000000) -> bool:
+	var value: Variant = data.get(key)
+	if value is float and value != floorf(value): return false
+	if not (value is int or value is float): return false
+	return int(value) >= minimum and int(value) <= maximum
+
+## Attached reference notes are local files; the other player never needs them.
+static func _network_deck(deck: Dictionary) -> Dictionary:
+	var copy: Dictionary = deck.duplicate(true)
+	copy.notes = []
+	return copy
 
 func snapshot(state: Dictionary) -> void:
 	if not _hosting or _guest_peer == 0 or match_info.is_empty(): return
