@@ -27,7 +27,9 @@ func _ready() -> void:
  process_mode = Node.PROCESS_MODE_ALWAYS
  endpoint = CONFIG.relay_url
  var settings := ConfigFile.new()
- if settings.load("user://online.cfg") == OK: endpoint = str(settings.get_value("relay", "url", ""))
+ if settings.load("user://online.cfg") == OK:
+  var saved: String = str(settings.get_value("relay", "url", "")).strip_edges()
+  if not saved.is_empty(): endpoint = saved
 func configure(url: String) -> bool:
  url = url.strip_edges().trim_suffix("/")
  if not (url.begins_with("wss://") or url.begins_with("ws://127.0.0.1:") or url.begins_with("ws://localhost:")):
@@ -38,6 +40,11 @@ func configure(url: String) -> bool:
  settings.set_value("relay", "url", endpoint)
  settings.save("user://online.cfg")
  return true
+## Forgets a custom relay address and returns to the one built into this game version.
+func reset_endpoint() -> void:
+ endpoint = CONFIG.relay_url
+ if FileAccess.file_exists("user://online.cfg"): DirAccess.remove_absolute(ProjectSettings.globalize_path("user://online.cfg"))
+func default_endpoint() -> String: return CONFIG.relay_url
 func create_room(player_name: String, deck: Dictionary) -> void:
  _connect_request({"type": "create", "name": player_name, "deck": _network_deck(deck)})
 func join_room(player_name: String, code: String) -> void:

@@ -55,7 +55,7 @@ func _run() -> void:
 		# Keep the player's real user://settings.cfg untouched while the slider moves.
 		root.get_node("GameSettings").persist = false
 		var original_volume: float = AudioServer.get_bus_volume_linear(master_bus)
-		var slider: HSlider = menu.get_node("SettingsScreen/CenterContainer/PanelContainer/Content/VolumeSlider")
+		var slider: HSlider = menu.get_node("SettingsScreen/CenterContainer/PanelContainer/Content/Settings").get_node("%MasterSlider")
 		slider.value = 35.0
 		_expect(absf(AudioServer.get_bus_volume_linear(master_bus) - 0.35) < 0.01, "Settings slider sets Master volume to 35%")
 		AudioServer.set_bus_volume_linear(master_bus, original_volume)

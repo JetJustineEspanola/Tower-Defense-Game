@@ -1,0 +1,371 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/settings_panel.gd" id="1_settings"]
+
+[node name="SettingsPanel" type="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+theme_override_constants/separation = 10
+script = ExtResource("1_settings")
+
+[node name="Tabs" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(600, 320)
+layout_mode = 2
+current_tab = 0
+
+[node name="Audio" type="ScrollContainer" parent="Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="Pad" type="MarginContainer" parent="Tabs/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="Tabs/Audio/Pad"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Master" type="HBoxContainer" parent="Tabs/Audio/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Audio/Pad/Rows/Master"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Master volume"
+
+[node name="MasterSlider" type="HSlider" parent="Tabs/Audio/Pad/Rows/Master"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 1.0
+value = 80.0
+
+[node name="MasterValue" type="Label" parent="Tabs/Audio/Pad/Rows/Master"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 2
+
+[node name="Music" type="HBoxContainer" parent="Tabs/Audio/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Audio/Pad/Rows/Music"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="Tabs/Audio/Pad/Rows/Music"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 1.0
+value = 80.0
+
+[node name="MusicValue" type="Label" parent="Tabs/Audio/Pad/Rows/Music"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 2
+
+[node name="SFX" type="HBoxContainer" parent="Tabs/Audio/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Audio/Pad/Rows/SFX"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Sound effects"
+
+[node name="SFXSlider" type="HSlider" parent="Tabs/Audio/Pad/Rows/SFX"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 1.0
+value = 80.0
+
+[node name="SFXValue" type="Label" parent="Tabs/Audio/Pad/Rows/SFX"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 2
+
+[node name="Voice" type="HBoxContainer" parent="Tabs/Audio/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Audio/Pad/Rows/Voice"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Voices"
+
+[node name="VoiceSlider" type="HSlider" parent="Tabs/Audio/Pad/Rows/Voice"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 1.0
+value = 80.0
+
+[node name="VoiceValue" type="Label" parent="Tabs/Audio/Pad/Rows/Voice"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 2
+
+[node name="MuteInBackground" type="CheckButton" parent="Tabs/Audio/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mute when CodeBorn is in the background"
+
+[node name="Display" type="ScrollContainer" parent="Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 1
+
+[node name="Pad" type="MarginContainer" parent="Tabs/Display"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="Tabs/Display/Pad"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="WindowModeRow" type="HBoxContainer" parent="Tabs/Display/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Display/Pad/Rows/WindowModeRow"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Window mode"
+
+[node name="WindowMode" type="OptionButton" parent="Tabs/Display/Pad/Rows/WindowModeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen (borderless)"
+popup/item_1/id = 1
+popup/item_2/text = "Exclusive fullscreen"
+popup/item_2/id = 2
+
+[node name="ResolutionRow" type="HBoxContainer" parent="Tabs/Display/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Display/Pad/Rows/ResolutionRow"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Window size"
+
+[node name="Resolution" type="OptionButton" parent="Tabs/Display/Pad/Rows/ResolutionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Used in Windowed mode. Fullscreen uses your screen's resolution."
+selected = 0
+item_count = 4
+popup/item_0/text = "1280 × 720"
+popup/item_0/id = 0
+popup/item_1/text = "1366 × 768"
+popup/item_1/id = 1
+popup/item_2/text = "1600 × 900"
+popup/item_2/id = 2
+popup/item_3/text = "1920 × 1080"
+popup/item_3/id = 3
+
+[node name="FpsRow" type="HBoxContainer" parent="Tabs/Display/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Display/Pad/Rows/FpsRow"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Frame rate limit"
+
+[node name="MaxFps" type="OptionButton" parent="Tabs/Display/Pad/Rows/FpsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 6
+popup/item_0/text = "Unlimited"
+popup/item_0/id = 0
+popup/item_1/text = "30 FPS"
+popup/item_1/id = 1
+popup/item_2/text = "60 FPS"
+popup/item_2/id = 2
+popup/item_3/text = "120 FPS"
+popup/item_3/id = 3
+popup/item_4/text = "144 FPS"
+popup/item_4/id = 4
+popup/item_5/text = "240 FPS"
+popup/item_5/id = 5
+
+[node name="VSync" type="CheckButton" parent="Tabs/Display/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "VSync (prevents screen tearing)"
+
+[node name="ShowFps" type="CheckButton" parent="Tabs/Display/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show FPS counter"
+
+[node name="DisplayHint" type="Label" parent="Tabs/Display/Pad/Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "Window size applies in Windowed mode. Lower the frame rate limit to keep laptops cool."
+autowrap_mode = 3
+
+[node name="Gameplay" type="ScrollContainer" parent="Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 2
+
+[node name="Pad" type="MarginContainer" parent="Tabs/Gameplay"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="Tabs/Gameplay/Pad"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="NameRow" type="HBoxContainer" parent="Tabs/Gameplay/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Tabs/Gameplay/Pad/Rows/NameRow"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "Player name"
+
+[node name="PlayerName" type="LineEdit" parent="Tabs/Gameplay/Pad/Rows/NameRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Player"
+max_length = 20
+
+[node name="Subtitles" type="CheckButton" parent="Tabs/Gameplay/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show voice subtitles"
+
+[node name="ReducedEffects" type="CheckButton" parent="Tabs/Gameplay/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reduced effects (fewer flashes and particles)"
+
+[node name="GameplayHint" type="Label" parent="Tabs/Gameplay/Pad/Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "Your player name fills in automatically in the Online and LAN lobbies."
+autowrap_mode = 3
+
+[node name="Online" type="ScrollContainer" parent="Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 3
+
+[node name="Pad" type="MarginContainer" parent="Tabs/Online"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="Tabs/Online/Pad"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="RelayLabel" type="Label" parent="Tabs/Online/Pad/Rows"]
+layout_mode = 2
+text = "Online relay address"
+
+[node name="RelayAddress" type="LineEdit" parent="Tabs/Online/Pad/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "wss://your-relay.onrender.com/rooms"
+
+[node name="RelayButtons" type="HBoxContainer" parent="Tabs/Online/Pad/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SaveRelay" type="Button" parent="Tabs/Online/Pad/Rows/RelayButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save address"
+
+[node name="ResetRelay" type="Button" parent="Tabs/Online/Pad/Rows/RelayButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use built-in address"
+
+[node name="RelayHint" type="Label" parent="Tabs/Online/Pad/Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "Only change this if you host your own relay. \"Use built-in address\" restores the server this version of CodeBorn ships with."
+autowrap_mode = 3
+
+[node name="Footer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Status" type="Label" parent="Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.72, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "Changes save automatically."
+autowrap_mode = 3
+
+[node name="ResetAll" type="Button" parent="Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset all to defaults"
+
+[node name="ResetConfirm" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Reset settings"
+ok_button_text = "Reset"
+dialog_text = "Reset audio, display and gameplay settings to their defaults?"

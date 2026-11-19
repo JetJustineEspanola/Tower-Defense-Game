@@ -4,8 +4,6 @@ extends Control
 @onready var play_screen: Control = $PlayScreen
 @onready var settings_screen: Control = $SettingsScreen
 @onready var developer_screen: Control = $DeveloperScreen
-@onready var volume_slider: HSlider = $SettingsScreen/CenterContainer/PanelContainer/Content/VolumeSlider
-var master_volume_bus_index: int = -1
 
 func _ready() -> void:
 	$DeveloperScreen/CenterContainer/PanelContainer/Content/Defender.pressed.connect(_start_practice.bind("res://scenes/practice/defender_practice.tscn"))
@@ -19,10 +17,6 @@ func _ready() -> void:
 	$PlayScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	$SettingsScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	$DeveloperScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
-	master_volume_bus_index = AudioServer.get_bus_index("Master")
-	if master_volume_bus_index >= 0:
-		volume_slider.set_value_no_signal(GameSettings.volume("Master"))
-		volume_slider.value_changed.connect(_on_volume_changed)
 	_show_main_menu()
 
 func _show_main_menu() -> void:
@@ -55,11 +49,6 @@ func _show_screen(screen: Control) -> void:
 
 func _quit_game() -> void:
 	get_tree().quit()
-
-func _on_volume_changed(value: float) -> void:
-	if master_volume_bus_index < 0:
-		return
-	GameSettings.set_volume("Master", value)
 
 func _start_practice(scene_path: String) -> void:
 	get_tree().paused = false

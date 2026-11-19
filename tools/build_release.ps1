@@ -19,6 +19,7 @@ if ([string]::IsNullOrWhiteSpace($Godot) -or -not (Test-Path $Godot)) {
 if (-not $SkipTests) {
 	foreach ($test in @(
 		"res://tests/questions/formatted_questions_test.gd",
+		"res://tests/ui/settings_panel_test.gd",
 		"res://tests/network/lan_session_test.gd",
 		"res://tests/ui/menu_layout_test.gd",
 		"res://tests/audio/arjie_voice_test.gd")) {

@@ -37,6 +37,7 @@ func _ready() -> void:
 	start_button.pressed.connect(_start)
 	$SettingsOverlay/Center/Panel/Content/Close.pressed.connect(func(): $SettingsOverlay.hide())
 	$SettingsOverlay/Center/Panel/Content/Volume.value_changed.connect(_volume_changed)
+	if not GameSettings.player_name().is_empty(): player_name.text = GameSettings.player_name()
 	set_rooms([])
 	if _lan_mode() and lan_service != null:
 		lan_service.rooms_found.connect(set_rooms)
@@ -48,6 +49,8 @@ func _ready() -> void:
 
 func _name() -> String:
 	var value: String = player_name.text.strip_edges()
+	# Remember the name for next time (also editable in Settings > Gameplay).
+	if not value.is_empty(): GameSettings.set_player_name(value)
 	return value if not value.is_empty() else "Player"
 
 func _host() -> void:

@@ -14,6 +14,7 @@
 [ext_resource type="Theme" uid="uid://cvr5xnlqee4w8" path="res://assets/ui/resources/hud_theme.tres" id="practice_theme"]
 [ext_resource type="Texture2D" path="res://assets/ui/lobby/frame.svg" id="menu_frame"]
 [ext_resource type="Texture2D" path="res://assets/ui/buttons/neon_button.svg" id="neon_button"]
+[ext_resource type="PackedScene" path="res://scenes/UI/settings_panel.tscn" id="settings_panel"]
 
 [sub_resource type="StyleBoxTexture" id="MenuFrame"]
 texture = ExtResource("menu_frame")
@@ -263,15 +264,8 @@ theme_override_font_sizes/font_size = 30
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="VolumeLabel" type="Label" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=787860707]
+[node name="Settings" parent="SettingsScreen/CenterContainer/PanelContainer/Content" instance=ExtResource("settings_panel")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "MASTER VOLUME"
-
-[node name="VolumeSlider" type="HSlider" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=1365276293]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-value = 75.0
 
 [node name="BackButton" type="Button" parent="SettingsScreen/CenterContainer/PanelContainer/Content" unique_id=963801174]
 custom_minimum_size = Vector2(0, 48)
