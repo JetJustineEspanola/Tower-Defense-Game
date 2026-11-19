@@ -21,7 +21,6 @@ var subtitles: bool = true
 var voice_priority: int = -1
 var notice_time: float = 0.0
 var reward_tween: Tween
-var config := ConfigFile.new()
 @onready var hud = get_parent().get_node("Gameplay/ResourceHUD/ArcaneQuestionTest")
 @onready var clock: MatchClock = hud.get_node("MatchClock")
 @onready var base: Node3D = get_parent().get_node("Gameplay/AlliedBase")
@@ -31,15 +30,13 @@ func _ready() -> void:
 	$Ability.pressed.connect(_ability)
 	$Voice.finished.connect(func(): voice_priority = -1; $Subtitle.hide())
 	hud.question_rewarded.connect(_question_reward)
-	config.load("user://presentation.cfg")
 	var settings = hud.get_node("PauseOverlay/Center/Panel/Content/AudioOptions")
 	for bus in ["Music", "SFX", "Voice"]:
 		var slider = settings.get_node(bus + "/Volume")
-		slider.set_value_no_signal(float(config.get_value("audio", bus, 80.0)))
-		_set_volume(slider.value, bus, false)
-		slider.value_changed.connect(_set_volume.bind(bus, true))
-	reduced_effects = bool(config.get_value("display", "reduced_effects", false))
-	subtitles = bool(config.get_value("display", "subtitles", true))
+		slider.set_value_no_signal(GameSettings.volume(bus))
+		slider.value_changed.connect(_set_volume.bind(bus))
+	reduced_effects = bool(GameSettings.get_setting("display", "reduced_effects"))
+	subtitles = bool(GameSettings.get_setting("display", "subtitles"))
 	settings.get_node("ReducedEffects").set_pressed_no_signal(reduced_effects)
 	settings.get_node("Subtitles").set_pressed_no_signal(subtitles)
 	settings.get_node("ReducedEffects").toggled.connect(_reduced)
@@ -53,23 +50,17 @@ func _ready() -> void:
 func _start() -> void:
 	announce(role, "Protect the core." if role == "defender" else "Break their defenses.", 10)
 
-func _set_volume(value: float, bus: String, save: bool) -> void:
-	var index: int = AudioServer.get_bus_index(bus)
-	if index >= 0: AudioServer.set_bus_volume_linear(index, value / 100.0)
-	if save:
-		config.set_value("audio", bus, value)
-		config.save("user://presentation.cfg")
+func _set_volume(value: float, bus: String) -> void:
+	GameSettings.set_volume(bus, value)
 
 func _reduced(value: bool) -> void:
 	reduced_effects = value
-	config.set_value("display", "reduced_effects", value)
-	config.save("user://presentation.cfg")
+	GameSettings.set_setting("display", "reduced_effects", value)
 
 func _subtitles(value: bool) -> void:
 	subtitles = value
 	if not value: $Subtitle.hide()
-	config.set_value("display", "subtitles", value)
-	config.save("user://presentation.cfg")
+	GameSettings.set_setting("display", "subtitles", value)
 
 func _health() -> int:
 	var online = get_tree().current_scene

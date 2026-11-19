@@ -142,12 +142,26 @@ func _process(delta: float) -> void:
 func _start_advertising() -> void:
 	_advertiser = PacketPeerUDP.new()
 	_advertiser.set_broadcast_enabled(true)
-	_advertiser.set_dest_address("255.255.255.255", DISCOVERY_PORT)
 	_advertise()
+
+## Windows sends 255.255.255.255 out of a single adapter, which is often a WSL,
+## Hyper-V or VPN adapter instead of Wi-Fi. Also send a directed broadcast to each
+## private network so guests on the real Wi-Fi or hotspot see the room.
+func broadcast_targets() -> PackedStringArray:
+	var targets := PackedStringArray(["255.255.255.255"])
+	for address in IP.get_local_addresses():
+		if not _private_ipv4(address): continue
+		var parts := address.split(".")
+		var target := "%s.%s.%s.255" % [parts[0], parts[1], parts[2]]
+		if not targets.has(target): targets.append(target)
+	return targets
 
 func _advertise() -> void:
 	var data := {"type": "codeborn_lan", "build": BUILD, "name": _host_name + "'s room", "players": room.get("players", []).size()}
-	_advertiser.put_packet(JSON.stringify(data).to_utf8_buffer())
+	var packet := JSON.stringify(data).to_utf8_buffer()
+	for target in broadcast_targets():
+		_advertiser.set_dest_address(target, DISCOVERY_PORT)
+		_advertiser.put_packet(packet)
 
 func _member(id: String, name: String, host: bool, ready: bool) -> Dictionary:
 	return {"id": id, "name": name, "host": host, "ready": ready}
@@ -396,9 +410,11 @@ func leave() -> void:
 func host_address() -> String:
 	var addresses := PackedStringArray()
 	for address in IP.get_local_addresses():
-		if not _valid_ipv4(address): continue
-		var parts := address.split(".")
-		var private_ip := address.begins_with("192.168.") or address.begins_with("10.") or (parts[0] == "172" and int(parts[1]) >= 16 and int(parts[1]) <= 31)
-		if private_ip and not addresses.has(address): addresses.append(address)
+		if _private_ipv4(address) and not addresses.has(address): addresses.append(address)
 	addresses.sort()
 	return ", ".join(addresses) if not addresses.is_empty() else "No local Wi-Fi IP found"
+
+func _private_ipv4(address: String) -> bool:
+	if not _valid_ipv4(address): return false
+	var parts := address.split(".")
+	return address.begins_with("192.168.") or address.begins_with("10.") or (parts[0] == "172" and int(parts[1]) >= 16 and int(parts[1]) <= 31)

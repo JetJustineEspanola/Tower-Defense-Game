@@ -15,6 +15,8 @@ var guest_ready: bool = false
 @onready var ready_button: Button = $HostRoom/Panel/Content/Actions/Ready
 @onready var start_button: Button = $HostRoom/Panel/Content/Actions/Start
 @onready var lan_service: Node = get_node_or_null("/root/LanSession")
+const FIREWALL_HINT := "No rooms yet? Enter the host's IP, use the same Wi-Fi or hotspot, and allow CodeBorn through Windows Firewall on Private networks."
+var _search_token: int = 0
 
 func _lan_mode() -> bool:
 	return get_script().resource_path == "res://scripts/ui/lan_lobby.gd"
@@ -42,7 +44,7 @@ func _ready() -> void:
 		lan_service.status_changed.connect(_status)
 		lan_service.room_closed.connect(_disconnected)
 		lan_service.match_started.connect(_enter_match)
-		lan_service.discover()
+		_discover()
 
 func _name() -> String:
 	var value: String = player_name.text.strip_edges()
@@ -55,7 +57,7 @@ func _host() -> void:
 func _leave() -> void:
 	if _lan_mode() and lan_service != null:
 		lan_service.leave()
-		lan_service.discover()
+		_discover()
 	leave_requested.emit()
 	host_room.hide()
 	browser.show()
@@ -80,7 +82,7 @@ func set_rooms(available: Array[Dictionary]) -> void:
 
 func _refresh() -> void:
 	set_rooms([])
-	if lan_service != null: lan_service.discover()
+	if lan_service != null: _discover()
 	_status("Searching for LAN rooms. You can also enter the host IP.")
 
 func _room_selected(index: int) -> void:
@@ -137,13 +139,13 @@ func _start() -> void:
 		start_requested.emit()
 
 func _settings() -> void:
-	var volume: float = AudioServer.get_bus_volume_linear(0) * 100.0
+	var volume: float = GameSettings.volume("Master")
 	$SettingsOverlay/Center/Panel/Content/Volume.set_value_no_signal(volume)
 	$SettingsOverlay/Center/Panel/Content/VolumeLabel.text = "Master volume • %d%%" % roundi(volume)
 	$SettingsOverlay.show()
 
 func _volume_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(0, value / 100.0)
+	GameSettings.set_volume("Master", value)
 	$SettingsOverlay/Center/Panel/Content/VolumeLabel.text = "Master volume • %d%%" % roundi(value)
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -176,7 +178,7 @@ func _disconnected(message: String) -> void:
 	host_room.hide()
 	browser.show()
 	_status(message)
-	if lan_service != null: lan_service.discover()
+	if lan_service != null: _discover()
 
 func _room_update(state: Dictionary) -> void:
 	browser.hide()
@@ -184,7 +186,8 @@ func _room_update(state: Dictionary) -> void:
 	var is_host: bool = lan_service.is_host()
 	$Header/Title.text = "HOST LOBBY" if is_host else "GAME LOBBY"
 	$Header/Subtitle.text = "WAIT FOR YOUR FRIEND TO JOIN" if is_host else "CONNECTED TO THE HOST"
-	$HostRoom/Panel/Content/Connection.text = "LAN • Host IPs (use Wi-Fi): " + lan_service.host_address() if is_host else "LAN • Connected to host"
+	$HostRoom/Panel/Content/Connection.text = "LAN • Host IPs (use Wi-Fi): " + lan_service.host_address() + "
+Allow CodeBorn through Windows Firewall (Private networks) if your friend cannot join." if is_host else "LAN • Connected to host"
 	$HostRoom/Questions.disabled = not is_host
 	$HostRoom/Questions.text = "Astral deck: " + str(state.deck.get("name", "Default"))
 	var members: Array = state.get("players", [])
@@ -206,6 +209,16 @@ func _room_update(state: Dictionary) -> void:
 
 func _enter_match() -> void:
 	get_tree().change_scene_to_file("res://scenes/network/lan_match.tscn")
+
+## Starts LAN discovery; if nothing answers within a few seconds, explain the usual causes.
+func _discover() -> void:
+	if not _lan_mode() or lan_service == null: return
+	lan_service.discover()
+	_search_token += 1
+	var token: int = _search_token
+	await get_tree().create_timer(6.0).timeout
+	if not is_inside_tree() or token != _search_token: return
+	if browser.visible and rooms.is_empty(): _status(FIREWALL_HINT)
 
 func _exit_tree() -> void:
 	if not _lan_mode() or lan_service == null: return

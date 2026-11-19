@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="103" y1="54" x2="916" y2="968" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142D58"/><stop offset=".48" stop-color="#07172F"/><stop offset="1" stop-color="#030A18"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="0" cy="0" r="1" gradientTransform="matrix(0 552 -552 0 512 452)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1266B8" stop-opacity=".55"/><stop offset=".58" stop-color="#0A3270" stop-opacity=".19"/><stop offset="1" stop-color="#07152C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shell" x1="253" y1="263" x2="774" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#667EAA"/><stop offset=".2" stop-color="#263D63"/><stop offset=".54" stop-color="#101E36"/><stop offset=".82" stop-color="#263B5D"/><stop offset="1" stop-color="#0A1528"/>
+    </linearGradient>
+    <linearGradient id="face" x1="325" y1="339" x2="698" y2="703" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142B49"/><stop offset=".5" stop-color="#08162A"/><stop offset="1" stop-color="#101F37"/>
+    </linearGradient>
+    <linearGradient id="ear" x1="344" y1="194" x2="415" y2="362" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#26E8FF"/><stop offset=".48" stop-color="#1684F4"/><stop offset="1" stop-color="#715DFF"/>
+    </linearGradient>
+    <linearGradient id="eye" x1="383" y1="477" x2="457" y2="595" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C9FFFF"/><stop offset=".28" stop-color="#54F8FF"/><stop offset="1" stop-color="#168BFF"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="355" y1="708" x2="663" y2="856" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#31587D"/><stop offset=".46" stop-color="#142A47"/><stop offset="1" stop-color="#0A162A"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="15" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="#54DFFF" stroke-opacity=".055" stroke-width="1"/>
+      <circle cx="2" cy="2" r="1.4" fill="#8CF8FF" fill-opacity=".16"/>
+    </pattern>
+  </defs>
+
+  <!-- Full-bleed launcher background -->
+  <rect width="1024" height="1024" rx="206" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="206" fill="url(#aura)"/>
+  <rect x="34" y="34" width="956" height="956" rx="180" fill="url(#grid)"/>
+  <circle cx="512" cy="476" r="376" stroke="#2ACFFF" stroke-opacity=".12" stroke-width="2"/>
+  <circle cx="512" cy="476" r="334" stroke="#B77DFF" stroke-opacity=".10" stroke-width="2" stroke-dasharray="5 19"/>
+  <path d="M127 298 192 233M832 793l65-65M192 791l-52-52M846 234l47 47" stroke="#46DFFF" stroke-opacity=".26" stroke-width="5" stroke-linecap="round"/>
+  <path d="m511 96 12 29 30 12-30 12-12 30-12-30-30-12 30-12 12-29ZM839 425l8 19 19 8-19 8-8 19-8-19-19-8 19-8 8-19ZM190 570l7 16 16 7-16 7-7 16-7-16-16-7 16-7 7-16Z" fill="#9AF8FF" fill-opacity=".78"/>
+  <circle cx="202" cy="390" r="4" fill="#D1FCFF"/><circle cx="825" cy="617" r="4" fill="#D1FCFF"/><circle cx="730" cy="201" r="3" fill="#A18BFF"/><circle cx="296" cy="780" r="3" fill="#A18BFF"/>
+
+  <!-- Rear ears -->
+  <path d="M279 409 301 224Q305 190 335 211L482 319 542 319 689 211Q719 190 723 224L745 409" fill="url(#shell)" stroke="#7A9ABC" stroke-width="13" stroke-linejoin="round"/>
+  <path d="m323 338 19-112 100 82-80 43-39-13ZM701 338l-19-112-100 82 80 43 39-13Z" fill="url(#ear)" stroke="#5AF5FF" stroke-width="7" stroke-linejoin="round"/>
+  <path d="m350 327 10-60 54 44-45 24-19-8ZM674 327l-10-60-54 44 45 24 19-8Z" fill="#172A4A" opacity=".86"/>
+  <path d="m366 237 7-10 78 58M658 237l-7-10-78 58" stroke="#D2FCFF" stroke-opacity=".66" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Neck and chest -->
+  <path d="M346 702 321 811Q311 850 352 873L431 917Q512 963 593 917L672 873Q713 850 703 811L678 702" fill="url(#plate)" stroke="#526E91" stroke-width="12" stroke-linejoin="round"/>
+  <path d="m400 781 112 70 112-70-12 77-100 55-100-55-12-77Z" fill="#0B192D" stroke="#237DB8" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M464 827h96l-14 52h-68l-14-52Z" fill="#0D3C62" stroke="#36DFFF" stroke-width="6" stroke-linejoin="round" filter="url(#soft)"/>
+  <path d="M487 849h50" stroke="#A7FCFF" stroke-width="8" stroke-linecap="round"/>
+  <path d="m343 818-55-16M681 818l55-16" stroke="#2EDCFF" stroke-opacity=".72" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Head shell -->
+  <path d="M256 476Q256 416 303 382L355 344Q379 326 411 326H613Q645 326 669 344L721 382Q768 416 768 476V589Q768 645 727 682L672 730Q648 751 616 751H408Q376 751 352 730L297 682Q256 645 256 589V476Z" fill="url(#shell)" stroke="#8CA8C6" stroke-width="15"/>
+  <path d="M283 479Q283 430 321 402L372 365Q388 354 412 354H612Q636 354 652 365L703 402Q741 430 741 479V583Q741 630 705 661L655 705Q638 720 615 720H409Q386 720 369 705L319 661Q283 630 283 583V479Z" fill="url(#face)" stroke="#294B70" stroke-width="8"/>
+
+  <!-- Side actuator panels -->
+  <path d="M263 486q-41 8-42 47v62q1 37 40 46l24-29V514l-22-28ZM761 486q41 8 42 47v62q-1 37-40 46l-24-29V514l22-28Z" fill="#142A48" stroke="#49DFFF" stroke-width="8"/>
+  <circle cx="244" cy="558" r="12" fill="#A5FAFF" filter="url(#soft)"/><circle cx="780" cy="558" r="12" fill="#A5FAFF" filter="url(#soft)"/>
+  <path d="M298 469h23M703 469h23M298 599h23M703 599h23" stroke="#7898B7" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Brow and luminous eyes -->
+  <path d="M350 456q55-47 119-14M674 456q-55-47-119-14" stroke="#8CA7C5" stroke-width="14" stroke-linecap="round"/>
+  <path d="M358 505Q390 474 427 493Q448 504 448 538Q448 576 408 590Q367 590 354 552Q347 529 358 505Z" fill="url(#eye)" filter="url(#glow)"/>
+  <path d="M666 505Q634 474 597 493Q576 504 576 538Q576 576 616 590Q657 590 670 552Q677 529 666 505Z" fill="url(#eye)" filter="url(#glow)"/>
+  <ellipse cx="407" cy="536" rx="9" ry="24" fill="#071C35"/><ellipse cx="617" cy="536" rx="9" ry="24" fill="#071C35"/>
+  <circle cx="389" cy="513" r="8" fill="#F3FFFF"/><circle cx="599" cy="513" r="8" fill="#F3FFFF"/>
+  <path d="M365 541q18-25 39-23M659 541q-18-25-39-23" stroke="#E3FFFF" stroke-opacity=".72" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Friendly muzzle and pixel nose -->
+  <path d="M458 603q26-28 54-28t54 28q-8 44-54 54-46-10-54-54Z" fill="#172C48" stroke="#3F6F94" stroke-width="6"/>
+  <path d="m494 600 18-9 18 9-18 17-18-17Z" fill="#66F5FF" stroke="#BDFDFF" stroke-width="4" stroke-linejoin="round" filter="url(#soft)"/>
+  <path d="M512 617v19m0 0q-18 17-35 0m35 0q18 17 35 0" stroke="#8DD6F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m472 629-23 5m103-5 23 5" stroke="#3488B4" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Small circuit marks and cyan signature -->
+  <path d="M324 638h32l17 17h24M700 638h-32l-17 17h-24" stroke="#37DDFB" stroke-opacity=".72" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="397" cy="655" r="6" fill="#9DFBFF"/><circle cx="627" cy="655" r="6" fill="#9DFBFF"/>
+  <path d="M383 385h58m142 0h58" stroke="#4BE7FF" stroke-width="6" stroke-linecap="round" filter="url(#soft)"/>
+  <path d="M416 371h31m130 0h31" stroke="#D1FFFF" stroke-opacity=".72" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Icon frame -->
+  <rect x="30" y="30" width="964" height="964" rx="184" stroke="#7CEFFF" stroke-opacity=".88" stroke-width="8"/>
+  <rect x="46" y="46" width="932" height="932" rx="170" stroke="#2878D8" stroke-opacity=".76" stroke-width="3"/>
+  <path d="M294 47h108M622 47h108M47 294v108M977 622v108M294 977h108M622 977h108" stroke="#B6FCFF" stroke-width="7" stroke-linecap="round" filter="url(#soft)"/>
+</svg>

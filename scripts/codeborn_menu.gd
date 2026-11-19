@@ -21,7 +21,7 @@ func _ready() -> void:
 	$DeveloperScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	master_volume_bus_index = AudioServer.get_bus_index("Master")
 	if master_volume_bus_index >= 0:
-		volume_slider.set_value_no_signal(AudioServer.get_bus_volume_linear(master_volume_bus_index) * 100.0)
+		volume_slider.set_value_no_signal(GameSettings.volume("Master"))
 		volume_slider.value_changed.connect(_on_volume_changed)
 	_show_main_menu()
 
@@ -59,7 +59,7 @@ func _quit_game() -> void:
 func _on_volume_changed(value: float) -> void:
 	if master_volume_bus_index < 0:
 		return
-	AudioServer.set_bus_volume_linear(master_volume_bus_index, clampf(value, 0.0, 100.0) / 100.0)
+	GameSettings.set_volume("Master", value)
 
 func _start_practice(scene_path: String) -> void:
 	get_tree().paused = false

@@ -4,8 +4,20 @@ const TYPES = ["multiple_choice", "identification", "code_fix"]
 const DIRECTORY = "user://astral_decks"
 static func default_deck() -> Dictionary:
 	return DEFAULT.data.duplicate(true)
-static func normalize(value: String, coding: bool) -> String:
+## Folds characters that Word, PDFs and phone keyboards substitute for plain ASCII,
+## so “quoted” code from a document matches "quoted" code a player types.
+static func clean_text(value: String) -> String:
 	value = value.replace("\r\n", "\n").replace("\r", "\n")
+	for pair in [["“", "\""], ["”", "\""], ["„", "\""], ["‟", "\""], ["″", "\""],
+			["‘", "'"], ["’", "'"], ["‚", "'"], ["‛", "'"], ["′", "'"],
+			[" ", " "], [" ", " "], [" ", " "], [" ", " "], ["　", " "],
+			["​", ""], ["‌", ""], ["‍", ""], ["⁠", ""], ["﻿", ""], ["­", ""],
+			["ﬁ", "fi"], ["ﬂ", "fl"], ["…", "..."]]:
+		value = value.replace(pair[0], pair[1])
+	return value
+
+static func normalize(value: String, coding: bool) -> String:
+	value = clean_text(value)
 	if coding:
 		# Preserve case, internal spaces and indentation; ignore terminal line breaks only.
 		return value.trim_suffix("\n")

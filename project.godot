@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GameSettings="*res://scripts/settings/game_settings.gd"
 OnlineSession="*res://scripts/network/online_room_client.gd"
 LanSession="*res://scripts/network/lan_session.gd"
 

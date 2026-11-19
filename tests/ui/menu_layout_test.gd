@@ -52,6 +52,8 @@ func _run() -> void:
 	var master_bus: int = AudioServer.get_bus_index("Master")
 	_expect(master_bus >= 0, "Master audio bus exists")
 	if master_bus >= 0:
+		# Keep the player's real user://settings.cfg untouched while the slider moves.
+		root.get_node("GameSettings").persist = false
 		var original_volume: float = AudioServer.get_bus_volume_linear(master_bus)
 		var slider: HSlider = menu.get_node("SettingsScreen/CenterContainer/PanelContainer/Content/VolumeSlider")
 		slider.value = 35.0

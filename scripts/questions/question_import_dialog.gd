@@ -12,7 +12,7 @@ func _ready() -> void:
 	get_ok_button().disabled = true
 	get_ok_button().pressed.connect(_accept)
 	$Center/Panel/Margin/Content/Buttons/Cancel.pressed.connect(hide)
-	$Center/Panel/Margin/Content/Actions/Template.pressed.connect(func(): text_input.text = FileAccess.get_file_as_string("res://resources/questions/import_template.txt"); _invalidate())
+	$Center/Panel/Margin/Content/Actions/Template.pressed.connect(_insert_template)
 	$Center/Panel/Margin/Content/Actions/Paste.pressed.connect(func(): text_input.text = DisplayServer.clipboard_get(); _invalidate())
 	$Center/Panel/Margin/Content/Actions/File.pressed.connect(func(): $File.popup_centered(Vector2i(800, 520)))
 	$File.file_selected.connect(_load_file)
@@ -34,6 +34,17 @@ func review() -> void:
 	var counts := {"multiple_choice": 0, "identification": 0, "code_fix": 0}
 	for card in candidate.cards: counts[card.type] += 1
 	status.text = "Ready: %d multiple choice, %d identification, %d code fix. Adds to your current deck; review answers in the editor before Use this deck." % [counts.multiple_choice, counts.identification, counts.code_fix]
+	if int(result.get("ignored", 0)) > 0:
+		status.text += "\nSkipped %d line(s) outside [QUESTION] blocks (titles, headers or page numbers)." % int(result.ignored)
+
+func _insert_template() -> void:
+	# The template ships inside the game via the export include filter.
+	var template: String = FileAccess.get_file_as_string("res://resources/questions/import_template.txt")
+	if template.is_empty():
+		status.text = "Template file is missing from this build."
+		return
+	text_input.text = template
+	_invalidate()
 func _accept() -> void:
 	if not candidate.is_empty():
 		cards_imported.emit(candidate.duplicate(true))
