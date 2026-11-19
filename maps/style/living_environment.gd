@@ -43,7 +43,7 @@ func _start_background_music() -> void:
 	if not player.finished.is_connected(_restart_music):
 		player.finished.connect(_restart_music)
 	player.play()
-	print("BACKGROUND_MUSIC_STARTED volume_db=",player.volume_db," length=",player.stream.get_length())
+	print_verbose("BACKGROUND_MUSIC_STARTED volume_db=",player.volume_db," length=",player.stream.get_length())
 
 func _restart_music() -> void:
 	var player=get_parent().get_node_or_null("BackgroundMusic") as AudioStreamPlayer
@@ -102,7 +102,7 @@ func _setup() -> void:
 					audit.water_surfaces+=1
 					if reverse_lower:audit.reversed_lower_water+=1
 		node.set_meta("living_applied",true)
-	print("LIVING_AUDIT ",JSON.stringify(audit))
+	print_verbose("LIVING_AUDIT ",JSON.stringify(audit))
 
 func _wind_material(source: Material, box: AABB, amplitude: float) -> Material:
 	var key=str(source.get_instance_id())+str(box)+str(amplitude)

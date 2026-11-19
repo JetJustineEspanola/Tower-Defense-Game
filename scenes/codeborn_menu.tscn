@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://6ur0gtfaovhm" path="res://assets/Buttons_Ubac/2.png" id="4_nrmlo"]
 [ext_resource type="Texture2D" uid="uid://ytdcm7fyrhlt" path="res://assets/Buttons_Ubac/3.png" id="5_4ujci"]
 [ext_resource type="Texture2D" uid="uid://bgfjggotqkvhi" path="res://assets/Buttons_Ubac/4.png" id="6_hu1up"]
-[ext_resource type="Texture2D" uid="uid://b327ia53hagpx" path="res://assets/Buttons_Ubac/5.png" id="7_wf2tn"]
-[ext_resource type="Texture2D" uid="uid://cesuy0xi8jrrs" path="res://assets/Buttons_Ubac/6.png" id="8_wmt6p"]
 [ext_resource type="Texture2D" uid="uid://dh1wu0nu3wllx" path="res://assets/Buttons_Ubac/7.png" id="9_leexa"]
 [ext_resource type="Texture2D" uid="uid://duymh76pmgmyy" path="res://assets/Buttons_Ubac/8.png" id="10_4rb5s"]
 [ext_resource type="SystemFont" path="res://assets/ui/resources/font_heading.tres" id="practice_font"]
@@ -15,6 +13,8 @@
 [ext_resource type="Texture2D" path="res://assets/ui/lobby/frame.svg" id="menu_frame"]
 [ext_resource type="Texture2D" path="res://assets/ui/buttons/neon_button.svg" id="neon_button"]
 [ext_resource type="PackedScene" path="res://scenes/UI/settings_panel.tscn" id="settings_panel"]
+[ext_resource type="Texture2D" path="res://assets/Buttons_Ubac/practice_arena.png" id="practice_button"]
+[ext_resource type="Texture2D" path="res://assets/Buttons_Ubac/practice_arena_hover.png" id="practice_button_hover"]
 
 [sub_resource type="StyleBoxTexture" id="MenuFrame"]
 texture = ExtResource("menu_frame")
@@ -137,13 +137,14 @@ texture_hover = ExtResource("6_hu1up")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="DeveloperButton" type="TextureButton" parent="MainMenu/CenterContainer/PanelContainer/Content/Buttons" unique_id=1491256789]
+[node name="PracticeButton" type="TextureButton" parent="MainMenu/CenterContainer/PanelContainer/Content/Buttons" unique_id=1491256789]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 3
-texture_normal = ExtResource("7_wf2tn")
-texture_pressed = ExtResource("7_wf2tn")
-texture_hover = ExtResource("8_wmt6p")
+tooltip_text = "Practice Arena: play Defender or Attacker against the computer."
+texture_normal = ExtResource("practice_button")
+texture_pressed = ExtResource("practice_button")
+texture_hover = ExtResource("practice_button_hover")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -272,7 +273,7 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 text = "Back"
 
-[node name="DeveloperScreen" type="Control" parent="." unique_id=1533904123]
+[node name="PracticeScreen" type="Control" parent="." unique_id=1533904123]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -280,7 +281,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="DeveloperScreen" unique_id=1412545248]
+[node name="CenterContainer" type="CenterContainer" parent="PracticeScreen" unique_id=1412545248]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -288,17 +289,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="DeveloperScreen/CenterContainer" unique_id=158137792]
+[node name="PanelContainer" type="PanelContainer" parent="PracticeScreen/CenterContainer" unique_id=158137792]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme = ExtResource("practice_theme")
 theme_override_styles/panel = SubResource("MenuFrame")
 
-[node name="Content" type="VBoxContainer" parent="DeveloperScreen/CenterContainer/PanelContainer" unique_id=1383644576]
+[node name="Content" type="VBoxContainer" parent="PracticeScreen/CenterContainer/PanelContainer" unique_id=1383644576]
 layout_mode = 2
 theme_override_constants/separation = 22
 
-[node name="Title" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=522546477]
+[node name="Title" type="Label" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=522546477]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.95, 0.9, 1)
 theme_override_fonts/font = ExtResource("practice_font")
@@ -306,14 +307,14 @@ theme_override_font_sizes/font_size = 30
 text = "PRACTICE ARENA"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=267394575]
+[node name="Description" type="Label" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=267394575]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.68, 0.76, 0.82, 1)
 text = "Choose your side. Learn the battle at your own pace.
 Offline practice • No connection needed"
 horizontal_alignment = 1
 
-[node name="Defender" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=846225538]
+[node name="Defender" type="Button" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=846225538]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_styles/focus = SubResource("NeonButtonHover")
@@ -323,13 +324,13 @@ theme_override_styles/pressed = SubResource("NeonButtonPressed")
 tooltip_text = "Build towers, answer questions and survive until time runs out."
 text = "DEFENDER  /  Protect your base"
 
-[node name="DefenderHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=1398342850]
+[node name="DefenderHelp" type="Label" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=1398342850]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Prepare your towers before the first enemy arrives."
 horizontal_alignment = 1
 
-[node name="Attacker" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=936291040]
+[node name="Attacker" type="Button" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=936291040]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_styles/focus = SubResource("NeonButtonHover")
@@ -339,13 +340,13 @@ theme_override_styles/pressed = SubResource("NeonButtonPressed")
 tooltip_text = "Train Ronel, Matthew and Canguit. Destroy the base before time expires."
 text = "ATTACKER  /  Break their defenses"
 
-[node name="AttackerHelp" type="Label" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=1721116988]
+[node name="AttackerHelp" type="Label" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=1721116988]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Attack while the computer builds, earns gold, and upgrades its defenses."
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="DeveloperScreen/CenterContainer/PanelContainer/Content" unique_id=49520902]
+[node name="BackButton" type="Button" parent="PracticeScreen/CenterContainer/PanelContainer/Content" unique_id=49520902]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 text = "Back"

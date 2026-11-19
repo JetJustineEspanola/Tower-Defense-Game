@@ -30,24 +30,24 @@ func _run() -> void:
 		_check_neon_button(play_panel.get_node("Content/LanLobby"), "LAN Lobby")
 		menu.get_node("PlayScreen").hide()
 		menu.get_node("SettingsScreen").show()
-		menu.get_node("DeveloperScreen").hide()
+		menu.get_node("PracticeScreen").hide()
 		await process_frame
 		_check_panel(menu.get_node("SettingsScreen/CenterContainer/PanelContainer"), viewport_size, "Settings")
 
 		menu.get_node("SettingsScreen").hide()
-		menu.get_node("DeveloperScreen").show()
+		menu.get_node("PracticeScreen").show()
 		await process_frame
-		var developer_panel: Control = menu.get_node("DeveloperScreen/CenterContainer/PanelContainer")
-		_check_panel(developer_panel, viewport_size, "Developer")
-		_check_neon_button(developer_panel.get_node("Content/Defender"), "Defender")
-		_check_neon_button(developer_panel.get_node("Content/Attacker"), "Attacker")
+		var practice_panel: Control = menu.get_node("PracticeScreen/CenterContainer/PanelContainer")
+		_check_panel(practice_panel, viewport_size, "Practice")
+		_check_neon_button(practice_panel.get_node("Content/Defender"), "Defender")
+		_check_neon_button(practice_panel.get_node("Content/Attacker"), "Attacker")
 		_check_full_rect(menu.get_node("MainMenu"), viewport_size, "MainMenu")
 		_check_menu_button_clearance(menu, viewport_size)
 
 	_check_anchor_mode(menu.get_node("MainMenu"), 1, "MainMenu")
 	_check_anchor_mode(menu.get_node("MainMenu/CenterContainer"), 1, "MainMenu/CenterContainer")
 	_check_anchor_mode(menu.get_node("SettingsScreen/CenterContainer"), 1, "Settings CenterContainer")
-	_check_anchor_mode(menu.get_node("DeveloperScreen/CenterContainer"), 1, "Developer CenterContainer")
+	_check_anchor_mode(menu.get_node("PracticeScreen/CenterContainer"), 1, "Practice CenterContainer")
 
 	var master_bus: int = AudioServer.get_bus_index("Master")
 	_expect(master_bus >= 0, "Master audio bus exists")

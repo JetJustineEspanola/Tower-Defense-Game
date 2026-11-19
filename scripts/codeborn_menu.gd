@@ -3,27 +3,27 @@ extends Control
 @onready var main_menu: Control = $MainMenu
 @onready var play_screen: Control = $PlayScreen
 @onready var settings_screen: Control = $SettingsScreen
-@onready var developer_screen: Control = $DeveloperScreen
+@onready var practice_screen: Control = $PracticeScreen
 
 func _ready() -> void:
-	$DeveloperScreen/CenterContainer/PanelContainer/Content/Defender.pressed.connect(_start_practice.bind("res://scenes/practice/defender_practice.tscn"))
-	$DeveloperScreen/CenterContainer/PanelContainer/Content/Attacker.pressed.connect(_start_practice.bind("res://scenes/attacker/attacker_match.tscn"))
+	$PracticeScreen/CenterContainer/PanelContainer/Content/Defender.pressed.connect(_start_practice.bind("res://scenes/practice/defender_practice.tscn"))
+	$PracticeScreen/CenterContainer/PanelContainer/Content/Attacker.pressed.connect(_start_practice.bind("res://scenes/attacker/attacker_match.tscn"))
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/PlayButton.pressed.connect(_show_play_screen)
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/SettingsButton.pressed.connect(_show_settings_screen)
-	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/DeveloperButton.pressed.connect(_show_developer_screen)
+	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/PracticeButton.pressed.connect(_show_practice_screen)
 	$MainMenu/CenterContainer/PanelContainer/Content/Buttons/QuitButton.pressed.connect(_quit_game)
 	$PlayScreen/CenterContainer/PanelContainer/Content/OnlineLobby.pressed.connect(_open_online_lobby)
 	$PlayScreen/CenterContainer/PanelContainer/Content/LanLobby.pressed.connect(_open_lan_lobby)
 	$PlayScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	$SettingsScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
-	$DeveloperScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
+	$PracticeScreen/CenterContainer/PanelContainer/Content/BackButton.pressed.connect(_show_main_menu)
 	_show_main_menu()
 
 func _show_main_menu() -> void:
 	main_menu.show()
 	play_screen.hide()
 	settings_screen.hide()
-	developer_screen.hide()
+	practice_screen.hide()
 
 func _show_play_screen() -> void:
 	_show_screen(play_screen)
@@ -37,14 +37,14 @@ func _open_lan_lobby() -> void:
 func _show_settings_screen() -> void:
 	_show_screen(settings_screen)
 
-func _show_developer_screen() -> void:
-	_show_screen(developer_screen)
+func _show_practice_screen() -> void:
+	_show_screen(practice_screen)
 
 func _show_screen(screen: Control) -> void:
 	main_menu.hide()
 	play_screen.hide()
 	settings_screen.hide()
-	developer_screen.hide()
+	practice_screen.hide()
 	screen.show()
 
 func _quit_game() -> void:

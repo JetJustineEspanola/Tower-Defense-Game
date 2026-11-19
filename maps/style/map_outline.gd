@@ -11,7 +11,7 @@ func _ready() -> void:
 func apply_outlines() -> void:
 	_counts = {"added_surfaces": 0, "existing_outline_meshes": 0, "effect_surfaces_preserved": 0}
 	_walk(get_parent())
-	print("MAP_OUTLINE_AUDIT ", JSON.stringify(_counts))
+	print_verbose("MAP_OUTLINE_AUDIT ", JSON.stringify(_counts))
 
 func _walk(node: Node) -> void:
 	if node is MeshInstance3D and node.mesh:

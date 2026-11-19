@@ -54,9 +54,12 @@ func _ready() -> void:
 # =========================================================
 
 func find_patrol_container() -> void:
-	patrol_container = get_tree().current_scene.get_node_or_null(
-		"RobotCatPatrol"
-	)
+	# Search up from the cat so it works whether the map is the current scene
+	# or instanced inside another scene (practice, online, LAN).
+	var node: Node = get_parent()
+	while node != null and patrol_container == null:
+		patrol_container = node.get_node_or_null("RobotCatPatrol") as Node3D
+		node = node.get_parent()
 
 	if patrol_container == null:
 		push_error(
@@ -74,7 +77,7 @@ func load_patrol_points() -> void:
 		if child is Marker3D:
 			patrol_points.append(child)
 
-	print(
+	print_verbose(
 		"Robot Cat found ",
 		patrol_points.size(),
 		" patrol points."
@@ -102,20 +105,20 @@ func setup_animation() -> void:
 	animation_player.active = true
 	animation_player.speed_scale = animation_speed
 
-	print(
+	print_verbose(
 		"Robot Cat AnimationPlayer found: ",
 		animation_player.name
 	)
 
-	print("Available robot cat animations:")
+	print_verbose("Available robot cat animations:")
 
 	for animation_name in animation_player.get_animation_list():
-		print(" - ", animation_name)
+		print_verbose(" - ", animation_name)
 
 	if animation_player.has_animation(walk_animation):
 		animation_player.play(walk_animation)
 
-		print(
+		print_verbose(
 			"Robot Cat playing animation: ",
 			walk_animation
 		)

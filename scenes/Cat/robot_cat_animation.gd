@@ -26,9 +26,11 @@ var current_patrol_index: int = 0
 
 
 func _ready() -> void:
-	patrol_container = get_tree().current_scene.get_node_or_null(
-		"RobotCatPatrol"
-	)
+	# Search up from the cat so it works wherever the map is instanced.
+	var node: Node = get_parent()
+	while node != null and patrol_container == null:
+		patrol_container = node.get_node_or_null("RobotCatPatrol") as Node3D
+		node = node.get_parent()
 
 	if patrol_container == null:
 		push_error("RobotCatPatrol not found.")
@@ -38,7 +40,7 @@ func _ready() -> void:
 		if child is Marker3D:
 			patrol_points.append(child)
 
-	print("Robot Cat found ", patrol_points.size(), " patrol points.")
+	print_verbose("Robot Cat found ", patrol_points.size(), " patrol points.")
 
 	setup_animation()
 
@@ -65,10 +67,10 @@ func setup_animation() -> void:
 			"Walk animation not found: " + str(walk_animation)
 		)
 
-		print("Available animations:")
+		print_verbose("Available animations:")
 
 		for anim in animation_player.get_animation_list():
-			print(" - ", anim)
+			print_verbose(" - ", anim)
 
 
 func _process(delta: float) -> void:

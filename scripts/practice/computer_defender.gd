@@ -29,6 +29,12 @@ var quiz = preload("res://scripts/questions/question_run.gd").new()
 func _ready() -> void:
 	wait_remaining = opening_delay_seconds
 	rng.randomize()
+	# Use the same prices and towers as the player's shop so balance changes apply to both.
+	var shop: Node = get_node_or_null("../Gameplay/TowerShop")
+	if shop != null and "costs" in shop and shop.costs.size() == tower_costs.size():
+		tower_costs = shop.costs.duplicate()
+	if shop != null and "tower_scenes" in shop and shop.tower_scenes.size() == tower_scenes.size():
+		tower_scenes = shop.tower_scenes.duplicate()
 	quiz.setup(preload("res://scripts/questions/deck_store.gd").active())
 
 func _process(delta: float) -> void:
