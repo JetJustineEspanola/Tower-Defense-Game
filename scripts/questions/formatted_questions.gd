@@ -50,6 +50,8 @@ static func parse(text: String) -> Dictionary:
 		elif line.is_empty():
 			if field == "CODE": fields[field] += "\n"
 			elif field == "ANSWER": fields[field][-1] += "\n"
+			# Keep paragraph breaks in long prompts; leading/trailing ones are stripped later.
+			elif field in ["QUESTION", "EXPLANATION"] and not str(fields[field]).is_empty(): fields[field] += "\n"
 		elif _page_artifact(line) and not _keeps_layout(field, fields):
 			continue
 		elif field in ["QUESTION", "CODE", "EXPLANATION", "A", "B", "C", "D"]:

@@ -39,6 +39,9 @@ func _initialize() -> void:
 		_expect(code_result.deck.cards[0].code == "def f(x):\n    type: int = 2\n    return 2", "Code text is unchanged")
 		_expect(code_result.deck.cards[0].answers[0] == "def f(x):\n    return 2", "Code answer keeps indentation")
 
+	var paragraphs: Dictionary = _ok("Paragraph break in question", base.replace("QUESTION: What does CSS stand for?", "QUESTION: Read this.\n\nWhat does CSS stand for?"), 3)
+	if paragraphs.has("deck"): _expect(paragraphs.deck.cards[1].prompt == "Read this.\n\nWhat does CSS stand for?", "Blank line inside a question is kept")
+
 	_expect(not str(FORMAT.parse("Just my lecture notes\nNothing formatted").get("error", "")).is_empty(), "Plain notes with no [QUESTION] blocks are rejected")
 	print("FAIL: %d formatted question check(s)" % failures if failures else "PASS: formatted question import")
 	quit(1 if failures else 0)

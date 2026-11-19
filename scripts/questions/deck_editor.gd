@@ -133,6 +133,7 @@ func _new() -> void:
 	selected = -1
 	_add()
 	_refresh()
+	%Status.text = "New deck started. Your previous deck was saved under Saved decks."
 
 func _load_saved() -> void:
 	if %Saved.selected < 0: return
@@ -150,7 +151,7 @@ func _import(path: String) -> void:
 		return
 	deck = loaded
 	_refresh()
-	%Status.text = "Loaded. Review the answers, then Save & use."
+	%Status.text = "Loaded. Your previous deck was saved under Saved decks. Review the answers, then Save & use."
 
 func _attach(path: String) -> void:
 	if not path.get_extension().to_lower() in ["pdf", "docx", "txt"]: return
